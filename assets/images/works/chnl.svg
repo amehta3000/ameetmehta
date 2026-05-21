@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Chnl thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="CHNL thumbnail">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0f172a" />
@@ -6,6 +6,6 @@
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)" />
-  <text x="80" y="330" fill="#ffffff" font-size="68" font-family="Arial, sans-serif" font-weight="700">Chnl</text>
+  <text x="80" y="330" fill="#ffffff" font-size="68" font-family="Arial, sans-serif" font-weight="700">CHNL</text>
   <text x="80" y="395" fill="#cbd5e1" font-size="34" font-family="Arial, sans-serif">Ameet Mehta · Selected Work</text>
 </svg>
