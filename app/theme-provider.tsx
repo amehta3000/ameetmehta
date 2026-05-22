@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useSyncExternalStore, useState, useCallback, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from "react";
 
 type Theme = "light" | "dark";
 
@@ -26,41 +26,15 @@ function getInitialBg(): string {
   return localStorage.getItem("backgroundColor") || "";
 }
 
-// Subscribe/getSnapshot for theme using useSyncExternalStore
-let themeListeners: Array<() => void> = [];
-let currentTheme: Theme | null = null;
-
-function subscribeTheme(listener: () => void) {
-  themeListeners.push(listener);
-  return () => {
-    themeListeners = themeListeners.filter((l) => l !== listener);
-  };
-}
-
-function getThemeSnapshot(): Theme {
-  if (currentTheme === null) {
-    currentTheme = getInitialTheme();
-  }
-  return currentTheme;
-}
-
-function getThemeServerSnapshot(): Theme {
-  return "dark";
-}
-
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const theme = useSyncExternalStore(subscribeTheme, getThemeSnapshot, getThemeServerSnapshot);
-  const [backgroundColor, setBackgroundColorState] = useState<string>(() => getInitialBg());
-
-  const toggleTheme = useCallback(() => {
-    const next = currentTheme === "dark" ? "light" : "dark";
-    currentTheme = next;
-    themeListeners.forEach((l) => l());
-  }, []);
-
-  const setBackgroundColor = useCallback((color: string) => {
-    setBackgroundColorState(color);
-  }, []);
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "dark";
+    return getInitialTheme();
+  });
+  const [backgroundColor, setBackgroundColorState] = useState<string>(() => {
+    if (typeof window === "undefined") return "";
+    return getInitialBg();
+  });
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -76,6 +50,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       localStorage.removeItem("backgroundColor");
     }
   }, [backgroundColor]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  }, []);
+
+  const setBackgroundColor = useCallback((color: string) => {
+    setBackgroundColorState(color);
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, backgroundColor, setBackgroundColor }}>

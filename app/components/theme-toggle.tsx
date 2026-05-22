@@ -1,11 +1,33 @@
 "use client";
 
 import { useTheme } from "../theme-provider";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export function ThemeToggle() {
   const { theme, toggleTheme, backgroundColor, setBackgroundColor } = useTheme();
   const [showPanel, setShowPanel] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!showPanel) return;
+
+    function handleClickOutside(e: MouseEvent) {
+      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
+        setShowPanel(false);
+      }
+    }
+
+    function handleEscape(e: KeyboardEvent) {
+      if (e.key === "Escape") setShowPanel(false);
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [showPanel]);
 
   const presetColors = [
     { name: "Default", value: "" },
@@ -18,7 +40,7 @@ export function ThemeToggle() {
   ];
 
   return (
-    <div className="relative">
+    <div className="relative" ref={panelRef}>
       <button
         onClick={() => setShowPanel(!showPanel)}
         className="p-2 rounded-lg border border-[var(--border)] hover:bg-[var(--card-hover)] transition-colors"

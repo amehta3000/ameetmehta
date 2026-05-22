@@ -32,4 +32,3 @@ npm start
 - `app/personal/` — Personal work (music, art, vibe coded programs)
 - `app/components/` — Navigation, theme toggle
 - `app/theme-provider.tsx` — Dark/light mode + custom background color context
-Personal website, porfolio and playground
