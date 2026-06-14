@@ -4,7 +4,7 @@ import { SpotifyEmbed } from "../components/SpotifyEmbed";
 export const metadata = {
   title: "Chiller | Ameet Mehta",
   description:
-    "Part Time Chiller — music curation, South Asian-influenced beats, and sound. Playlists by Ameet Mehta.",
+    "Part Time Chiller — Ameet Mehta as solo DJ and music producer. Playlists, beats, and sound. Also one half of SADUBAS, an audio-visual performance act.",
 };
 
 const playlists = [
@@ -47,7 +47,7 @@ export default function ChillerPage() {
       <section className="pt-24 pb-20 md:pt-40 md:pb-28">
         <Reveal>
           <p className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-amber mb-5">
-            Creative platform
+            Solo DJ + Producer
           </p>
           <h1 className="font-[family-name:var(--font-display)] text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
             Part Time<br />Chiller
@@ -55,7 +55,7 @@ export default function ChillerPage() {
         </Reveal>
         <Reveal delay={0.12}>
           <p className="mt-7 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-            A music curation and creative platform for people who take sound seriously but also know when to let go. Playlists, beats, visuals — built around the things worth listening to.
+            My solo alias as a DJ and music producer. Curation, original beats, and South Asian-influenced electronics — for people who take sound seriously but also know when to let go.
           </p>
         </Reveal>
         <Reveal delay={0.2}>

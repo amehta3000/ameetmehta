@@ -46,12 +46,14 @@ export default function AboutPage() {
                 that&apos;s usually a good sign we&apos;d work well together.
               </p>
               <p>
-                Parallel to all of it, I make music. I&apos;m one half of SADUBAS,
-                an audio-visual performance act I co-founded with a longtime
-                collaborator. South Asian-influenced electronics, live visuals,
-                and a rotating cast of musicians and filmmakers we work with.
-                It&apos;s a studio practice: work done on its own terms, that
-                keeps the consulting side honest.
+                Parallel to all of it, I make music across two contexts. As
+                Part Time Chiller I work solo: DJing, producing beats, and
+                curating sounds for people who take music seriously. As one
+                half of SADUBAS, I collaborate with my longtime partner on
+                South Asian-influenced electronic music and live audio-visual
+                performance, working with musicians and filmmakers to expand
+                the work beyond the two of us. Both practices feed each other
+                and keep the rest of it honest.
               </p>
             </div>
           </div>
@@ -103,9 +105,9 @@ export default function AboutPage() {
                 Studio
               </h2>
               <ul className="space-y-1 text-sm text-muted">
+                <li>Part Time Chiller — solo DJ / producer</li>
                 <li>SADUBAS — audio-visual act</li>
-                <li>Generative art</li>
-                <li>Synthography</li>
+                <li>Generative art / synthography</li>
                 <li>Three.js / p5.js</li>
                 <li>Max for Live devices</li>
               </ul>
