@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Project, ArtifactType } from "@/data/projects";
+import { asset } from "@/lib/asset";
 
 const typeLabels: Record<ArtifactType, string> = {
   software: "software",
@@ -21,7 +22,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         <div className="relative overflow-hidden aspect-[4/3] bg-line/30 border border-line">
           {project.cover ? (
             <img
-              src={project.cover}
+              src={asset(project.cover)}
               alt={project.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             />

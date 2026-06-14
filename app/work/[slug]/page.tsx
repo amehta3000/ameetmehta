@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { projects, getProjectBySlug } from "@/data/projects";
 import { Reveal } from "../../components/Reveal";
+import { asset } from "@/lib/asset";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -108,7 +109,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
               <Reveal key={i} delay={0.05}>
                 <figure>
                   <img
-                    src={block.src}
+                    src={asset(block.src)}
                     alt={block.alt ?? ""}
                     className="w-full border border-line"
                   />
@@ -129,7 +130,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                   {block.images.map((img, j) => (
                     <figure key={j}>
                       <img
-                        src={img.src}
+                        src={asset(img.src)}
                         alt={img.alt}
                         className="w-full border border-line object-cover"
                       />

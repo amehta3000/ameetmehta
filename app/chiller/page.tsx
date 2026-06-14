@@ -1,5 +1,6 @@
 import { Reveal } from "../components/Reveal";
 import { SpotifyEmbed } from "../components/SpotifyEmbed";
+import { asset } from "@/lib/asset";
 
 export const metadata = {
   title: "Chiller | Ameet Mehta",
@@ -142,7 +143,7 @@ export default function ChillerPage() {
                 className="aspect-square overflow-hidden border border-line"
               >
                 <img
-                  src={img.src}
+                  src={asset(img.src)}
                   alt={img.alt}
                   className="w-full h-full object-cover"
                 />

@@ -1,4 +1,5 @@
 import { Reveal } from "../components/Reveal";
+import { asset } from "@/lib/asset";
 
 export const metadata = {
   title: "About | Ameet Mehta",
@@ -21,7 +22,7 @@ export default function AboutPage() {
           <div className="grid gap-12 md:grid-cols-[1fr_2fr]">
             <div>
               <img
-                src="/assets/about/AmeetProfileRound.png"
+                src={asset("/assets/about/AmeetProfileRound.png")}
                 alt="Ameet Mehta"
                 className="w-32 h-32 rounded-full object-cover md:w-full md:h-auto md:rounded-none"
               />
