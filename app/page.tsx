@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { projects } from "@/data/projects";
-import { WorkRow } from "./components/WorkRow";
+import { HomeCard } from "./components/HomeCard";
 import { Reveal } from "./components/Reveal";
 
 export const metadata = {
@@ -8,12 +8,19 @@ export const metadata = {
   description: "Design, code, sound. Twenty years of digital products, brands, and creative work.",
 };
 
+function getStartYear(year: string): number {
+  const match = year.match(/\d{4}/);
+  return match ? parseInt(match[0]) : 0;
+}
+
 export default function Home() {
-  const featured = projects.slice(0, 5);
+  const sorted = [...projects].sort(
+    (a, b) => getStartYear(b.year) - getStartYear(a.year)
+  );
 
   return (
     <div className="mx-auto max-w-7xl px-6">
-      <section className="pt-24 pb-20 md:pt-40 md:pb-28">
+      <section className="pt-24 pb-16 md:pt-40 md:pb-20">
         <Reveal>
           <h1 className="font-[family-name:var(--font-display)] font-semibold leading-[1.0] tracking-tight text-[clamp(3.5rem,9vw,10rem)]">
             design,<br />code,<br />sound.
@@ -40,7 +47,7 @@ export default function Home() {
 
       <section className="pb-32">
         <Reveal>
-          <div className="flex items-baseline justify-between mb-2">
+          <div className="flex items-baseline justify-between mb-5">
             <h2 className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.25em] text-muted">
               Selected Work
             </h2>
@@ -52,13 +59,27 @@ export default function Home() {
             </Link>
           </div>
         </Reveal>
-        <Reveal delay={0.05}>
-          <div className="border-b border-line">
-            {featured.map((project, i) => (
-              <WorkRow key={project.slug} project={project} index={i} />
-            ))}
-          </div>
-        </Reveal>
+
+        {/* Mixed grid: alternates [2/3 wide + 1/3 narrow] and [1/3 narrow + 2/3 wide] */}
+        <div className="grid grid-cols-3 gap-3 sm:gap-4">
+          {sorted.slice(0, 6).map((project, i) => {
+            const pairIndex = Math.floor(i / 2);
+            const posInPair = i % 2;
+            const isEvenPair = pairIndex % 2 === 0;
+            const wide =
+              (isEvenPair && posInPair === 0) ||
+              (!isEvenPair && posInPair === 1);
+            return (
+              <Reveal
+                key={project.slug}
+                delay={Math.min(i * 0.06, 0.25)}
+                className={wide ? "col-span-2" : "col-span-1"}
+              >
+                <HomeCard project={project} wide={wide} />
+              </Reveal>
+            );
+          })}
+        </div>
       </section>
     </div>
   );

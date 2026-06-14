@@ -50,10 +50,10 @@ function Particles({ isDark }: { isDark: boolean }) {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.045}
+        size={0.07}
         color={isDark ? "#f59e0b" : "#94a3b8"}
         transparent
-        opacity={isDark ? 0.22 : 0.15}
+        opacity={isDark ? 0.45 : 0.25}
         sizeAttenuation
       />
     </points>
