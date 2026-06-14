@@ -103,24 +103,34 @@ export default function ChillerPage() {
                 SADUBAS
               </h2>
               <p className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.15em] text-amber">
-                Music production
+                Audio-visual performance
               </p>
             </div>
             <div className="space-y-5 text-base leading-relaxed text-muted">
               <p>
-                South Asian-influenced beats, electronics, and sound design made under the SADUBAS alias. The music sits somewhere between house, ambient, and whatever comes next — informed by a lifelong obsession with rhythm, texture, and the spaces between notes.
+                SADUBAS is an audio-visual performance act I co-founded with my collaborator and longtime friend. Together we make South Asian-influenced electronic music and live visuals — sitting somewhere between house, ambient, and whatever comes next.
               </p>
               <p>
-                Beat tapes and live experiments are posted to Instagram. More releases in progress.
+                We collaborate with musicians and filmmakers to expand the work beyond the two of us: live sets, beat tapes, short film scores, and visual installations. The through-line is always rhythm, texture, and the spaces between notes.
               </p>
-              <a
-                href="https://www.instagram.com/sadubas/reels/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-widest text-amber hover:text-ink transition-colors"
-              >
-                Listen on Instagram ↗
-              </a>
+              <div className="flex flex-wrap gap-5">
+                <a
+                  href="https://sadubas.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-widest text-amber hover:text-ink transition-colors"
+                >
+                  sadubas.com ↗
+                </a>
+                <a
+                  href="https://www.instagram.com/sadubas/reels/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-widest text-muted hover:text-ink transition-colors"
+                >
+                  Instagram ↗
+                </a>
+              </div>
             </div>
           </div>
         </Reveal>
