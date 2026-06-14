@@ -1,72 +1,76 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/work", label: "Work" },
+  { href: "/play", label: "Play" },
+  { href: "/about", label: "About" },
 ];
 
-export default function Nav() {
+export function Nav() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-900/80 backdrop-blur border-b border-zinc-200 dark:border-zinc-800">
-      <nav className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-        <a href="#" className="font-semibold text-base tracking-tight">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
+        <Link href="/" className="text-sm font-semibold uppercase tracking-widest">
           Ameet Mehta
-        </a>
+        </Link>
 
-        {/* Desktop links */}
-        <ul className="hidden sm:flex gap-6 text-sm text-zinc-600 dark:text-zinc-400">
-          {links.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-              >
-                {l.label}
-              </a>
-            </li>
+        {/* Desktop */}
+        <div className="hidden items-center gap-8 md:flex">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`text-xs uppercase tracking-wider transition-colors hover:text-accent ${
+                pathname === link.href ? "text-accent" : "text-muted"
+              }`}
+            >
+              {link.label}
+            </Link>
           ))}
-        </ul>
+          <ThemeToggle />
+        </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile toggle */}
         <button
-          className="sm:hidden p-1 text-zinc-600 dark:text-zinc-400"
           onClick={() => setOpen(!open)}
+          className="flex flex-col gap-1 md:hidden"
           aria-label="Toggle menu"
         >
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-            {open ? (
-              <path d="M4 4l14 14M18 4L4 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            ) : (
-              <>
-                <path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </>
-            )}
-          </svg>
+          <span className={`block h-px w-5 bg-foreground transition-transform ${open ? "translate-y-[5px] rotate-45" : ""}`} />
+          <span className={`block h-px w-5 bg-foreground transition-opacity ${open ? "opacity-0" : ""}`} />
+          <span className={`block h-px w-5 bg-foreground transition-transform ${open ? "-translate-y-[5px] -rotate-45" : ""}`} />
         </button>
-      </nav>
+      </div>
 
       {/* Mobile menu */}
       {open && (
-        <ul className="sm:hidden px-6 pb-4 flex flex-col gap-3 text-sm text-zinc-600 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-800 pt-3">
-          {links.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
+        <div className="border-t border-border bg-background px-6 pb-6 pt-4 md:hidden">
+          <div className="flex flex-col gap-4">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
                 onClick={() => setOpen(false)}
-                className="hover:text-zinc-900 dark:hover:text-zinc-100"
+                className={`text-sm uppercase tracking-wider ${
+                  pathname === link.href ? "text-accent" : "text-muted"
+                }`}
               >
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+                {link.label}
+              </Link>
+            ))}
+            <ThemeToggle />
+          </div>
+        </div>
       )}
-    </header>
+    </nav>
   );
 }
