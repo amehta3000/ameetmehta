@@ -1,5 +1,5 @@
 import { projects } from "@/data/projects";
-import { ProjectCard } from "../components/ProjectCard";
+import { WorkRow } from "../components/WorkRow";
 import { Reveal } from "../components/Reveal";
 
 export const metadata = {
@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function WorkPage() {
   return (
-    <div className="mx-auto max-w-6xl px-6">
+    <div className="mx-auto max-w-5xl px-6">
       <section className="pt-24 pb-16 md:pt-36">
         <Reveal>
           <h1 className="font-[family-name:var(--font-display)] text-5xl font-semibold tracking-tight sm:text-6xl md:text-7xl">
@@ -25,13 +25,13 @@ export default function WorkPage() {
       </section>
 
       <section className="pb-32">
-        <div className="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, i) => (
-            <Reveal key={project.slug} delay={Math.min(i * 0.05, 0.25)}>
-              <ProjectCard project={project} index={i} />
-            </Reveal>
-          ))}
-        </div>
+        <Reveal>
+          <div className="border-b border-line">
+            {projects.map((project, i) => (
+              <WorkRow key={project.slug} project={project} index={i} />
+            ))}
+          </div>
+        </Reveal>
       </section>
     </div>
   );
