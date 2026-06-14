@@ -8,16 +8,19 @@ export default function Home() {
     <div className="mx-auto max-w-6xl px-6">
       {/* Hero */}
       <section className="py-24 md:py-36">
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent mb-6">
+          Creative Technologist · Consultant · Musician
+        </p>
         <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-          I build things that work — and look like they mean it.
+          I build things that work, and look like they mean it.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
           Twenty years designing and shipping digital products across startups,
           enterprise software, and culture brands. Now I help small businesses
-          move faster, and make things I can&apos;t stop thinking about.
+          move faster, and make music and art I can&apos;t stop thinking about.
         </p>
         <p className="mt-4 text-sm text-muted">
-          Accepting new projects —{" "}
+          Accepting new projects.{" "}
           <a
             href="mailto:hello@ameetmehta.com?subject=Hi%2C%20let%27s%20work%20together"
             className="text-accent underline underline-offset-4 hover:text-foreground transition-colors"

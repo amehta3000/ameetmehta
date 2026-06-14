@@ -2,7 +2,7 @@ import { getProjectsByType } from "@/data/projects";
 import { ProjectCard } from "../components/ProjectCard";
 
 export const metadata = {
-  title: "Work — Ameet Mehta",
+  title: "Work | Ameet Mehta",
   description: "Professional portfolio: product design, branding, and digital experiences.",
 };
 
@@ -16,7 +16,7 @@ export default function WorkPage() {
           Work
         </h1>
         <p className="mt-4 max-w-xl text-lg text-muted">
-          Product design, branding, and digital experiences — for startups
+          Product design, branding, and digital experiences for startups
           finding their footing and established brands that need to move again.
         </p>
       </section>

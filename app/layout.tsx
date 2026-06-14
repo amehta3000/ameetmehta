@@ -18,7 +18,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ameet Mehta — Creative Technologist",
+  title: "Ameet Mehta | Creative Technologist",
   description:
     "Creative technologist with 20+ years building digital products, brands, and experiences. I help SMBs ship better tools and help collaborators make more interesting things.",
 };

@@ -26,8 +26,8 @@ export default function PlayPage() {
           Studio
         </h1>
         <p className="mt-4 max-w-xl text-lg text-muted">
-          Music production, generative art, and intuition-driven code — made
-          outside of client work, but informed by the same sensibility.
+          Beats, generative art, and intuition-driven code. Made outside of
+          client work, but informed by the same sensibility.
         </p>
       </section>
 
