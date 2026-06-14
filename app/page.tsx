@@ -12,10 +12,10 @@ export default function Home() {
   const featured = projects.slice(0, 5);
 
   return (
-    <div className="mx-auto max-w-5xl px-6">
+    <div className="mx-auto max-w-7xl px-6">
       <section className="pt-24 pb-20 md:pt-40 md:pb-28">
         <Reveal>
-          <h1 className="font-[family-name:var(--font-display)] text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="font-[family-name:var(--font-display)] font-semibold leading-[1.0] tracking-tight text-[clamp(3.5rem,9vw,10rem)]">
             design,<br />code,<br />sound.
           </h1>
         </Reveal>

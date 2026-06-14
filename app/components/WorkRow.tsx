@@ -29,7 +29,7 @@ export function WorkRow({ project, index }: { project: Project; index: number })
         </span>
 
         <div className="flex-1 min-w-0">
-          <h2 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight leading-snug group-hover:text-amber transition-colors duration-200 sm:text-3xl md:text-[2.5rem]">
+          <h2 className="font-[family-name:var(--font-display)] font-semibold tracking-tight leading-snug group-hover:text-amber transition-colors duration-200 text-[clamp(1.5rem,3vw,3.5rem)]">
             {project.title}
           </h2>
           <p className="mt-1 font-[family-name:var(--font-mono)] text-[11px] text-muted">

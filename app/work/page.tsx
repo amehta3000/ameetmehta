@@ -9,10 +9,10 @@ export const metadata = {
 
 export default function WorkPage() {
   return (
-    <div className="mx-auto max-w-5xl px-6">
+    <div className="mx-auto max-w-7xl px-6">
       <section className="pt-24 pb-16 md:pt-36">
         <Reveal>
-          <h1 className="font-[family-name:var(--font-display)] text-5xl font-semibold tracking-tight sm:text-6xl md:text-7xl">
+          <h1 className="font-[family-name:var(--font-display)] font-semibold tracking-tight text-[clamp(2.5rem,7vw,7rem)]">
             Work
           </h1>
         </Reveal>

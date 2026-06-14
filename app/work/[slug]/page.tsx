@@ -27,14 +27,14 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
   const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
-    <div className="mx-auto max-w-5xl px-6">
+    <div className="mx-auto max-w-7xl px-6">
       {/* Hero */}
       <section className="pt-24 pb-16 md:pt-36">
         <Reveal>
           <p className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-amber mb-4">
             {project.client ?? project.type}
           </p>
-          <h1 className="font-[family-name:var(--font-display)] text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl">
+          <h1 className="font-[family-name:var(--font-display)] font-semibold leading-[1.05] tracking-tight text-[clamp(2rem,5.5vw,5.5rem)]">
             {project.title}
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">

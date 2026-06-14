@@ -17,7 +17,7 @@ export function Nav() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-line bg-paper/90 backdrop-blur-sm">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
         <Link
           href="/"
           className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.2em] hover:text-amber transition-colors"

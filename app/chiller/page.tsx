@@ -42,7 +42,7 @@ const ART_STUB_COUNT = 6;
 
 export default function ChillerPage() {
   return (
-    <div className="mx-auto max-w-6xl px-6">
+    <div className="mx-auto max-w-7xl px-6">
 
       {/* Hero */}
       <section className="pt-24 pb-20 md:pt-40 md:pb-28">
@@ -50,7 +50,7 @@ export default function ChillerPage() {
           <p className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-amber mb-5">
             Solo DJ + Producer
           </p>
-          <h1 className="font-[family-name:var(--font-display)] text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="font-[family-name:var(--font-display)] font-semibold leading-[1.0] tracking-tight text-[clamp(3rem,8vw,9rem)]">
             Part Time<br />Chiller
           </h1>
         </Reveal>
