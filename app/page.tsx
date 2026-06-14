@@ -9,21 +9,65 @@ export default function Home() {
       {/* Hero */}
       <section className="py-24 md:py-36">
         <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-          20+ years designing &amp; building internet experiences
+          I build things that work — and look like they mean it.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
-          Using empathy, rapid prototyping and systems thinking to bring
-          zero-to-one products to life.
+          Twenty years designing and shipping digital products across startups,
+          enterprise software, and culture brands. Now I help small businesses
+          move faster, and make things I can&apos;t stop thinking about.
         </p>
-        <p className="mt-4 text-sm text-accent">
-          Currently accepting new projects —{" "}
+        <p className="mt-4 text-sm text-muted">
+          Accepting new projects —{" "}
           <a
-            href="mailto:hello@ameetmehta.com?subject=Hi%2C%20let%27s%20chat%20about%20products"
-            className="underline underline-offset-4 hover:text-foreground transition-colors"
+            href="mailto:hello@ameetmehta.com?subject=Hi%2C%20let%27s%20work%20together"
+            className="text-accent underline underline-offset-4 hover:text-foreground transition-colors"
           >
-            Let&apos;s chat
+            hello@ameetmehta.com
           </a>
         </p>
+      </section>
+
+      {/* How I Help */}
+      <section className="pb-24 border-t border-border pt-16">
+        <h2 className="font-[family-name:var(--font-display)] text-xs font-medium uppercase tracking-[0.2em] text-muted">
+          How I Help
+        </h2>
+        <div className="mt-8 grid gap-px sm:grid-cols-2 lg:grid-cols-3 border border-border">
+          <div className="border-border p-6 sm:border-r">
+            <p className="font-mono text-[10px] text-accent mb-4">01</p>
+            <h3 className="font-[family-name:var(--font-display)] text-sm font-semibold uppercase tracking-wide mb-3">
+              Workflow &amp; Digital Tools
+            </h3>
+            <p className="text-sm leading-relaxed text-muted">
+              You have a process that lives in spreadsheets, email threads, and
+              tribal knowledge. I help you find the friction and build something
+              that fits how you actually work.
+            </p>
+          </div>
+          <div className="border-border p-6 lg:border-r">
+            <p className="font-mono text-[10px] text-accent mb-4">02</p>
+            <h3 className="font-[family-name:var(--font-display)] text-sm font-semibold uppercase tracking-wide mb-3">
+              Product Design &amp; Launch
+            </h3>
+            <p className="text-sm leading-relaxed text-muted">
+              Zero to one without the chaos. Research, prototyping, design
+              systems, and product judgment from doing this across dozens of
+              contexts. I work fast because I&apos;ve seen most of this before.
+            </p>
+          </div>
+          <div className="p-6">
+            <p className="font-mono text-[10px] text-accent mb-4">03</p>
+            <h3 className="font-[family-name:var(--font-display)] text-sm font-semibold uppercase tracking-wide mb-3">
+              Creative Consulting
+            </h3>
+            <p className="text-sm leading-relaxed text-muted">
+              Brand identity, digital campaigns, editorial direction. I&apos;ve
+              led creative for a 25-year music publication, launched a cargo bike
+              brand, and designed commerce experiences for Reebok. When the brief
+              is vague and the stakes are real, that range matters.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Selected Works */}

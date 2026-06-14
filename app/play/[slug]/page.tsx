@@ -45,9 +45,9 @@ export default async function PlayDetailPage({ params }: { params: Promise<{ slu
             href={project.externalUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-block text-sm text-accent underline underline-offset-4 hover:text-foreground transition-colors"
+            className="mt-6 inline-block border border-accent px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-accent hover:bg-accent hover:text-background transition-colors duration-150"
           >
-            View externally →
+            View externally ↗
           </a>
         )}
       </section>
@@ -60,7 +60,7 @@ export default async function PlayDetailPage({ params }: { params: Promise<{ slu
       </div>
 
       {/* Content placeholder */}
-      <div className="my-12 aspect-[16/9] w-full rounded-sm bg-border/50" />
+      <div className="my-12 aspect-[16/9] w-full border border-border" />
 
       {/* Body sections */}
       <div className="space-y-12 pb-24">

@@ -3,13 +3,16 @@ import Link from "next/link";
 const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/ameetmehta/" },
   { label: "Instagram", href: "https://www.instagram.com/ameet3000/" },
-  { label: "Art", href: "https://www.instagram.com/ameet3000.art/" },
-  { label: "Music", href: "https://www.instagram.com/sadubas/reels/" },
+  { label: "Artwork", href: "https://www.instagram.com/ameet3000.art/" },
+  { label: "Beats", href: "https://www.instagram.com/sadubas/reels/" },
 ];
 
 export function Footer() {
   return (
     <footer className="border-t border-border py-12">
+      <div className="mx-auto max-w-6xl px-6">
+        <p className="text-xs text-muted mb-8">Design. Technology. Whatever it takes.</p>
+      </div>
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 md:flex-row md:justify-between">
         <p className="text-xs text-muted">
           © {new Date().getFullYear()} Ameet Mehta

@@ -18,9 +18,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ameet Mehta",
+  title: "Ameet Mehta — Creative Technologist",
   description:
-    "Product designer, synthographer, beat maker, and eternal learner. 20+ years designing & building internet experiences.",
+    "Creative technologist with 20+ years building digital products, brands, and experiences. I help SMBs ship better tools and help collaborators make more interesting things.",
 };
 
 export default function RootLayout({

@@ -23,21 +23,24 @@ export default function PlayPage() {
     <div className="mx-auto max-w-6xl px-6">
       <section className="py-24 md:py-36">
         <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-          Play
+          Studio
         </h1>
         <p className="mt-4 max-w-xl text-lg text-muted">
-          Music, art, and vibe-coded experiments — creative work outside the product world.
+          Music production, generative art, and intuition-driven code — made
+          outside of client work, but informed by the same sensibility.
         </p>
       </section>
 
-      {/* Filter tabs */}
-      <div className="flex gap-4 border-b border-border pb-4">
+      {/* Filter buttons */}
+      <div className="flex gap-3 border-b border-border pb-6">
         {categories.map((cat) => (
           <button
             key={cat.value}
             onClick={() => setActive(cat.value)}
-            className={`text-xs uppercase tracking-wider transition-colors ${
-              active === cat.value ? "text-accent" : "text-muted hover:text-foreground"
+            className={`px-3 py-1 font-mono text-[11px] uppercase tracking-widest border transition-colors duration-150 ${
+              active === cat.value
+                ? "border-accent text-accent"
+                : "border-border text-muted hover:border-foreground hover:text-foreground"
             }`}
           >
             {cat.label}

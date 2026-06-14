@@ -6,9 +6,8 @@ import { useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
-  { href: "/", label: "Home" },
   { href: "/work", label: "Work" },
-  { href: "/play", label: "Play" },
+  { href: "/play", label: "Studio" },
   { href: "/about", label: "About" },
 ];
 
@@ -17,7 +16,7 @@ export function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <Link href="/" className="text-sm font-semibold uppercase tracking-widest">
           Ameet Mehta

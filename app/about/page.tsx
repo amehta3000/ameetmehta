@@ -1,6 +1,7 @@
 export const metadata = {
   title: "About — Ameet Mehta",
-  description: "Product designer, synthographer, beat maker, and eternal learner.",
+  description:
+    "Creative technologist with 20+ years in product design, branding, and digital experiences. Currently consulting SMBs and pursuing a parallel creative practice in music, generative art, and code.",
 };
 
 export default function AboutPage() {
@@ -14,22 +15,30 @@ export default function AboutPage() {
 
       <div className="space-y-8 pb-24 text-base leading-relaxed text-muted">
         <p>
-          Product Designer + Synthographer + Beat Maker + Eternal Learner.
+          I&apos;m a creative technologist. For twenty years I&apos;ve designed
+          and built digital products across every part of the stack — research,
+          systems design, visual craft, and code. That breadth isn&apos;t a
+          detour. It&apos;s how I work.
         </p>
         <p>
-          20+ years designing &amp; building internet experiences using empathy,
-          rapid prototyping and systems thinking to bring zero-to-one products to
-          life.
+          I&apos;ve led product design at an AI enterprise company, run creative
+          direction for a 25-year subculture magazine, launched consumer brands
+          from scratch, and designed commerce experiences for Reebok. The common
+          thread is getting complex things to feel simple, and making simple
+          things feel considered.
         </p>
         <p>
-          Currently, I consult small to medium-sized businesses, providing user
-          research, design, mentorship, and product strategy to help them achieve
-          product-market fit.
+          Right now I mostly work with small and medium-sized businesses who need
+          to move faster without hiring a full team — workflow analysis, product
+          design, creative direction, sometimes all at once. If your problem
+          doesn&apos;t fit a clean job description, that&apos;s usually a good
+          sign we&apos;d work well together.
         </p>
         <p>
-          Outside of product work, I make music, generate art, and write
-          vibe-coded programs — following intuition and aesthetic over strict
-          engineering.
+          Outside of client work, I make beats, generate art, and write programs
+          that follow intuition more than architecture. It&apos;s a studio
+          practice — work done for its own sake, on its own schedule, that keeps
+          the whole thing honest.
         </p>
 
         <div className="border-t border-border pt-8">

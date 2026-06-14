@@ -52,7 +52,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
       </div>
 
       {/* Hero image placeholder */}
-      <div className="my-12 aspect-[16/9] w-full rounded-sm bg-border/50" />
+      <div className="my-12 aspect-[16/9] w-full border border-border" />
 
       {/* Body sections */}
       <div className="space-y-12 pb-24">
@@ -66,7 +66,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
           }
           if (section.type === "image") {
             return (
-              <div key={i} className="aspect-[16/9] w-full rounded-sm bg-border/50">
+              <div key={i} className="aspect-[16/9] w-full border border-border">
                 {section.caption && (
                   <p className="mt-2 text-xs text-muted">{section.caption}</p>
                 )}

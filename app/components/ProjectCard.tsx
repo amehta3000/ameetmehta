@@ -14,27 +14,22 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
   return (
     <Link href={href} className="group block">
-      <article className="relative overflow-hidden rounded-sm border border-border bg-card p-6 transition-all duration-300 hover:border-accent hover:bg-card-hover">
-        {/* Index number — Basic Agency style */}
-        <span className="text-[10px] font-mono text-muted">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-
-        {/* Thumbnail placeholder */}
-        <div className="mt-4 aspect-[16/10] w-full rounded-sm bg-border/50" />
-
-        <div className="mt-4">
-          {project.client && (
-            <p className="text-[11px] font-medium uppercase tracking-widest text-accent">
-              {project.client}
-            </p>
+      <article className="border border-border p-6 transition-colors duration-200 hover:border-accent">
+        <div className="flex items-start justify-between">
+          <span className="font-mono text-[10px] text-muted">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          {(project.client || project.category) && (
+            <span className="font-mono text-[10px] uppercase tracking-widest text-accent">
+              {project.client ?? project.category}
+            </span>
           )}
-          {project.category && (
-            <p className="text-[11px] font-medium uppercase tracking-widest text-accent">
-              {project.category}
-            </p>
-          )}
-          <h3 className="mt-1 text-lg font-semibold leading-tight tracking-tight group-hover:text-accent transition-colors">
+        </div>
+
+        <div className="mt-4 aspect-[16/10] w-full border border-border" />
+
+        <div className="mt-5">
+          <h3 className="font-[family-name:var(--font-display)] text-base font-semibold leading-snug tracking-tight group-hover:text-accent transition-colors">
             {project.title}
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-muted line-clamp-2">
@@ -42,16 +37,11 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           </p>
         </div>
 
-        <div className="mt-4 flex flex-wrap gap-2">
-          {project.tags.slice(0, 3).map((tag) => (
-            <span
-              key={tag}
-              className="text-[10px] uppercase tracking-wider text-muted"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+        {project.tags.length > 0 && (
+          <div className="mt-4 font-mono text-[10px] uppercase tracking-wider text-muted">
+            {project.tags.slice(0, 3).join(" · ")}
+          </div>
+        )}
       </article>
     </Link>
   );
