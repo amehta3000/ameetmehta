@@ -1,30 +1,35 @@
-import { getProjectsByType } from "@/data/projects";
+import { projects } from "@/data/projects";
 import { ProjectCard } from "../components/ProjectCard";
+import { Reveal } from "../components/Reveal";
 
 export const metadata = {
   title: "Work | Ameet Mehta",
-  description: "Professional portfolio: product design, branding, and digital experiences.",
+  description: "Product design, branding, and digital experiences across twenty years.",
 };
 
 export default function WorkPage() {
-  const professional = getProjectsByType("professional");
-
   return (
     <div className="mx-auto max-w-6xl px-6">
-      <section className="py-24 md:py-36">
-        <h1 className="font-[family-name:var(--font-display)] text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-          Work
-        </h1>
-        <p className="mt-4 max-w-xl text-lg text-muted">
-          Product design, branding, and digital experiences for startups
-          finding their footing and established brands that need to move again.
-        </p>
+      <section className="pt-24 pb-16 md:pt-36">
+        <Reveal>
+          <h1 className="font-[family-name:var(--font-display)] text-5xl font-semibold tracking-tight sm:text-6xl md:text-7xl">
+            Work
+          </h1>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="mt-5 max-w-lg text-base text-muted leading-relaxed">
+            Product design, branding, and digital experiences across startups,
+            enterprise software, and culture brands.
+          </p>
+        </Reveal>
       </section>
 
-      <section className="pb-24">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 stagger-children">
-          {professional.map((project, i) => (
-            <ProjectCard key={project.slug} project={project} index={i} />
+      <section className="pb-32">
+        <div className="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project, i) => (
+            <Reveal key={project.slug} delay={Math.min(i * 0.05, 0.25)}>
+              <ProjectCard project={project} index={i} />
+            </Reveal>
           ))}
         </div>
       </section>

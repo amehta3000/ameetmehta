@@ -1,74 +1,57 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f1ec;
-  --foreground: #0a0a0a;
-  --accent: #d97706;
-  --muted: #6b6760;
-  --border: #c8c4bb;
+  --paper: #f4f1ec;
+  --ink: #1a1816;
+  --muted: #7a776f;
+  --amber: #c2791f;
+  --amber-bright: #d97706;
+  --amber-deep: #9a5f18;
+  --line: #d4d0c7;
   --card: transparent;
-  --card-hover: transparent;
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #fafafa;
-  --accent: #f59e0b;
-  --muted: #8a8a8a;
-  --border: #2e2e2e;
+  --paper: #111010;
+  --ink: #f0ede8;
+  --muted: #8a8880;
+  --amber: #f59e0b;
+  --amber-bright: #fbbf24;
+  --amber-deep: #d97706;
+  --line: #232120;
   --card: transparent;
-  --card-hover: transparent;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
   --color-muted: var(--muted);
-  --color-border: var(--border);
-  --color-card: var(--card);
-  --color-card-hover: var(--card-hover);
+  --color-amber: var(--amber);
+  --color-amber-bright: var(--amber-bright);
+  --color-amber-deep: var(--amber-deep);
+  --color-line: var(--line);
+  /* legacy aliases so old class refs don't break */
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --color-accent: var(--amber);
+  --color-border: var(--line);
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: transparent;
 }
 
-/* Scroll-triggered animations */
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Smooth theme transitions */
+*, *::before, *::after {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.animate-fade-in-up {
-  animation: fade-in-up 0.6s ease-out both;
-}
-
-/* Stagger children */
-.stagger-children > * {
-  opacity: 0;
-  animation: fade-in-up 0.5s ease-out both;
-}
-
-.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
-.stagger-children > *:nth-child(2) { animation-delay: 80ms; }
-.stagger-children > *:nth-child(3) { animation-delay: 160ms; }
-.stagger-children > *:nth-child(4) { animation-delay: 240ms; }
-.stagger-children > *:nth-child(5) { animation-delay: 320ms; }
-.stagger-children > *:nth-child(6) { animation-delay: 400ms; }
-.stagger-children > *:nth-child(7) { animation-delay: 480ms; }
-.stagger-children > *:nth-child(8) { animation-delay: 560ms; }
-.stagger-children > *:nth-child(9) { animation-delay: 640ms; }
-
-/* Smooth transitions for theme changes */
-body,
-body * {
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+/* Override for elements that shouldn't transition (flicker prevention) */
+img, canvas, video {
+  transition: none;
 }

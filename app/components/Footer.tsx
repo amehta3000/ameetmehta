@@ -1,41 +1,54 @@
 import Link from "next/link";
 
-const socials = [
+const links = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/ameetmehta/" },
   { label: "Instagram", href: "https://www.instagram.com/ameet3000/" },
-  { label: "Artwork", href: "https://www.instagram.com/ameet3000.art/" },
-  { label: "Beats", href: "https://www.instagram.com/sadubas/reels/" },
+  { label: "Art", href: "https://www.instagram.com/ameet3000.art/" },
+  { label: "SADUBAS", href: "https://www.instagram.com/sadubas/reels/" },
 ];
 
 export function Footer() {
   return (
-    <footer className="border-t border-border py-12">
+    <footer className="relative z-10 border-t border-line mt-24 py-12">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="text-xs text-muted mb-8">Design. Technology. Whatever it takes.</p>
-      </div>
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 md:flex-row md:justify-between">
-        <p className="text-xs text-muted">
-          © {new Date().getFullYear()} Ameet Mehta
-        </p>
-        <div className="flex gap-6">
-          {socials.map((s) => (
+        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="font-[family-name:var(--font-display)] text-2xl font-semibold text-ink">
+              design, code, sound.
+            </p>
+            <p className="mt-1 text-sm text-muted">
+              Los Angeles
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3 md:items-end">
             <Link
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs uppercase tracking-wider text-muted transition-colors hover:text-foreground"
+              href="mailto:hello@ameetmehta.com?subject=Hey%20Ameet"
+              className="font-[family-name:var(--font-mono)] text-xs text-muted hover:text-amber transition-colors tracking-wide"
             >
-              {s.label}
+              hello@ameetmehta.com
             </Link>
-          ))}
+            <div className="flex gap-5">
+              {links.map((l) => (
+                <Link
+                  key={l.label}
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-widest text-muted hover:text-ink transition-colors"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
-        <Link
-          href="mailto:hello@ameetmehta.com?subject=Hey%20Ameet!%20Let%27s%20Connect"
-          className="text-xs text-muted transition-colors hover:text-accent"
-        >
-          hello@ameetmehta.com
-        </Link>
+
+        <div className="mt-10 border-t border-line pt-6">
+          <p className="font-[family-name:var(--font-mono)] text-[10px] text-muted">
+            &copy; {new Date().getFullYear()} Ameet Mehta
+          </p>
+        </div>
       </div>
     </footer>
   );

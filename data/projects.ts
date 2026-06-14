@@ -1,212 +1,436 @@
-export type ProjectType = "professional" | "personal";
-export type PersonalCategory = "music" | "art" | "code";
+export type ArtifactType = "software" | "product" | "identity" | "sound" | "image"
 
-export interface ProjectSection {
-  type: "text" | "image" | "video" | "embed";
-  content: string; // text content, image URL, video URL, or embed URL
-  caption?: string;
+export interface Block {
+  type: "prose" | "image" | "grid"
+  content?: string
+  src?: string
+  alt?: string
+  caption?: string
+  images?: { src: string; alt: string; caption?: string }[]
 }
 
 export interface Project {
-  slug: string;
-  title: string;
-  client?: string;
-  description: string;
-  shortDescription: string;
-  type: ProjectType;
-  category?: PersonalCategory;
-  tags: string[];
-  year?: string;
-  role?: string;
-  thumbnail?: string;
-  heroImage?: string;
-  sections: ProjectSection[];
-  externalUrl?: string;
+  slug: string
+  title: string
+  subtitle: string
+  type: ArtifactType
+  role: string
+  year: string
+  client?: string
+  link?: string
+  tags: string[]
+  cover: string
+  shortDescription: string
+  overview: string
+  blocks: Block[]
 }
 
 export const projects: Project[] = [
-  // Professional
   {
     slug: "employee-communications",
     title: "Employee Communications",
-    client: "Moveworks.ai",
-    description:
-      "Send messages that drive action and make corporate change happen in real time. Designed an enterprise communications platform that transforms how organizations connect with employees.",
-    shortDescription: "Send messages that drive action and make corporate change happen in real time.",
-    type: "professional",
+    subtitle: "Send messages that drive action and make change happen in real time",
+    type: "software",
+    role: "Product Design Lead",
+    year: "2020–2021",
+    client: "Moveworks",
     tags: ["Product Design", "Enterprise", "AI"],
-    year: "2023",
-    role: "Product Designer",
-    sections: [
-      { type: "text", content: "Designed the end-to-end employee communications experience for Moveworks' AI platform, enabling HR and IT teams to send targeted, actionable messages across the organization." },
-      { type: "text", content: "The system leverages AI to personalize delivery timing and channel, dramatically improving engagement rates over traditional corporate communications tools." },
+    cover: "/assets/employee-communications/mw_comms_dashboard_x1280@2x.jpg",
+    shortDescription: "A zero-to-one enterprise communications platform replacing corporate email with AI-powered, actionable messaging.",
+    overview: "From October 2020 to March 2021, I helped shape a crucial component of Moveworks' core platform by serving as the Product Design Lead for a pioneering corporate communications platform. This platform revolutionized internal corporate communication by empowering IT and HR stakeholders to send custom, actionable messages directly via Moveworks' AI enhanced chatbot, effectively replacing the clutter of traditional corporate emails.\n\nAs a true zero-to-one product, it required an extensive mix of user research, stakeholder interviews, data analysis, and intuitive design to shape and launch the MVP to our three lighthouse partners. More than just a designer, I acted as a product leader, onboarding over 20 customers and harnessing their feedback to continually refine the product.",
+    blocks: [
+      {
+        type: "prose",
+        content: "As a true zero-to-one product, it required an extensive mix of user research, stakeholder interviews, data analysis, and intuitive design to shape and launch the MVP to three lighthouse partners.",
+      },
+      {
+        type: "image",
+        src: "/assets/employee-communications/mw_comms_dashboard_x1280@2x.jpg",
+        alt: "Moveworks employee communications dashboard",
+        caption: "The communications dashboard — designed for HR and IT stakeholders to compose and target messages.",
+      },
+      {
+        type: "prose",
+        content: "I acted as a product leader beyond design: onboarding over 20 customers, synthesizing usage data and employee responses to drive iteration, and laying the groundwork for Moveworks' initial web design system.",
+      },
     ],
   },
   {
     slug: "weathersight",
-    title: "Extreme Climate Website Rebrand",
-    client: "Weathersight",
-    description:
-      "The platform for discovering and contextualizing global weather trends. A complete rebrand bringing clarity to complex climate data.",
-    shortDescription: "The platform for discovering and contextualizing global weather trends.",
-    type: "professional",
-    tags: ["Branding", "Web Design", "Data Visualization"],
+    title: "Weathersight",
+    subtitle: "The platform for discovering and contextualizing global weather trends",
+    type: "product",
+    role: "Designer / Front End Developer",
     year: "2022",
-    role: "Design Lead",
-    sections: [
-      { type: "text", content: "Led the complete rebrand of Weathersight, transforming a data-heavy climate platform into an accessible, visually compelling experience that contextualizes extreme weather events for general audiences." },
+    client: "Weathersight",
+    link: "https://weathersight.com",
+    tags: ["Branding", "Web Design", "Climate"],
+    cover: "/assets/weathersight/weathersight_cover1200x500.png",
+    shortDescription: "Brand identity and landing page for a precision climate data platform serving media outlets and publications.",
+    overview: "Brought on board by WeatherSight, my responsibility was twofold: carve out a distinct brand identity and construct an enticing landing page. Known for its precise and exhaustive global weather information, WeatherSight equips media outlets and publications with dependable data to monitor long-term climate change and extreme weather events.",
+    blocks: [
+      {
+        type: "image",
+        src: "/assets/weathersight/weathersight_cover1200x500.png",
+        alt: "Weathersight brand identity",
+      },
+      {
+        type: "prose",
+        content: "I crafted a custom Bootstrap theme that was seamlessly integrated into the site — communicating WeatherSight's mission and impact effectively to potential investors and broader audiences.",
+      },
+      {
+        type: "grid",
+        images: [
+          {
+            src: "/assets/weathersight/weathersight_casestudybrowser-w1280@2x.png",
+            alt: "Weathersight browser view",
+          },
+          {
+            src: "/assets/weathersight/weathersight_casestudybrowser02-w1280@2x.png",
+            alt: "Weathersight data view",
+          },
+        ],
+      },
+      {
+        type: "image",
+        src: "/assets/weathersight/weathersight_casestudybrowser03_logos-w1280@2x.png",
+        alt: "Weathersight logo system",
+        caption: "Logo and identity system for WeatherSight.",
+      },
     ],
   },
   {
     slug: "xlr8r",
-    title: "Accelerating Music & Culture",
+    title: "XLR8R Magazine",
+    subtitle: "Accelerating music and culture",
+    type: "product",
+    role: "Product Manager / Designer / Developer",
+    year: "2015–2016",
     client: "XLR8R",
-    description:
-      "Rebrand and relaunch of 25+ year subculture magazine. Modernizing a beloved music and culture publication for the digital era.",
-    shortDescription: "Rebrand and relaunch of 25+ year subculture magazine.",
-    type: "professional",
-    tags: ["Branding", "Editorial", "Music"],
-    year: "2021",
-    role: "Creative Director",
-    sections: [
-      { type: "text", content: "Rebranded and relaunched XLR8R, a 25+ year electronic music and culture publication, creating a modern digital experience while honoring its subcultural roots." },
+    link: "https://xlr8r.com",
+    tags: ["Editorial", "Music", "Web Development"],
+    cover: "/assets/xlr8r/xlr8r_v1_casestudybrowser-1-w1280@2x.jpg",
+    shortDescription: "Relaunch of a 25-year electronic music and culture publication — migrated from Drupal to WordPress, redesigned for 650k monthly readers.",
+    overview: "As the appointed Head of Product and Engineering at XLR8R.com, a revered music and culture magazine with over two decades of print and digital history, my task was to revive and redefine its digital landscape. I empowered writers with enhanced editorial capabilities while overhauling the platform to provide a sleek, responsive interface complete with popular daily free music downloads.",
+    blocks: [
+      {
+        type: "image",
+        src: "/assets/xlr8r/xlr8r_v1_casestudybrowser-1-w1280@2x.jpg",
+        alt: "XLR8R v1 website redesign",
+        caption: "Drawing inspiration from XLR8R's retired glossy print format — a minimal, responsive design.",
+      },
+      {
+        type: "prose",
+        content: "I skillfully navigated a complex migration from Drupal to WordPress, meticulously preserving a legacy of articles, photos, and digital media. Beyond a product revival, I established a robust ticketing platform connecting our global readership with the vibrant nightlife they craved.",
+      },
+      {
+        type: "grid",
+        images: [
+          {
+            src: "/assets/xlr8r/xlr8r_v1_ipad_browser-1280@2x.png",
+            alt: "XLR8R on iPad",
+          },
+          {
+            src: "/assets/xlr8r/xlr8r_v2_ipad-1280@2xNew.png",
+            alt: "XLR8R v2 on iPad",
+          },
+        ],
+      },
+      {
+        type: "grid",
+        images: [
+          {
+            src: "/assets/xlr8r/xlr8r_v3_mobile.png",
+            alt: "XLR8R mobile",
+          },
+          {
+            src: "/assets/xlr8r/xlr8r_v1_stickers-w1280@2xNew.png",
+            alt: "XLR8R brand stickers",
+          },
+        ],
+      },
     ],
   },
   {
     slug: "chnl",
-    title: "Curate What You Love",
+    title: "CHNL",
+    subtitle: "Curate what you love",
+    type: "software",
+    role: "Co-founder / Product / Lead Designer",
+    year: "2012–2015",
     client: "CHNL",
-    description:
-      "Automatically filter social noise with the content you desire in beautiful collaborative channels.",
-    shortDescription: "Automatically filter social noise with the content you desire.",
-    type: "professional",
-    tags: ["Product Design", "Social", "Mobile"],
-    year: "2020",
-    role: "Product Designer",
-    sections: [
-      { type: "text", content: "Designed CHNL, a content curation platform that cuts through social media noise by automatically filtering and organizing content into beautiful, shareable channels." },
+    tags: ["Product Design", "Startup", "Content"],
+    cover: "/assets/chnl/chnl_casestudybrowser-home-w1280@2x.jpg",
+    shortDescription: "A content curation platform that attracted 400k registered users — pivoted into a digital portfolio tool for ICM Partners and acquired by XLR8R.",
+    overview: "In an era of digital noise, CHNL emerged as a tool for personalized, meaningful content. We didn't just aggregate quality content into beautiful channels — we redefined how users interact with digital media. CHNL wasn't just about consumption; it was about active, community-driven curation. As co-founder, my leadership spanned both Product and Engineering, steering a diverse team toward a product that resonated profoundly.",
+    blocks: [
+      {
+        type: "image",
+        src: "/assets/chnl/chnl_casestudybrowser-home-w1280@2x.jpg",
+        alt: "CHNL home view",
+      },
+      {
+        type: "grid",
+        images: [
+          {
+            src: "/assets/chnl/chnl_v2_laptop_blue2_w1280@2x.jpg",
+            alt: "CHNL laptop view",
+          },
+          {
+            src: "/assets/chnl/chnl_v2_mobile4_w1280@2x.jpg",
+            alt: "CHNL mobile view",
+          },
+        ],
+      },
+      {
+        type: "prose",
+        content: "We discovered a unique niche, transforming CHNL into an in-house digital portfolio platform for ICM Partners. This pivot culminated in an acquisition by XLR8R.com — validating our approach to content curation and presentation.",
+      },
+      {
+        type: "grid",
+        images: [
+          {
+            src: "/assets/chnl/chnl_social_3channels_white_w1280@2x.jpg",
+            alt: "CHNL social channels view",
+          },
+          {
+            src: "/assets/chnl/CHNL_biz_cards_w1280@2x.jpg",
+            alt: "CHNL business cards",
+          },
+        ],
+      },
     ],
   },
   {
     slug: "product-plan",
-    title: "Beautiful Product Roadmaps",
+    title: "ProductPlan",
+    subtitle: "Beautiful roadmaps for executive decisions",
+    type: "software",
+    role: "UX Designer",
+    year: "2013",
     client: "ProductPlan",
-    description:
-      "Build executive product plans for strategic decisions and delivery, all in one platform.",
-    shortDescription: "Build executive product plans for strategic decisions and delivery.",
-    type: "professional",
-    tags: ["Product Design", "SaaS", "Enterprise"],
-    year: "2019",
-    role: "Senior Product Designer",
-    sections: [
-      { type: "text", content: "Redesigned ProductPlan's roadmapping tool to support executive-level strategic planning alongside detailed delivery tracking, creating a unified platform for product teams." },
+    link: "https://www.productplan.com",
+    tags: ["Product Design", "SaaS", "Roadmapping"],
+    cover: "/assets/product-plan/productplan_cover_2000.jpg",
+    shortDescription: "Designed the MVP roadmapping tool for CEOs and product teams — intuitive, visually engaging, and built to inform strategic decisions.",
+    overview: "ProductPlan, a leading pioneer in agile project management workflows, engaged me as a UX designer to spearhead the design and user experience of their MVP product. Tasked with creating an intuitive roadmap for CEOs, I skillfully transformed their feedback into a streamlined, impactful UI. My involvement wasn't limited to product design — I also crafted the brand's logo.",
+    blocks: [
+      {
+        type: "image",
+        src: "/assets/product-plan/productplan_cover_2000.jpg",
+        alt: "ProductPlan cover",
+      },
+      {
+        type: "grid",
+        images: [
+          {
+            src: "/assets/product-plan/productplan_laptop_w1280@2x.jpg",
+            alt: "ProductPlan on laptop",
+          },
+          {
+            src: "/assets/product-plan/productplan_cinema_flat_w1280@2x.jpg",
+            alt: "ProductPlan cinema display",
+          },
+        ],
+      },
+      {
+        type: "grid",
+        images: [
+          {
+            src: "/assets/product-plan/productplan_wires_plan_w1280@2x.jpg",
+            alt: "ProductPlan wireframes — roadmap view",
+          },
+          {
+            src: "/assets/product-plan/productplan_wires_w1280@2x.jpg",
+            alt: "ProductPlan wireframes — overview",
+          },
+        ],
+      },
     ],
   },
   {
     slug: "topspin",
-    title: "Direct to Fan Music Marketing",
-    client: "Topspin Media",
-    description:
-      "Highly customizable sales and audience building marketing tools for artists and management.",
-    shortDescription: "Customizable sales and audience building tools for artists.",
-    type: "professional",
+    title: "Topspin Media",
+    subtitle: "Direct-to-fan sales and marketing for artists",
+    type: "software",
+    role: "Lead UX Designer / Developer",
+    year: "2011–2014",
+    client: "Topspin Media (acquired by Beats by Dre)",
     tags: ["Product Design", "Music", "E-commerce"],
-    year: "2014",
-    role: "Product Designer",
-    sections: [
-      { type: "text", content: "Designed direct-to-fan marketing and commerce tools at Topspin Media, empowering artists and labels to build audiences and sell music, merch, and experiences directly to fans." },
+    cover: "/assets/topspin/topspin-c4m-mocks-1280@2x.jpg",
+    shortDescription: "Designed a suite of embeddable widgets for streaming, e-commerce, and fan acquisition — tools that changed how artists connect with audiences.",
+    overview: "In collaboration with the bright minds at Topspin Media, I served as the lead UX developer on a mission to create sustainable revenue streams for musicians and filmmakers. My role encompassed design, UX, and front-end development for three highly customizable, embeddable products.",
+    blocks: [
+      {
+        type: "image",
+        src: "/assets/topspin/topspin-c4m-mocks-1280@2x.jpg",
+        alt: "Topspin C4M mock designs",
+      },
+      {
+        type: "prose",
+        content: "A Streaming Media Widget for high-quality audio, HD video, and Flickr image pools. A user-friendly e-commerce store embeddable with a single line of JavaScript. And the Email for Media Widget (E4M) — which set the industry standard for fan acquisitions.",
+      },
+      {
+        type: "grid",
+        images: [
+          {
+            src: "/assets/topspin/topspin-c4m-wires-1280@2x.jpg",
+            alt: "Topspin wireframes",
+          },
+          {
+            src: "/assets/topspin/topspin_embedded_widgets_1280@2x.jpg",
+            alt: "Topspin embedded widgets",
+          },
+        ],
+      },
+      {
+        type: "grid",
+        images: [
+          {
+            src: "/assets/topspin/topspin_purchase_flow2_1280@2x.jpg",
+            alt: "Topspin purchase flow",
+          },
+          {
+            src: "/assets/topspin/topspin_streaming_widgetsII_1280@2x.jpg",
+            alt: "Topspin streaming widgets",
+          },
+        ],
+      },
     ],
   },
   {
     slug: "cero-electric-cargo-bikes",
-    title: "Electric Cargo Bikes Launch",
-    client: "Cero",
-    description: "Enjoy driving again. Launch campaign and digital experience for an electric cargo bike brand.",
-    shortDescription: "Enjoy driving again.",
-    type: "professional",
-    tags: ["Branding", "Web Design", "Launch"],
-    year: "2020",
-    role: "Design Lead",
-    sections: [
-      { type: "text", content: "Created the brand identity and launch digital experience for Cero, an electric cargo bike company making urban transportation joyful and sustainable." },
+    title: "Cero Electric Bikes",
+    subtitle: "Enjoy driving again",
+    type: "product",
+    role: "Designer / Web Developer",
+    year: "2021",
+    client: "Cero Bikes",
+    tags: ["Branding", "E-commerce", "Web Development"],
+    cover: "/assets/cero/cero_website_x1280@2xNew.jpg",
+    shortDescription: "Launched Cero's electric cargo bike line with a custom WooCommerce site, real-time bike configurator, and art-directed photoshoot.",
+    overview: "As a contract designer and developer for Cero Bikes, I played a pivotal role in launching their new Electric Cargo Bikes line. I developed a dynamic WordPress site powered by WooCommerce, integrated with Klarna payments and Velofix for seamless bike assembly and service.",
+    blocks: [
+      {
+        type: "image",
+        src: "/assets/cero/cero_website_x1280@2xNew.jpg",
+        alt: "Cero website",
+      },
+      {
+        type: "prose",
+        content: "A custom, real-time bike configurator elevated the shopping experience — offering customers the opportunity to customize their purchase in detail. I also art directed a photoshoot to capture striking assets that formed the site's visual narrative.",
+      },
+      {
+        type: "image",
+        src: "/assets/cero/cero_desktop_x1280@2x.jpg",
+        alt: "Cero desktop view",
+        caption: "The configurator experience, desktop view.",
+      },
     ],
   },
   {
     slug: "rbkcustom",
     title: "RbkCustom by Reebok",
-    client: "Reebok",
-    description: "Customize your Reeboks and unleash your sole expression.",
-    shortDescription: "Customize your Reeboks and unleash your sole expression.",
-    type: "professional",
-    tags: ["E-commerce", "Customization", "Web App"],
-    year: "2012",
-    role: "UX Designer",
-    sections: [
-      { type: "text", content: "Designed Reebok's shoe customization platform, enabling customers to express their creativity through personalized colorways, materials, and details on classic Reebok silhouettes." },
+    subtitle: "Unleash your sole expression",
+    type: "software",
+    role: "Lead UX Developer",
+    year: "2008",
+    client: "Reebok / Fluid",
+    tags: ["3D", "E-commerce", "Customization"],
+    cover: "/assets/rbkcustom/rbkcustom_screens.jpg",
+    shortDescription: "Award-winning online sneaker configurator — real-time 360° customization, built with Fluid's creative team, including a collaboration with John Maeda.",
+    overview: "As lead UX developer for RbkCustom by Reebok, I collaborated with Fluid's extraordinary creative team to develop Reebok's groundbreaking, award-winning online sneaker configurator. A tour de force in client-side rendering and production techniques, offering users a real-time 360-degree view of their customized shoe designs.",
+    blocks: [
+      {
+        type: "image",
+        src: "/assets/rbkcustom/rbkcustom_screens.jpg",
+        alt: "RbkCustom screens",
+      },
+      {
+        type: "prose",
+        content: "In a notable highlight, I had the privilege to collaborate with esteemed design technologist John Maeda to craft a limited edition Reebok Custom experience — pushing the boundaries of front-end development into artistic expression.",
+      },
+      {
+        type: "image",
+        src: "/assets/rbkcustom/rbk_maeda_labptop-1280@2x.jpg",
+        alt: "John Maeda x Reebok limited edition",
+        caption: "The John Maeda limited edition experience.",
+      },
     ],
   },
   {
     slug: "identity",
     title: "Identity + Branding",
-    client: "Multiple",
-    description: "Small collection of logos, business cards, and graphics.",
-    shortDescription: "Collection of logos, business cards, and graphics.",
-    type: "professional",
-    tags: ["Branding", "Identity", "Graphic Design"],
-    sections: [
-      { type: "text", content: "A curated collection of identity and branding work across multiple clients, including logos, business cards, and graphic design systems." },
+    subtitle: "Logos, print, and visual systems",
+    type: "identity",
+    role: "Designer",
+    year: "2008–present",
+    client: "Various",
+    tags: ["Branding", "Identity", "Print"],
+    cover: "/assets/identity/Sadubas-The_Ascent_cover_2000_trishul.png",
+    shortDescription: "A collection of identity and branding work — logos, business cards, posters, and visual systems across a decade of client work.",
+    overview: "A curated collection of identity and branding across multiple clients and creative ventures — from startup logos to film posters to music artwork.",
+    blocks: [
+      {
+        type: "grid",
+        images: [
+          { src: "/assets/identity/Sadubas-The_Ascent_cover_2000_trishul.png", alt: "Sadubas — The Ascent cover" },
+          { src: "/assets/identity/Sadubas_bizcard.png", alt: "Sadubas business card" },
+        ],
+      },
+      {
+        type: "grid",
+        images: [
+          { src: "/assets/identity/XLR8R_biz_cards.png", alt: "XLR8R business cards" },
+          { src: "/assets/identity/bizcard-CHNL_2.jpg", alt: "CHNL business card" },
+        ],
+      },
+      {
+        type: "grid",
+        images: [
+          { src: "/assets/identity/bizcard-PTC.jpg", alt: "Part Time Chiller business card" },
+          { src: "/assets/identity/bizcard-RR.jpg", alt: "Red Rickshaw business card" },
+        ],
+      },
+      {
+        type: "grid",
+        images: [
+          { src: "/assets/identity/Railways_cover_202212.jpg", alt: "Railways album cover" },
+          { src: "/assets/identity/TablaCentricHammerPRINT_Final_1200.png", alt: "Tabla Centric art show poster" },
+        ],
+      },
+      {
+        type: "grid",
+        images: [
+          { src: "/assets/identity/20weeks_LAFF_CreditBlock.jpg", alt: "20 Weeks film poster" },
+          { src: "/assets/identity/dandekar_300dpi.jpg", alt: "Raspberry Magic film poster" },
+        ],
+      },
+      {
+        type: "grid",
+        images: [
+          { src: "/assets/identity/mw_og_logo.png", alt: "Moveworks original logo" },
+          { src: "/assets/identity/sadubas_logo.png", alt: "Sadubas logo" },
+        ],
+      },
+      {
+        type: "grid",
+        images: [
+          { src: "/assets/identity/ptc_logo_black_900.png", alt: "Part Time Chiller logo" },
+          { src: "/assets/identity/wethersight_logo.png", alt: "Weathersight logo" },
+        ],
+      },
+      {
+        type: "grid",
+        images: [
+          { src: "/assets/identity/mw_original_tshirt.png", alt: "Moveworks original t-shirt" },
+          { src: "/assets/identity/mw_yolo_maze_desktop_Round_3000x2250_zoom.png", alt: "Moveworks YOLO maze" },
+        ],
+      },
     ],
   },
-
-  // Personal
-  {
-    slug: "beat-explorations",
-    title: "Beat Explorations",
-    description: "Electronic music production exploring texture, rhythm, and space.",
-    shortDescription: "Electronic beats exploring texture, rhythm, and space.",
-    type: "personal",
-    category: "music",
-    tags: ["Beats", "Electronic", "Production"],
-    externalUrl: "https://www.instagram.com/sadubas/reels/",
-    sections: [
-      { type: "text", content: "Ongoing exploration of electronic music production — blending organic textures with synthesized rhythms." },
-    ],
-  },
-  {
-    slug: "generative-sketches",
-    title: "Generative Sketches",
-    description: "AI-assisted and hand-drawn visual explorations.",
-    shortDescription: "AI-assisted and hand-drawn visual explorations.",
-    type: "personal",
-    category: "art",
-    tags: ["AI Art", "Generative", "Sketches"],
-    externalUrl: "https://www.instagram.com/ameet3000.art/",
-    sections: [
-      { type: "text", content: "A collection of generative and AI-assisted visual experiments, blending computation with hand-drawn sensibility." },
-    ],
-  },
-  {
-    slug: "vibe-coded-experiments",
-    title: "Vibe Coded Experiments",
-    description: "Playful programs built through intuition-driven development.",
-    shortDescription: "Playful programs built through intuition-driven development.",
-    type: "personal",
-    category: "code",
-    tags: ["Creative Coding", "Experiments", "Web"],
-    sections: [
-      { type: "text", content: "A collection of small, expressive programs built through vibe coding — following intuition and aesthetic over strict engineering." },
-    ],
-  },
-];
-
-export function getProjectsByType(type: ProjectType) {
-  return projects.filter((p) => p.type === type);
-}
+]
 
 export function getProjectBySlug(slug: string) {
-  return projects.find((p) => p.slug === slug);
-}
-
-export function getPersonalByCategory(category: PersonalCategory) {
-  return projects.filter((p) => p.type === "personal" && p.category === category);
+  return projects.find((p) => p.slug === slug)
 }

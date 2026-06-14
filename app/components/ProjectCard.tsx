@@ -1,5 +1,13 @@
 import Link from "next/link";
-import type { Project } from "@/data/projects";
+import type { Project, ArtifactType } from "@/data/projects";
+
+const typeLabels: Record<ArtifactType, string> = {
+  software: "software",
+  product: "product",
+  identity: "identity",
+  sound: "sound",
+  image: "image",
+};
 
 interface ProjectCardProps {
   project: Project;
@@ -7,41 +15,39 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
-  const href =
-    project.type === "professional"
-      ? `/work/${project.slug}`
-      : `/play/${project.slug}`;
-
   return (
-    <Link href={href} className="group block">
-      <article className="border border-border p-6 transition-colors duration-200 hover:border-accent">
-        <div className="flex items-start justify-between">
-          <span className="font-mono text-[10px] text-muted">
-            {String(index + 1).padStart(2, "0")}
-          </span>
-          {(project.client || project.category) && (
-            <span className="font-mono text-[10px] uppercase tracking-widest text-accent">
-              {project.client ?? project.category}
-            </span>
+    <Link href={`/work/${project.slug}`} className="group block">
+      <article>
+        <div className="relative overflow-hidden aspect-[4/3] bg-line/30 border border-line">
+          {project.cover ? (
+            <img
+              src={project.cover}
+              alt={project.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          ) : (
+            <div className="w-full h-full" />
           )}
+          <div className="absolute top-3 right-3">
+            <span className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.15em] bg-paper/90 text-amber px-2 py-1">
+              {typeLabels[project.type]}
+            </span>
+          </div>
         </div>
 
-        <div className="mt-4 aspect-[16/10] w-full border border-border" />
-
-        <div className="mt-5">
-          <h3 className="font-[family-name:var(--font-display)] text-base font-semibold leading-snug tracking-tight group-hover:text-accent transition-colors">
-            {project.title}
-          </h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted line-clamp-2">
+        <div className="mt-4">
+          <div className="flex items-baseline justify-between gap-4">
+            <h3 className="font-[family-name:var(--font-display)] text-base font-semibold leading-snug tracking-tight group-hover:text-amber transition-colors duration-200">
+              {project.title}
+            </h3>
+            <span className="font-[family-name:var(--font-mono)] text-[10px] text-muted shrink-0">
+              {project.year}
+            </span>
+          </div>
+          <p className="mt-1.5 text-sm leading-relaxed text-muted line-clamp-2">
             {project.shortDescription}
           </p>
         </div>
-
-        {project.tags.length > 0 && (
-          <div className="mt-4 font-mono text-[10px] uppercase tracking-wider text-muted">
-            {project.tags.slice(0, 3).join(" · ")}
-          </div>
-        )}
       </article>
     </Link>
   );

@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { projects, getProjectBySlug, getProjectsByType } from "@/data/projects";
+import { projects, getProjectBySlug } from "@/data/projects";
+import { Reveal } from "../../components/Reveal";
 
 export function generateStaticParams() {
-  return getProjectsByType("professional").map((p) => ({ slug: p.slug }));
+  return projects.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -19,74 +20,149 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function WorkDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
-  if (!project || project.type !== "professional") notFound();
+  if (!project) notFound();
 
-  const allProfessional = getProjectsByType("professional");
-  const currentIndex = allProfessional.findIndex((p) => p.slug === slug);
-  const nextProject = allProfessional[(currentIndex + 1) % allProfessional.length];
+  const currentIndex = projects.findIndex((p) => p.slug === slug);
+  const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
-    <div className="mx-auto max-w-4xl px-6">
+    <div className="mx-auto max-w-5xl px-6">
       {/* Hero */}
-      <section className="py-24 md:py-36">
-        {project.client && (
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
-            {project.client}
+      <section className="pt-24 pb-16 md:pt-36">
+        <Reveal>
+          <p className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-amber mb-4">
+            {project.client ?? project.type}
           </p>
-        )}
-        <h1 className="mt-2 font-[family-name:var(--font-display)] text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-          {project.title}
-        </h1>
-        <p className="mt-6 text-lg leading-relaxed text-muted">
-          {project.description}
-        </p>
+          <h1 className="font-[family-name:var(--font-display)] text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl">
+            {project.title}
+          </h1>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
+            {project.shortDescription}
+          </p>
+        </Reveal>
       </section>
 
-      {/* Meta */}
-      <div className="flex flex-wrap gap-6 border-t border-border py-6 text-xs uppercase tracking-wider text-muted">
-        {project.role && <span>{project.role}</span>}
-        {project.year && <span>{project.year}</span>}
-        {project.tags.map((tag) => (
-          <span key={tag}>{tag}</span>
-        ))}
-      </div>
-
-      {/* Hero image placeholder */}
-      <div className="my-12 aspect-[16/9] w-full border border-border" />
-
-      {/* Body sections */}
-      <div className="space-y-12 pb-24">
-        {project.sections.map((section, i) => {
-          if (section.type === "text") {
-            return (
-              <p key={i} className="text-base leading-relaxed text-muted">
-                {section.content}
-              </p>
-            );
-          }
-          if (section.type === "image") {
-            return (
-              <div key={i} className="aspect-[16/9] w-full border border-border">
-                {section.caption && (
-                  <p className="mt-2 text-xs text-muted">{section.caption}</p>
-                )}
+      {/* Sidebar metadata + overview */}
+      <Reveal>
+        <div className="grid gap-12 border-t border-line pt-10 pb-16 md:grid-cols-[200px_1fr]">
+          <aside className="space-y-6 font-[family-name:var(--font-mono)] text-[11px]">
+            {project.role && (
+              <div>
+                <p className="uppercase tracking-[0.15em] text-muted mb-1">Role</p>
+                <p className="text-ink">{project.role}</p>
               </div>
+            )}
+            {project.year && (
+              <div>
+                <p className="uppercase tracking-[0.15em] text-muted mb-1">Year</p>
+                <p className="text-ink">{project.year}</p>
+              </div>
+            )}
+            {project.client && (
+              <div>
+                <p className="uppercase tracking-[0.15em] text-muted mb-1">Client</p>
+                <p className="text-ink">{project.client}</p>
+              </div>
+            )}
+            {project.tags.length > 0 && (
+              <div>
+                <p className="uppercase tracking-[0.15em] text-muted mb-1">Type</p>
+                <p className="text-ink">{project.tags.join(", ")}</p>
+              </div>
+            )}
+            {project.link && (
+              <div>
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="uppercase tracking-[0.15em] text-amber hover:text-ink transition-colors"
+                >
+                  Visit site ↗
+                </a>
+              </div>
+            )}
+          </aside>
+
+          <div className="text-base leading-relaxed text-muted whitespace-pre-line">
+            {project.overview}
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Content blocks */}
+      <div className="space-y-14 pb-32">
+        {project.blocks.map((block, i) => {
+          if (block.type === "prose") {
+            return (
+              <Reveal key={i} delay={0.05}>
+                <p className="max-w-2xl text-base leading-relaxed text-muted">
+                  {block.content}
+                </p>
+              </Reveal>
             );
           }
+
+          if (block.type === "image" && block.src) {
+            return (
+              <Reveal key={i} delay={0.05}>
+                <figure>
+                  <img
+                    src={block.src}
+                    alt={block.alt ?? ""}
+                    className="w-full border border-line"
+                  />
+                  {block.caption && (
+                    <figcaption className="mt-3 font-[family-name:var(--font-mono)] text-[10px] text-muted">
+                      {block.caption}
+                    </figcaption>
+                  )}
+                </figure>
+              </Reveal>
+            );
+          }
+
+          if (block.type === "grid" && block.images) {
+            return (
+              <Reveal key={i} delay={0.05}>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {block.images.map((img, j) => (
+                    <figure key={j}>
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        className="w-full border border-line object-cover"
+                      />
+                      {img.caption && (
+                        <figcaption className="mt-2 font-[family-name:var(--font-mono)] text-[10px] text-muted">
+                          {img.caption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  ))}
+                </div>
+              </Reveal>
+            );
+          }
+
           return null;
         })}
       </div>
 
       {/* Next project */}
-      <div className="border-t border-border py-12">
-        <p className="text-xs uppercase tracking-[0.2em] text-muted">Next Project</p>
-        <Link
-          href={`/work/${nextProject.slug}`}
-          className="mt-2 block font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight transition-colors hover:text-accent"
-        >
-          {nextProject.title}
-        </Link>
-      </div>
+      <Reveal>
+        <div className="border-t border-line py-12">
+          <p className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted">
+            Next
+          </p>
+          <Link
+            href={`/work/${nextProject.slug}`}
+            className="mt-3 block font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight hover:text-amber transition-colors"
+          >
+            {nextProject.title} →
+          </Link>
+        </div>
+      </Reveal>
     </div>
   );
 }

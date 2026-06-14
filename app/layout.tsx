@@ -1,26 +1,34 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Fraunces, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
+import { SceneWrapper } from "./components/SceneWrapper";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const fraunces = Fraunces({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-display",
 });
 
-const inter = Inter({
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-body",
 });
 
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mono",
+  weight: ["400", "500"],
+});
+
 export const metadata: Metadata = {
-  title: "Ameet Mehta | Creative Technologist",
+  title: "Ameet Mehta",
   description:
-    "Creative technologist with 20+ years building digital products, brands, and experiences. I help SMBs ship better tools and help collaborators make more interesting things.",
+    "Design, code, sound. Twenty years of digital products, brands, and creative work.",
 };
 
 export default function RootLayout({
@@ -29,11 +37,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`h-full dark ${spaceGrotesk.variable} ${inter.variable}`} suppressHydrationWarning>
-      <body className="min-h-full flex flex-col font-[family-name:var(--font-body)] antialiased">
+    <html
+      lang="en"
+      className={`h-full dark ${fraunces.variable} ${instrumentSans.variable} ${ibmPlexMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-full flex flex-col font-[family-name:var(--font-body)] antialiased bg-paper text-ink">
         <ThemeProvider>
+          <SceneWrapper />
           <Nav />
-          <main className="flex-1 pt-14">{children}</main>
+          <main className="flex-1 pt-14 relative z-10">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>
