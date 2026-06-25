@@ -28,13 +28,12 @@ export default function Home() {
         </Reveal>
         <Reveal delay={0.12}>
           <p className="mt-8 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-            Twenty years building digital products, brands, and creative work.
-            Product designer. Consultant. Musician. Based in Los Angeles.
+            Creative technologist. Product builder. Musician. Based in Los Angeles.
           </p>
         </Reveal>
         <Reveal delay={0.2}>
           <p className="mt-5 font-[family-name:var(--font-mono)] text-xs text-muted">
-            Accepting new projects &mdash;{" "}
+            Say hi &mdash;{" "}
             <a
               href="mailto:hello@ameetmehta.com?subject=Hi%2C%20let%27s%20work%20together"
               className="text-amber underline underline-offset-4 hover:text-ink transition-colors"
