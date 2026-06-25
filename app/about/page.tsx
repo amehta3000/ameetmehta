@@ -29,32 +29,35 @@ export default function AboutPage() {
             </div>
             <div className="space-y-6 text-base leading-relaxed text-muted">
               <p>
-                I&apos;m Ameet. A well-marinated product builder based in Los
-                Angeles. My 20+ year career in tech is driven by a love for
-                design, technology, and music.
+                I&apos;m Ameet. A well-marinated creative technologist based in
+                Los Angeles.
               </p>
               <p>
-                With a rich background in bringing zero-to-one products to life
-                as a co-founder, product head, engineering director, and principal
-                designer, I&apos;m just as comfortable flying solo as I am leading
-                a team toward a shared product vision.
+                I build things for artists, brands, and enterprises, whatever
+                the problem calls for. Design, code, product strategy, creative
+                direction. Right now most of my energy is at Microsoft, where
+                I&apos;m helping organizations defend themselves against
+                nation-state threats using AI agents. It&apos;s some of the most
+                high-stakes, technically interesting work I&apos;ve done, and
+                I&apos;m into it.
               </p>
               <p>
-                Right now I mostly consult with small and medium-sized businesses
-                who need to move faster without hiring a full team: workflow
-                analysis, product design, creative direction, sometimes all at
-                once. If your problem doesn&apos;t fit a clean job description,
-                that&apos;s usually a good sign we&apos;d work well together.
+                I also consult, selectively, with founders and small teams who
+                need to move fast without hiring a whole org around it. If your
+                problem doesn&apos;t fit a clean job description, that&apos;s
+                usually a good sign we&apos;d work well together.
               </p>
               <p>
-                Parallel to all of it, I make music across two contexts. As
-                Part Time Chiller I work solo: DJing, producing beats, and
-                curating sounds for people who take music seriously. As one
-                half of SADUBAS, I collaborate with my longtime partner on
-                South Asian-influenced electronic music and live audio-visual
-                performance, working with musicians and filmmakers to expand
-                the work beyond the two of us. Both practices feed each other
-                and keep the rest of it honest.
+                Music runs parallel to all of it. As Part Time Chiller I DJ and
+                produce, mostly for myself and whoever else happens to be in the
+                room at the right moment. As one half of SADUBAS, I make South
+                Asian-influenced electronic music and perform live audio-visual
+                sets with my longtime collaborator, pulling in musicians and
+                filmmakers along the way.
+              </p>
+              <p>
+                If any of this sounds interesting, professionally or creatively,
+                hit me up.
               </p>
             </div>
           </div>
