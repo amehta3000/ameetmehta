@@ -12,7 +12,7 @@ export default function Hero() {
       </h2>
       <p className="mt-6 max-w-xl text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
         I&apos;m a software engineer passionate about building great products and
-        experiences. I love working across the full stack — from clean UIs to
+        experiences. I love working across the full stack, from clean UIs to
         scalable backend systems.
       </p>
       <div className="mt-10 flex flex-wrap gap-4">

@@ -33,7 +33,7 @@ export default function Home() {
         </Reveal>
         <Reveal delay={0.2}>
           <p className="mt-5 font-[family-name:var(--font-mono)] text-xs text-muted">
-            Say hi &mdash;{" "}
+            Say hi,{" "}
             <a
               href="mailto:hello@ameetmehta.com?subject=Hi%2C%20let%27s%20work%20together"
               className="text-amber underline underline-offset-4 hover:text-ink transition-colors"

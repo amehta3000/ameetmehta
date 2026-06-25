@@ -5,7 +5,7 @@ import { asset } from "@/lib/asset";
 export const metadata = {
   title: "Chiller | Ameet Mehta",
   description:
-    "Part Time Chiller — Ameet Mehta as solo DJ and music producer. Playlists, beats, and sound. Also one half of SADUBAS, an audio-visual performance act.",
+    "Part Time Chiller, Ameet Mehta as solo DJ and music producer. Playlists, beats, and sound. Also one half of SADUBAS, an audio-visual performance act.",
 };
 
 const playlists = [
@@ -13,24 +13,24 @@ const playlists = [
     id: "0iMNNrtl1m6B54PyGlygy2",
     title: "Sunday Vibes",
     description:
-      "The one that started it all. Built for slow mornings and focused afternoons — no filler, no bad energy.",
+      "The one that started it all. Built for slow mornings and focused afternoons. No filler, no bad energy.",
   },
   {
     id: "6MYB8Zxzbi2w6zZGIovB5S",
     title: "Track IDs",
     description:
-      "A deeper cut. The records I keep coming back to across years of digging — a more holistic read of where my taste actually lives.",
+      "A deeper cut. The records I keep coming back to across years of digging, a more holistic read of where my taste actually lives.",
   },
 ];
 
 const sadubas = [
   {
     src: "/assets/identity/Sadubas-The_Ascent_cover_2000_trishul.png",
-    alt: "SADUBAS — The Ascent",
+    alt: "SADUBAS: The Ascent",
   },
   {
     src: "/assets/identity/Railways_cover_202212.jpg",
-    alt: "SADUBAS — Railways",
+    alt: "SADUBAS: Railways",
   },
   {
     src: "/assets/identity/sadubas_logo.png",
@@ -56,7 +56,7 @@ export default function ChillerPage() {
         </Reveal>
         <Reveal delay={0.12}>
           <p className="mt-7 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-            My solo alias as a DJ and music producer. Curation, original beats, and South Asian-influenced electronics — for people who take sound seriously but also know when to let go.
+            My solo alias as a DJ and music producer. Curation, original beats, and South Asian-influenced electronics, for people who take sound seriously but also know when to let go.
           </p>
         </Reveal>
         <Reveal delay={0.2}>
@@ -109,7 +109,7 @@ export default function ChillerPage() {
             </div>
             <div className="space-y-5 text-base leading-relaxed text-muted">
               <p>
-                SADUBAS is an audio-visual performance act I co-founded with my collaborator and longtime friend. Together we make South Asian-influenced electronic music and live visuals — sitting somewhere between house, ambient, and whatever comes next.
+                SADUBAS is an audio-visual performance act I co-founded with my collaborator and longtime friend. Together we make South Asian-influenced electronic music and live visuals, sitting somewhere between house, ambient, and whatever comes next.
               </p>
               <p>
                 We collaborate with musicians and filmmakers to expand the work beyond the two of us: live sets, beat tapes, short film scores, and visual installations. The through-line is always rhythm, texture, and the spaces between notes.

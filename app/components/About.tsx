@@ -12,12 +12,12 @@ export default function About() {
         <div className="sm:col-span-2 space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">
           <p>
             Hello! I&apos;m Ameet, a software engineer based in the US. I enjoy
-            creating things that live on the internet — whether that&apos;s
+            creating things that live on the internet, whether that&apos;s
             websites, applications, or anything in between.
           </p>
           <p>
             I&apos;m passionate about building products that are both functional
-            and beautiful. I care deeply about the details — clean code, good
+            and beautiful. I care deeply about the details: clean code, good
             UX, and systems that scale.
           </p>
           <p>

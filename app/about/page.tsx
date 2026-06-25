@@ -74,8 +74,8 @@ export default function AboutPage() {
                   { label: "hello@ameetmehta.com", href: "mailto:hello@ameetmehta.com?subject=Hey%20Ameet" },
                   { label: "LinkedIn", href: "https://www.linkedin.com/in/ameetmehta/" },
                   { label: "Instagram", href: "https://www.instagram.com/ameet3000/" },
-                  { label: "Art — @ameet3000.art", href: "https://www.instagram.com/ameet3000.art/" },
-                  { label: "Beats — SADUBAS", href: "https://www.instagram.com/sadubas/reels/" },
+                  { label: "Art: @ameet3000.art", href: "https://www.instagram.com/ameet3000.art/" },
+                  { label: "Beats: SADUBAS", href: "https://www.instagram.com/sadubas/reels/" },
                 ].map((item) => (
                   <li key={item.href}>
                     <a
@@ -109,8 +109,8 @@ export default function AboutPage() {
                 Studio
               </h2>
               <ul className="space-y-1 text-sm text-muted">
-                <li>Part Time Chiller — solo DJ / producer</li>
-                <li>SADUBAS — audio-visual act</li>
+                <li>Part Time Chiller, solo DJ / producer</li>
+                <li>SADUBAS, audio-visual act</li>
                 <li>Generative art / synthography</li>
                 <li>Three.js / p5.js</li>
                 <li>Max for Live devices</li>

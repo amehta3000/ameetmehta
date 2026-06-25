@@ -7,7 +7,7 @@ const jobs = [
   {
     company: "Company Name",
     title: "Senior Software Engineer",
-    range: "2022 — Present",
+    range: "2022 to Present",
     bullets: [
       "Led development of core product features used by thousands of customers daily.",
       "Collaborated with cross-functional teams to define and ship new product capabilities.",
@@ -17,7 +17,7 @@ const jobs = [
   {
     company: "Previous Company",
     title: "Software Engineer",
-    range: "2019 — 2022",
+    range: "2019 to 2022",
     bullets: [
       "Built and maintained full-stack features across web and mobile platforms.",
       "Worked closely with product and design to deliver high-quality user experiences.",
@@ -27,7 +27,7 @@ const jobs = [
   {
     company: "Startup Inc.",
     title: "Software Engineer Intern",
-    range: "2018 — 2019",
+    range: "2018 to 2019",
     bullets: [
       "Developed internal tooling and dashboards to streamline operations.",
       "Contributed to the main product codebase in both frontend and backend.",

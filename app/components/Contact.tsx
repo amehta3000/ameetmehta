@@ -7,7 +7,7 @@ export default function Contact() {
       <div className="mt-10 max-w-lg">
         <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
           I&apos;m currently open to new opportunities. Whether you have a
-          question, a project idea, or just want to say hello — my inbox is
+          question, a project idea, or just want to say hello, my inbox is
           always open!
         </p>
         <a
