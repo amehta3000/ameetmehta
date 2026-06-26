@@ -57,8 +57,8 @@ export function HomeCard({ project, wide = false }: HomeCardProps) {
         transition={{ duration: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
       >
         <div className="flex items-start justify-between gap-4">
-          <span className="font-[family-name:var(--font-mono)] text-[10px] text-muted tabular-nums">
-            {project.year}
+          <span className="font-[family-name:var(--font-mono)] text-[10px] text-muted">
+            {project.subtitle}
           </span>
           <span className="text-muted/60 group-hover:text-amber transition-colors duration-200 shrink-0">
             <TypeIcon type={project.type} />

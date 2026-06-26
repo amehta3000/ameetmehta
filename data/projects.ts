@@ -27,16 +27,54 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "ai-security-interfaces",
+    title: "AI Security Interfaces",
+    subtitle: "Current work",
+    type: "software",
+    role: "Product Design Lead",
+    year: "2023–present",
+    client: "Microsoft",
+    tags: ["AI", "Security", "Enterprise", "Product Design"],
+    cover: "/assets/ai-security/cover.jpg",
+    shortDescription: "Designing AI-powered security experiences for high-stakes enterprise workflows, from agentic investigation patterns to composable interfaces and human-in-the-loop systems.",
+    overview: "Designing AI-powered security experiences for high-stakes enterprise workflows at Microsoft. The work spans agentic investigation patterns, composable interface systems, and human-in-the-loop design for teams defending against nation-state threats.",
+    blocks: [
+      {
+        type: "prose",
+        content: "More detail coming soon.",
+      },
+    ],
+  },
+  {
+    slug: "part-time-chiller",
+    title: "Part Time Chiller",
+    subtitle: "Visual beat tape",
+    type: "sound",
+    role: "Artist / Producer / Designer",
+    year: "2015–present",
+    link: "https://parttimechiller.com",
+    tags: ["Music", "DJ", "Production", "Sound"],
+    cover: "/assets/identity/ptc_logo_black_900.png",
+    shortDescription: "A listening environment for my solo DJ and producer alias, built around beats, records, South Asian-influenced electronics, and visual experiments that let the music become a place.",
+    overview: "Part Time Chiller is my solo alias as a DJ and music producer. Curation, original beats, and South Asian-influenced electronics, for people who take sound seriously but also know when to let go.",
+    blocks: [
+      {
+        type: "prose",
+        content: "More detail coming soon.",
+      },
+    ],
+  },
+  {
     slug: "employee-communications",
     title: "Employee Communications",
-    subtitle: "Send messages that drive action and make change happen in real time",
+    subtitle: "AI enterprise product",
     type: "software",
     role: "Product Design Lead",
     year: "2021",
     client: "Moveworks",
     tags: ["Product Design", "Enterprise", "AI"],
     cover: "/assets/employee-communications/mw_comms_dashboard_x1280@2x.jpg",
-    shortDescription: "A zero-to-one enterprise communications platform replacing corporate email with AI-powered, actionable messaging.",
+    shortDescription: "Led product design and research for a zero-to-one enterprise communications platform at Moveworks, helping teams replace low-signal corporate email with targeted, actionable communication.",
     overview: "From October 2020 to March 2021, I helped shape a crucial component of Moveworks' core platform by serving as the Product Design Lead for a pioneering corporate communications platform. This platform revolutionized internal corporate communication by empowering IT and HR stakeholders to send custom, actionable messages directly via Moveworks' AI enhanced chatbot, effectively replacing the clutter of traditional corporate emails.\n\nAs a true zero-to-one product, it required an extensive mix of user research, stakeholder interviews, data analysis, and intuitive design to shape and launch the MVP to our three lighthouse partners. More than just a designer, I acted as a product leader, onboarding over 20 customers and harnessing their feedback to continually refine the product.",
     blocks: [
       {
@@ -47,7 +85,7 @@ export const projects: Project[] = [
         type: "image",
         src: "/assets/employee-communications/mw_comms_dashboard_x1280@2x.jpg",
         alt: "Moveworks employee communications dashboard",
-        caption: "The communications dashboard — designed for HR and IT stakeholders to compose and target messages.",
+        caption: "The communications dashboard, designed for HR and IT stakeholders to compose and target messages.",
       },
       {
         type: "prose",
@@ -56,53 +94,9 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "weathersight",
-    title: "Weathersight",
-    subtitle: "The platform for discovering and contextualizing global weather trends",
-    type: "product",
-    role: "Designer / Front End Developer",
-    year: "2022",
-    client: "Weathersight",
-    link: "https://weathersight.io",
-    tags: ["Branding", "Web Design", "Climate"],
-    cover: "/assets/weathersight/weathersight_cover1200x500.png",
-    shortDescription: "Brand identity and landing page for a precision climate data platform serving media outlets and publications.",
-    overview: "Brought on board by WeatherSight, my responsibility was twofold: carve out a distinct brand identity and construct an enticing landing page. Known for its precise and exhaustive global weather information, WeatherSight equips media outlets and publications with dependable data to monitor long-term climate change and extreme weather events.",
-    blocks: [
-      {
-        type: "image",
-        src: "/assets/weathersight/weathersight_cover1200x500.png",
-        alt: "Weathersight brand identity",
-      },
-      {
-        type: "prose",
-        content: "I crafted a custom Bootstrap theme that was seamlessly integrated into the site — communicating WeatherSight's mission and impact effectively to potential investors and broader audiences.",
-      },
-      {
-        type: "grid",
-        images: [
-          {
-            src: "/assets/weathersight/weathersight_casestudybrowser-w1280@2x.png",
-            alt: "Weathersight browser view",
-          },
-          {
-            src: "/assets/weathersight/weathersight_casestudybrowser02-w1280@2x.png",
-            alt: "Weathersight data view",
-          },
-        ],
-      },
-      {
-        type: "image",
-        src: "/assets/weathersight/weathersight_casestudybrowser03_logos-w1280@2x.png",
-        alt: "Weathersight logo system",
-        caption: "Logo and identity system for WeatherSight.",
-      },
-    ],
-  },
-  {
     slug: "xlr8r",
     title: "XLR8R Magazine",
-    subtitle: "Accelerating music and culture",
+    subtitle: "Music culture and product systems",
     type: "product",
     role: "Product Manager / Designer / Developer",
     year: "2015–2016",
@@ -110,14 +104,14 @@ export const projects: Project[] = [
     link: "https://xlr8r.com",
     tags: ["Editorial", "Music", "Web Development"],
     cover: "/assets/xlr8r/xlr8r_v1_casestudybrowser-1-w1280@2x.jpg",
-    shortDescription: "Relaunch of a 25-year electronic music and culture publication — migrated from Drupal to WordPress, redesigned for 650k monthly readers.",
+    shortDescription: "Led product and engineering for the relaunch of a 25-year electronic music publication, modernizing the platform, preserving the archive, and supporting a large global readership.",
     overview: "As the appointed Head of Product and Engineering at XLR8R.com, a revered music and culture magazine with over two decades of print and digital history, my task was to revive and redefine its digital landscape. I empowered writers with enhanced editorial capabilities while overhauling the platform to provide a sleek, responsive interface complete with popular daily free music downloads.",
     blocks: [
       {
         type: "image",
         src: "/assets/xlr8r/xlr8r_v1_casestudybrowser-1-w1280@2x.jpg",
         alt: "XLR8R v1 website redesign",
-        caption: "Drawing inspiration from XLR8R's retired glossy print format — a minimal, responsive design.",
+        caption: "Drawing inspiration from XLR8R's retired glossy print format, a minimal, responsive design.",
       },
       {
         type: "prose",
@@ -154,14 +148,14 @@ export const projects: Project[] = [
   {
     slug: "chnl",
     title: "CHNL",
-    subtitle: "Curate what you love",
+    subtitle: "Founder, zero-to-one product",
     type: "software",
     role: "Co-founder / Product / Lead Designer",
     year: "2012–2015",
     client: "CHNL",
     tags: ["Product Design", "Startup", "Content"],
     cover: "/assets/chnl/chnl_casestudybrowser-home-w1280@2x.jpg",
-    shortDescription: "A content curation platform that attracted 400k registered users — pivoted into a digital portfolio tool for ICM Partners and acquired by XLR8R.",
+    shortDescription: "Co-founded and designed a social content platform that turned noisy feeds into curated visual channels, growing to more than 400k registered users before pivoting and acquisition.",
     overview: "In an era of digital noise, CHNL emerged as a tool for personalized, meaningful content. We didn't just aggregate quality content into beautiful channels — we redefined how users interact with digital media. CHNL wasn't just about consumption; it was about active, community-driven curation. As co-founder, my leadership spanned both Product and Engineering, steering a diverse team toward a product that resonated profoundly.",
     blocks: [
       {
@@ -184,7 +178,7 @@ export const projects: Project[] = [
       },
       {
         type: "prose",
-        content: "We discovered a unique niche, transforming CHNL into an in-house digital portfolio platform for ICM Partners. This pivot culminated in an acquisition by XLR8R.com — validating our approach to content curation and presentation.",
+        content: "We discovered a unique niche, transforming CHNL into an in-house digital portfolio platform for ICM Partners. This pivot culminated in an acquisition by XLR8R.com, validating our approach to content curation and presentation.",
       },
       {
         type: "grid",
@@ -202,63 +196,34 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "product-plan",
-    title: "ProductPlan",
-    subtitle: "Beautiful roadmaps for executive decisions",
-    type: "software",
-    role: "UX Designer",
-    year: "2013",
-    client: "ProductPlan",
-    link: "https://www.productplan.com",
-    tags: ["Product Design", "SaaS", "Roadmapping"],
-    cover: "/assets/product-plan/productplan_cover_2000.jpg",
-    shortDescription: "Designed the MVP roadmapping tool for CEOs and product teams — intuitive, visually engaging, and built to inform strategic decisions.",
-    overview: "ProductPlan, a leading pioneer in agile project management workflows, engaged me as a UX designer to spearhead the design and user experience of their MVP product. Tasked with creating an intuitive roadmap for CEOs, I skillfully transformed their feedback into a streamlined, impactful UI. My involvement wasn't limited to product design — I also crafted the brand's logo.",
+    slug: "space-rickshaw",
+    title: "Space Rickshaw",
+    subtitle: "Generative worldbuilding",
+    type: "image",
+    role: "Artist / Designer",
+    year: "2022–present",
+    tags: ["Generative AI", "Visual Art", "Worldbuilding"],
+    cover: "/assets/space-rickshaw/cover.jpg",
+    shortDescription: "A strange little visual world built through generative AI, storytelling, and design direction. Part sketchbook, part myth system, part proof that taste still matters when the machine gets fast.",
+    overview: "Space Rickshaw is an ongoing generative worldbuilding project, a visual universe built through AI tools, storytelling, and design direction. Part sketchbook, part myth system, part proof that taste still matters when the machine gets fast.",
     blocks: [
       {
-        type: "image",
-        src: "/assets/product-plan/productplan_cover_2000.jpg",
-        alt: "ProductPlan cover",
-      },
-      {
-        type: "grid",
-        images: [
-          {
-            src: "/assets/product-plan/productplan_laptop_w1280@2x.jpg",
-            alt: "ProductPlan on laptop",
-          },
-          {
-            src: "/assets/product-plan/productplan_cinema_flat_w1280@2x.jpg",
-            alt: "ProductPlan cinema display",
-          },
-        ],
-      },
-      {
-        type: "grid",
-        images: [
-          {
-            src: "/assets/product-plan/productplan_wires_plan_w1280@2x.jpg",
-            alt: "ProductPlan wireframes — roadmap view",
-          },
-          {
-            src: "/assets/product-plan/productplan_wires_w1280@2x.jpg",
-            alt: "ProductPlan wireframes — overview",
-          },
-        ],
+        type: "prose",
+        content: "More detail coming soon.",
       },
     ],
   },
   {
     slug: "topspin",
-    title: "Topspin Media",
-    subtitle: "Direct-to-fan sales and marketing for artists",
+    title: "Topspin",
+    subtitle: "Music tech",
     type: "software",
     role: "Lead UX Designer / Developer",
     year: "2011–2014",
     client: "Topspin Media (acquired by Beats by Dre)",
     tags: ["Product Design", "Music", "E-commerce"],
     cover: "/assets/topspin/topspin-c4m-mocks-1280@2x.jpg",
-    shortDescription: "Designed a suite of embeddable widgets for streaming, e-commerce, and fan acquisition — tools that changed how artists connect with audiences.",
+    shortDescription: "Product and UX work for direct-to-fan music tools, helping artists, labels, and teams sell, promote, and distribute music on their own terms.",
     overview: "In collaboration with the bright minds at Topspin Media, I served as the lead UX developer on a mission to create sustainable revenue streams for musicians and filmmakers. My role encompassed design, UX, and front-end development for three highly customizable, embeddable products.",
     blocks: [
       {
@@ -268,7 +233,7 @@ export const projects: Project[] = [
       },
       {
         type: "prose",
-        content: "A Streaming Media Widget for high-quality audio, HD video, and Flickr image pools. A user-friendly e-commerce store embeddable with a single line of JavaScript. And the Email for Media Widget (E4M) — which set the industry standard for fan acquisitions.",
+        content: "A Streaming Media Widget for high-quality audio, HD video, and Flickr image pools. A user-friendly e-commerce store embeddable with a single line of JavaScript. And the Email for Media Widget (E4M), which set the industry standard for fan acquisitions.",
       },
       {
         type: "grid",
@@ -299,82 +264,69 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "cero-electric-cargo-bikes",
-    title: "Cero Electric Bikes",
-    subtitle: "Enjoy driving again",
-    type: "product",
-    role: "Designer / Web Developer",
-    year: "2021",
-    client: "Cero Bikes",
-    tags: ["Branding", "E-commerce", "Web Development"],
-    cover: "/assets/cero/cero_website_x1280@2xNew.jpg",
-    shortDescription: "Launched Cero's electric cargo bike line with a custom WooCommerce site, real-time bike configurator, and art-directed photoshoot.",
-    overview: "As a contract designer and developer for Cero Bikes, I played a pivotal role in launching their new Electric Cargo Bikes line. I developed a dynamic WordPress site powered by WooCommerce, integrated with Klarna payments and Velofix for seamless bike assembly and service.",
-    blocks: [
-      {
-        type: "image",
-        src: "/assets/cero/cero_website_x1280@2xNew.jpg",
-        alt: "Cero website",
-      },
-      {
-        type: "prose",
-        content: "A custom, real-time bike configurator elevated the shopping experience — offering customers the opportunity to customize their purchase in detail. I also art directed a photoshoot to capture striking assets that formed the site's visual narrative.",
-      },
-      {
-        type: "image",
-        src: "/assets/cero/cero_desktop_x1280@2x.jpg",
-        alt: "Cero desktop view",
-        caption: "The configurator experience, desktop view.",
-      },
-    ],
-  },
-  {
-    slug: "rbkcustom",
-    title: "RbkCustom by Reebok",
-    subtitle: "Unleash your sole expression",
+    slug: "product-plan",
+    title: "ProductPlan",
+    subtitle: "SaaS MVP",
     type: "software",
-    role: "Lead UX Developer",
-    year: "2008",
-    client: "Reebok / Fluid",
-    tags: ["3D", "E-commerce", "Customization"],
-    cover: "/assets/rbkcustom/rbkcustom_screens.jpg",
-    shortDescription: "Award-winning online sneaker configurator — real-time 360° customization, built with Fluid's creative team, including a collaboration with John Maeda.",
-    overview: "As lead UX developer for RbkCustom by Reebok, I collaborated with Fluid's extraordinary creative team to develop Reebok's groundbreaking, award-winning online sneaker configurator. A tour de force in client-side rendering and production techniques, offering users a real-time 360-degree view of their customized shoe designs.",
+    role: "UX Designer",
+    year: "2013",
+    client: "ProductPlan",
+    link: "https://www.productplan.com",
+    tags: ["Product Design", "SaaS", "Roadmapping"],
+    cover: "/assets/product-plan/productplan_cover_2000.jpg",
+    shortDescription: "Helped shape the MVP experience and early identity for a roadmap product built to make product strategy easier to see, share, and align around.",
+    overview: "ProductPlan, a leading pioneer in agile project management workflows, engaged me as a UX designer to spearhead the design and user experience of their MVP product. Tasked with creating an intuitive roadmap for CEOs, I skillfully transformed their feedback into a streamlined, impactful UI. My involvement wasn't limited to product design — I also crafted the brand's logo.",
     blocks: [
       {
         type: "image",
-        src: "/assets/rbkcustom/rbkcustom_screens.jpg",
-        alt: "RbkCustom screens",
+        src: "/assets/product-plan/productplan_cover_2000.jpg",
+        alt: "ProductPlan cover",
       },
       {
-        type: "prose",
-        content: "In a notable highlight, I had the privilege to collaborate with esteemed design technologist John Maeda to craft a limited edition Reebok Custom experience — pushing the boundaries of front-end development into artistic expression.",
+        type: "grid",
+        images: [
+          {
+            src: "/assets/product-plan/productplan_laptop_w1280@2x.jpg",
+            alt: "ProductPlan on laptop",
+          },
+          {
+            src: "/assets/product-plan/productplan_cinema_flat_w1280@2x.jpg",
+            alt: "ProductPlan cinema display",
+          },
+        ],
       },
       {
-        type: "image",
-        src: "/assets/rbkcustom/rbk_maeda_labptop-1280@2x.jpg",
-        alt: "John Maeda x Reebok limited edition",
-        caption: "The John Maeda limited edition experience.",
+        type: "grid",
+        images: [
+          {
+            src: "/assets/product-plan/productplan_wires_plan_w1280@2x.jpg",
+            alt: "ProductPlan wireframes, roadmap view",
+          },
+          {
+            src: "/assets/product-plan/productplan_wires_w1280@2x.jpg",
+            alt: "ProductPlan wireframes, overview",
+          },
+        ],
       },
     ],
   },
   {
     slug: "identity",
-    title: "Identity + Branding",
-    subtitle: "Logos, print, and visual systems",
+    title: "Marks, Posters, Systems",
+    subtitle: "Visual identity",
     type: "identity",
     role: "Designer",
     year: "2008–present",
     client: "Various",
     tags: ["Branding", "Identity", "Print"],
     cover: "/assets/identity/Sadubas-The_Ascent_cover_2000_trishul.png",
-    shortDescription: "A collection of identity and branding work — logos, business cards, posters, and visual systems across a decade of client work.",
-    overview: "A curated collection of identity and branding across multiple clients and creative ventures — from startup logos to film posters to music artwork.",
+    shortDescription: "Logos, posters, shirts, covers, and visual systems for products, music projects, friends, experiments, and finely made things.",
+    overview: "A curated collection of identity and branding across multiple clients and creative ventures, from startup logos to film posters to music artwork.",
     blocks: [
       {
         type: "grid",
         images: [
-          { src: "/assets/identity/Sadubas-The_Ascent_cover_2000_trishul.png", alt: "Sadubas — The Ascent cover" },
+          { src: "/assets/identity/Sadubas-The_Ascent_cover_2000_trishul.png", alt: "Sadubas: The Ascent cover" },
           { src: "/assets/identity/Sadubas_bizcard.png", alt: "Sadubas business card" },
         ],
       },
