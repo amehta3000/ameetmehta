@@ -57,8 +57,8 @@ export const projects: Project[] = [
     link: "https://parttimechiller.com",
     tags: ["Music", "DJ", "Production", "Sound", "Code"],
     cover: "/assets/identity/ptc_logo_black_900.png",
-    shortDescription: "A listening environment for my solo DJ and producer alias, built around beats, records, South Asian-influenced electronics, and visual experiments that let the music become a place.",
-    overview: "Beats, records, and South Asian-influenced electronics for people who take sound seriously but also know when to let go.",
+    shortDescription: "My solo alias as a DJ and music producer. Original productions rooted in downtempo, trip-hop, and house, plus DJ sets built around global soul, folk, and groove, including a monthly four-hour residency at the Mar Vista Farmers Market for over 15 years.",
+    overview: "Part Time Chiller is my solo alias as a DJ and producer. On the production side, my music draws from downtempo, trip-hop, and house, built around feel and texture. As a DJ, I curate around global soul, folk, and positive groove energy. For over 15 years I have held a monthly four-hour residency at the Mar Vista Farmers Market, the kind of set where the music fits the morning but stays with you all day.",
     blocks: [
       {
         type: "video",

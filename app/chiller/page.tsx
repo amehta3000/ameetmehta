@@ -55,7 +55,7 @@ export default function ChillerPage() {
         </Reveal>
         <Reveal delay={0.12}>
           <p className="mt-7 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-            My solo alias as a DJ and music producer. Curation, original beats, and South Asian-influenced electronics, for people who take sound seriously but also know when to let go.
+            My solo alias as a DJ and music producer. Original productions rooted in downtempo, trip-hop, and house. DJ sets built around global soul, folk, and groove, including a monthly four-hour residency at the Mar Vista Farmers Market for over 15 years.
           </p>
         </Reveal>
         <Reveal delay={0.2}>
