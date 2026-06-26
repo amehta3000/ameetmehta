@@ -28,7 +28,22 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "Ameet Mehta",
   description:
-    "Design, code, sound. Twenty years of digital products, brands, and creative work.",
+    "Creative technologist, product design leader, musician, and curator of finely made things. Based in Los Angeles.",
+  openGraph: {
+    title: "Ameet Mehta",
+    description:
+      "Creative technologist, product design leader, musician, and curator of finely made things. Based in Los Angeles.",
+    url: "https://ameetmehta.com",
+    siteName: "Ameet Mehta",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Ameet Mehta",
+    description:
+      "Creative technologist, product design leader, musician, and curator of finely made things. Based in Los Angeles.",
+  },
 };
 
 export default function RootLayout({
