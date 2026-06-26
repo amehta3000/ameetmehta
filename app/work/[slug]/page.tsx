@@ -146,6 +146,22 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
             );
           }
 
+          if (block.type === "video" && block.url) {
+            return (
+              <Reveal key={i} delay={0.05}>
+                <div className="aspect-video w-full overflow-hidden border border-line">
+                  <iframe
+                    src={block.url}
+                    title={block.title ?? "Video"}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  />
+                </div>
+              </Reveal>
+            );
+          }
+
           return null;
         })}
       </div>

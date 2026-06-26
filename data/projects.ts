@@ -1,12 +1,14 @@
 export type ArtifactType = "software" | "product" | "identity" | "sound" | "image"
 
 export interface Block {
-  type: "prose" | "image" | "grid"
+  type: "prose" | "image" | "grid" | "video"
   content?: string
   src?: string
   alt?: string
   caption?: string
   images?: { src: string; alt: string; caption?: string }[]
+  url?: string
+  title?: string
 }
 
 export interface Project {
@@ -53,14 +55,15 @@ export const projects: Project[] = [
     role: "Artist / Producer / Designer",
     year: "2015–present",
     link: "https://parttimechiller.com",
-    tags: ["Music", "DJ", "Production", "Sound"],
+    tags: ["Music", "DJ", "Production", "Sound", "Code"],
     cover: "/assets/identity/ptc_logo_black_900.png",
     shortDescription: "A listening environment for my solo DJ and producer alias, built around beats, records, South Asian-influenced electronics, and visual experiments that let the music become a place.",
-    overview: "Part Time Chiller is my solo alias as a DJ and music producer. Curation, original beats, and South Asian-influenced electronics, for people who take sound seriously but also know when to let go.",
+    overview: "Beats, records, and South Asian-influenced electronics for people who take sound seriously but also know when to let go.",
     blocks: [
       {
-        type: "prose",
-        content: "More detail coming soon.",
+        type: "video",
+        url: "https://www.youtube.com/embed/Zv2sKFRcMis",
+        title: "Part Time Chiller",
       },
     ],
   },
