@@ -31,7 +31,7 @@ export default function Home() {
             Creative technologist, product design leader, musician, and curator of finely made things. Based in Los Angeles.
           </p>
           <p className="mt-4 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-            I shape complex ideas into useful products, prototypes, stories, and systems, with a bias toward craft, culture, and momentum.
+            I shape complex ideas into products, prototypes, systems, and small worlds.
           </p>
         </Reveal>
         <Reveal delay={0.2}>
