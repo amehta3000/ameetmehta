@@ -38,7 +38,6 @@ const sadubas = [
   },
 ];
 
-const ART_STUB_COUNT = 6;
 
 export default function ChillerPage() {
   return (
@@ -136,11 +135,11 @@ export default function ChillerPage() {
           </div>
         </Reveal>
         <Reveal delay={0.1}>
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          <div className="mt-10 flex gap-4">
             {sadubas.map((img) => (
               <div
                 key={img.src}
-                className="aspect-square overflow-hidden border border-line"
+                className="w-24 h-24 shrink-0 overflow-hidden border border-line"
               >
                 <img
                   src={asset(img.src)}
@@ -151,27 +150,17 @@ export default function ChillerPage() {
             ))}
           </div>
         </Reveal>
-      </section>
-
-      {/* Visual — stubbed */}
-      <section className="border-t border-line pt-16 pb-32">
-        <Reveal>
-          <div className="flex items-baseline justify-between mb-10">
-            <h2 className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.25em] text-muted">
-              Visual
-            </h2>
-            <span className="font-[family-name:var(--font-mono)] text-[10px] text-muted">
-              Coming soon
-            </span>
+        <Reveal delay={0.15}>
+          <div className="mt-10 aspect-video w-full overflow-hidden border border-line">
+            <iframe
+              src="https://www.youtube.com/embed/K7yc3vkW1ZA"
+              title="SADUBAS live performance"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
           </div>
         </Reveal>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: ART_STUB_COUNT }).map((_, i) => (
-            <Reveal key={i} delay={Math.min(i * 0.05, 0.2)}>
-              <div className="aspect-square border border-line bg-line/10" />
-            </Reveal>
-          ))}
-        </div>
       </section>
 
     </div>
