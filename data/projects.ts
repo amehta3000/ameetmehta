@@ -66,7 +66,7 @@ export const projects: Project[] = [
   },
   {
     slug: "employee-communications",
-    title: "Employee Communications",
+    title: "Employee Comms",
     subtitle: "AI enterprise product",
     type: "software",
     role: "Product Design Lead",
