@@ -28,8 +28,10 @@ export default function Home() {
         </Reveal>
         <Reveal delay={0.12}>
           <p className="mt-8 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-            Creative technologist, product builder, musician, and curator of finely made things.
-            Based in Los Angeles.
+            Creative technologist, product design leader, musician, and curator of finely made things. Based in Los Angeles.
+          </p>
+          <p className="mt-4 max-w-lg text-base leading-relaxed text-muted md:text-lg">
+            I shape complex ideas into useful products, prototypes, stories, and systems, with a bias toward craft, culture, and momentum.
           </p>
         </Reveal>
         <Reveal delay={0.2}>
