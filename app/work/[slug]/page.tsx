@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { projects, getProjectBySlug } from "@/data/projects";
 import { Reveal } from "../../components/Reveal";
+import { SpaceRickshawEmbed } from "../../components/SpaceRickshawEmbed";
 import { asset } from "@/lib/asset";
 
 export function generateStaticParams() {
@@ -158,6 +159,14 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                     className="w-full h-full"
                   />
                 </div>
+              </Reveal>
+            );
+          }
+
+          if (block.type === "game") {
+            return (
+              <Reveal key={i} delay={0.05}>
+                <SpaceRickshawEmbed />
               </Reveal>
             );
           }

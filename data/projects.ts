@@ -1,7 +1,7 @@
 export type ArtifactType = "software" | "product" | "identity" | "sound" | "image"
 
 export interface Block {
-  type: "prose" | "image" | "grid" | "video"
+  type: "prose" | "image" | "grid" | "video" | "game"
   content?: string
   src?: string
   alt?: string
@@ -205,14 +205,13 @@ export const projects: Project[] = [
     type: "image",
     role: "Artist / Designer",
     year: "2022–present",
-    tags: ["Generative AI", "Visual Art", "Worldbuilding"],
+    tags: ["Generative AI", "Visual Art", "Worldbuilding", "Code"],
     cover: "/assets/space-rickshaw/cover.jpg",
     shortDescription: "A strange little visual world built through generative AI, storytelling, and design direction. Part sketchbook, part myth system, part proof that taste still matters when the machine gets fast.",
     overview: "Space Rickshaw is an ongoing generative worldbuilding project, a visual universe built through AI tools, storytelling, and design direction. Part sketchbook, part myth system, part proof that taste still matters when the machine gets fast.",
     blocks: [
       {
-        type: "prose",
-        content: "More detail coming soon.",
+        type: "game",
       },
     ],
   },
