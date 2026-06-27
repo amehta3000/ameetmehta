@@ -38,7 +38,7 @@ export const projects: Project[] = [
     client: "Microsoft",
     tags: ["AI", "Security", "Enterprise", "Product Design"],
     cover: "/assets/ai-security/cover.jpg",
-    shortDescription: "Designing for AI in security workflows. As a Principal Product Design Manager at Microsoft, I shape how AI shows up inside security tools, where the stakes are high, the data is dense, and trust is everything.",
+    shortDescription: "Designing AI-powered security experiences for high-stakes enterprise workflows, from agentic investigation patterns to composable interfaces and human-in-the-loop systems.",
     overview: "As a Principal Product Design Manager at Microsoft, I shape how AI shows up inside security tools, where the stakes are high, the data is dense, and trust is everything. I focus on the hard parts: framing ambiguous problems, building a research foundation, and helping designers turn raw complexity into experiences security professionals can actually rely on. Alongside the product work, I created a framework for scaling AI into my team's day-to-day design practice.",
     blocks: [
       {
