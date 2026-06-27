@@ -44,52 +44,98 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
         </Reveal>
       </section>
 
-      {/* Sidebar metadata + overview */}
+      {/* Metadata + overview */}
       <Reveal>
-        <div className="grid gap-12 border-t border-line pt-10 pb-16 md:grid-cols-[200px_1fr]">
-          <aside className="space-y-6 font-[family-name:var(--font-mono)] text-[11px]">
-            {project.role && (
-              <div>
-                <p className="uppercase tracking-[0.15em] text-muted mb-1">Role</p>
-                <p className="text-ink">{project.role}</p>
-              </div>
-            )}
-            {project.year && (
-              <div>
-                <p className="uppercase tracking-[0.15em] text-muted mb-1">Year</p>
-                <p className="text-ink">{project.year}</p>
-              </div>
-            )}
-            {project.client && (
-              <div>
-                <p className="uppercase tracking-[0.15em] text-muted mb-1">Client</p>
-                <p className="text-ink">{project.client}</p>
-              </div>
-            )}
-            {project.tags.length > 0 && (
-              <div>
-                <p className="uppercase tracking-[0.15em] text-muted mb-1">Type</p>
-                <p className="text-ink">{project.tags.join(", ")}</p>
-              </div>
-            )}
-            {project.link && (
-              <div>
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="uppercase tracking-[0.15em] text-amber hover:text-ink transition-colors"
-                >
-                  Visit site ↗
-                </a>
-              </div>
-            )}
-          </aside>
-
-          <div className="text-base leading-relaxed text-muted whitespace-pre-line">
-            {project.overview}
+        {slug === "space-rickshaw" ? (
+          <div className="border-t border-line pt-10 pb-16">
+            <div className="flex flex-wrap gap-x-12 gap-y-6 font-[family-name:var(--font-mono)] text-[11px] mb-10">
+              {project.role && (
+                <div>
+                  <p className="uppercase tracking-[0.15em] text-muted mb-1">Role</p>
+                  <p className="text-ink">{project.role}</p>
+                </div>
+              )}
+              {project.year && (
+                <div>
+                  <p className="uppercase tracking-[0.15em] text-muted mb-1">Year</p>
+                  <p className="text-ink">{project.year}</p>
+                </div>
+              )}
+              {project.client && (
+                <div>
+                  <p className="uppercase tracking-[0.15em] text-muted mb-1">Client</p>
+                  <p className="text-ink">{project.client}</p>
+                </div>
+              )}
+              {project.tags.length > 0 && (
+                <div>
+                  <p className="uppercase tracking-[0.15em] text-muted mb-1">Type</p>
+                  <p className="text-ink">{project.tags.join(", ")}</p>
+                </div>
+              )}
+              {project.link && (
+                <div>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="uppercase tracking-[0.15em] text-amber hover:text-ink transition-colors"
+                  >
+                    Visit site ↗
+                  </a>
+                </div>
+              )}
+            </div>
+            <p className="max-w-2xl text-base leading-relaxed text-muted whitespace-pre-line">
+              {project.overview}
+            </p>
           </div>
-        </div>
+        ) : (
+          <div className="grid gap-12 border-t border-line pt-10 pb-16 md:grid-cols-[200px_1fr]">
+            <aside className="space-y-6 font-[family-name:var(--font-mono)] text-[11px]">
+              {project.role && (
+                <div>
+                  <p className="uppercase tracking-[0.15em] text-muted mb-1">Role</p>
+                  <p className="text-ink">{project.role}</p>
+                </div>
+              )}
+              {project.year && (
+                <div>
+                  <p className="uppercase tracking-[0.15em] text-muted mb-1">Year</p>
+                  <p className="text-ink">{project.year}</p>
+                </div>
+              )}
+              {project.client && (
+                <div>
+                  <p className="uppercase tracking-[0.15em] text-muted mb-1">Client</p>
+                  <p className="text-ink">{project.client}</p>
+                </div>
+              )}
+              {project.tags.length > 0 && (
+                <div>
+                  <p className="uppercase tracking-[0.15em] text-muted mb-1">Type</p>
+                  <p className="text-ink">{project.tags.join(", ")}</p>
+                </div>
+              )}
+              {project.link && (
+                <div>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="uppercase tracking-[0.15em] text-amber hover:text-ink transition-colors"
+                  >
+                    Visit site ↗
+                  </a>
+                </div>
+              )}
+            </aside>
+
+            <div className="text-base leading-relaxed text-muted whitespace-pre-line">
+              {project.overview}
+            </div>
+          </div>
+        )}
       </Reveal>
 
       {/* Content blocks */}

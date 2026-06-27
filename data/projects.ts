@@ -208,9 +208,7 @@ export const projects: Project[] = [
     tags: ["Vibe coding"],
     cover: "/assets/space-rickshaw/cover.jpg",
     shortDescription: "A nostalgic homage to Space Taxi on the Commodore 64, rebuilt as a bajaj rickshaw odyssey across India. Made with Claude through spec-driven development as an experiment in AI-assisted game design.",
-    overview: "Space Taxi was one of my favorite games on my first computer, the Commodore 64. Space Rickshaw is my homage to it: a pixel-faithful recreation rebuilt in the same spirit, but transplanted across five Indian cities in a yellow bajaj auto-rickshaw instead of a spaceship.
-
-I built it with Claude as an experiment in spec-driven development, writing detailed game specs and letting the AI handle the implementation while I directed the design, the levels, and the feel. The result is a playable artifact that sits at the intersection of nostalgia, craft, and a genuine curiosity about what human-AI collaboration looks like when the human stays in the authorial seat.",
+    overview: "Space Taxi was one of my favorite games on my first computer, the Commodore 64. Space Rickshaw is my homage to it: a pixel-faithful recreation rebuilt in the same spirit, but transplanted across five Indian cities in a yellow bajaj auto-rickshaw instead of a spaceship.\n\nI built it with Claude as an experiment in spec-driven development, writing detailed game specs and letting the AI handle the implementation while I directed the design, the levels, and the feel. The result is a playable artifact that sits at the intersection of nostalgia, craft, and a genuine curiosity about what human-AI collaboration looks like when the human stays in the authorial seat.",
     blocks: [
       {
         type: "game",
