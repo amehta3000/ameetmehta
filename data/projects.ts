@@ -202,7 +202,7 @@ export const projects: Project[] = [
     slug: "space-rickshaw",
     title: "Space Rickshaw",
     subtitle: "Generative worldbuilding",
-    type: "image",
+    type: "software",
     role: "Artist / Designer",
     year: "2026",
     client: "Game",

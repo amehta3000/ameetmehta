@@ -8,15 +8,8 @@ export const metadata = {
   description: "Design, code, sound. Twenty years of digital products, brands, and creative work.",
 };
 
-function getStartYear(year: string): number {
-  const match = year.match(/\d{4}/);
-  return match ? parseInt(match[0]) : 0;
-}
-
 export default function Home() {
-  const sorted = [...projects].sort(
-    (a, b) => getStartYear(b.year) - getStartYear(a.year)
-  );
+  const sorted = projects;
 
   return (
     <div className="mx-auto max-w-7xl px-6">
