@@ -29,36 +29,36 @@ export default function AboutPage() {
               />
             </div>
             <div className="space-y-6 text-base leading-relaxed text-muted">
+              <p>Hey there. I&apos;m Ameet.</p>
               <p>
-                I&apos;m Ameet. A well-marinated creative technologist based in
+                I&apos;m a product design leader, builder, and musician based in
                 Los Angeles.
               </p>
               <p>
-                I build things for artists, brands, and enterprises, whatever
-                the problem calls for. Design, code, product strategy, creative
-                direction. Right now most of my energy is at Microsoft, where
-                I&apos;m helping organizations defend themselves against
-                nation-state threats using AI agents. It&apos;s some of the most
-                high-stakes, technically interesting work I&apos;ve done, and
-                I&apos;m into it.
+                For more than 20 years, I&apos;ve worked at the intersection of
+                design, technology, and culture. I&apos;ve led teams, built
+                zero-to-one products, and helped turn emerging technology into
+                experiences people can understand and enjoy. My path has moved
+                across engineering, product, and design, from music platforms
+                and independent media to early enterprise AI at Moveworks and
+                AI-native products at Microsoft.
               </p>
               <p>
-                I also consult, selectively, with founders and small teams who
-                need to move fast without hiring a whole org around it. If your
-                problem doesn&apos;t fit a clean job description, that&apos;s
-                usually a good sign we&apos;d work well together.
+                Music is a core part of how I think and create. I produce and DJ
+                as Part Time Chiller, perform with Sadubas, and build visual and
+                generative experiments around sound. That work keeps me close to
+                the creators, audiences, and communities these products are
+                meant to serve.
               </p>
               <p>
-                Music runs parallel to all of it. As Part Time Chiller I DJ and
-                produce, mostly for myself and whoever else happens to be in the
-                room at the right moment. As one half of SADUBAS, I make South
-                Asian-influenced electronic music and perform live audio-visual
-                sets with my longtime collaborator, pulling in musicians and
-                filmmakers along the way.
+                I&apos;m most energized by teams exploring how AI can expand
+                human creativity. I bring product vision, systems thinking,
+                technical fluency, taste, and a collaborative leadership style
+                to ambitious ideas that are still taking shape.
               </p>
               <p>
-                If any of this sounds interesting, professionally or creatively,
-                hit me up.
+                Mostly, I want to make thoughtful things with good people and
+                keep the vibes intact.
               </p>
             </div>
           </div>
