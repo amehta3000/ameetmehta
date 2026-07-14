@@ -31,8 +31,8 @@ export default function AboutPage() {
             <div className="space-y-6 text-base leading-relaxed text-muted">
               <p>Hey there. I&apos;m Ameet.</p>
               <p>
-                I&apos;m a product design leader, builder, and musician based in
-                Los Angeles.
+                I&apos;m a well-marinated product design leader, builder, and
+                musician based in Los Angeles.
               </p>
               <p>
                 For more than 20 years, I&apos;ve worked at the intersection of
