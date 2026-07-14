@@ -53,8 +53,8 @@ const experience: ExperienceItem[] = [
     period: "2011 — 2015",
     positioning: "Builder",
     points: [
-      "Co-founded a mobile media platform and led product vision, UX, brand, and go-to-market from concept to launch.",
-      "Shipped an iOS product earning a 4-star App Store rating and built the cross-functional team and partnerships required to bring it to market.",
+      "Co-founded CHNL and led product vision, experience design, brand, and early product development for a mobile media concept.",
+      "Developed the product strategy and prototypes while building the team, partnerships, and narrative needed to test and advance the concept.",
     ],
   },
   {
@@ -65,6 +65,15 @@ const experience: ExperienceItem[] = [
     points: [
       "Designed and built direct-to-fan tools enabling artists and labels to sell music, merchandise, tickets, and fan experiences.",
       "Created embeddable commerce and content experiences used across artist sites, bringing product design, front-end engineering, and music-industry needs together.",
+    ],
+  },
+  {
+    role: "Director of Engineering Services / Senior UX Developer",
+    company: "Fluid",
+    period: "2005 — 2008",
+    positioning: "Builder",
+    points: [
+      "Led UX engineering and delivery for major digital commerce brands, managing multidisciplinary work across design, technology, and client leadership.",
     ],
   },
   {
