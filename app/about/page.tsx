@@ -1,4 +1,5 @@
 import { Reveal } from "../components/Reveal";
+import { ExperienceAccordion } from "../components/ExperienceAccordion";
 import { asset } from "@/lib/asset";
 
 export const metadata = {
@@ -60,6 +61,15 @@ export default function AboutPage() {
                 hit me up.
               </p>
             </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <div className="border-t border-line pt-12">
+            <h2 className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted mb-8">
+              Experience
+            </h2>
+            <ExperienceAccordion />
           </div>
         </Reveal>
 
