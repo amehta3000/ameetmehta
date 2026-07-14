@@ -86,7 +86,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                 </div>
               )}
             </div>
-            <p className="max-w-2xl text-base leading-relaxed text-muted whitespace-pre-line">
+            <p className="max-w-2xl text-lg leading-relaxed text-muted whitespace-pre-line">
               {project.overview}
             </p>
           </div>
@@ -131,7 +131,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
               )}
             </aside>
 
-            <div className="text-base leading-relaxed text-muted whitespace-pre-line">
+            <div className="text-lg leading-relaxed text-muted whitespace-pre-line">
               {project.overview}
             </div>
           </div>
@@ -144,7 +144,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
           if (block.type === "prose") {
             return (
               <Reveal key={i} delay={0.05}>
-                <p className="max-w-2xl text-base leading-relaxed text-muted">
+                <p className="max-w-2xl text-lg leading-relaxed text-muted">
                   {block.content}
                 </p>
               </Reveal>

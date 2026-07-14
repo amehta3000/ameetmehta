@@ -40,7 +40,6 @@
 html {
   background: var(--paper);
   color: var(--ink);
-  font-size: 18px;
 }
 
 body {

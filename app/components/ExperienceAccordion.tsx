@@ -112,7 +112,7 @@ export function ExperienceAccordion() {
                 <h3 className="mt-2 font-[family-name:var(--font-display)] text-xl md:text-2xl font-semibold tracking-tight text-ink group-hover:text-amber transition-colors duration-200">
                   {item.role}
                 </h3>
-                <p className="mt-1 text-sm text-muted">{item.company}</p>
+                <p className="mt-1 text-base text-muted">{item.company}</p>
               </div>
               <motion.span
                 animate={{ rotate: isOpen ? 45 : 0 }}
@@ -132,7 +132,7 @@ export function ExperienceAccordion() {
                   transition={{ duration: 0.35, ease: [0.25, 0.4, 0.25, 1] }}
                   className="overflow-hidden"
                 >
-                  <ul className="max-w-2xl space-y-3 pb-8 pl-0 text-sm leading-relaxed text-muted">
+                  <ul className="max-w-2xl space-y-3 pb-8 pl-0 text-base leading-relaxed text-muted">
                     {item.points.map((point, j) => (
                       <li key={j} className="flex gap-3">
                         <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-amber" />

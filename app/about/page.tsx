@@ -28,7 +28,7 @@ export default function AboutPage() {
                 className="w-32 h-32 rounded-full object-cover md:w-full md:h-auto md:rounded-none"
               />
             </div>
-            <div className="space-y-6 text-base leading-relaxed text-muted">
+            <div className="space-y-6 text-lg leading-relaxed text-muted">
               <p>Hey there. I&apos;m Ameet.</p>
               <p>
                 I&apos;m a well-marinated product design leader, builder, and
@@ -92,7 +92,7 @@ export default function AboutPage() {
                       href={item.href}
                       target={item.href.startsWith("mailto") ? undefined : "_blank"}
                       rel={item.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                      className="text-sm text-ink underline underline-offset-4 hover:text-amber transition-colors"
+                      className="text-base text-ink underline underline-offset-4 hover:text-amber transition-colors"
                     >
                       {item.label}
                     </a>
@@ -105,7 +105,7 @@ export default function AboutPage() {
               <h2 className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted mb-4">
                 Consulting
               </h2>
-              <ul className="space-y-1 text-sm text-muted">
+              <ul className="space-y-1 text-base text-muted">
                 <li>Product design</li>
                 <li>Workflow analysis</li>
                 <li>Creative direction</li>
@@ -118,7 +118,7 @@ export default function AboutPage() {
               <h2 className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted mb-4">
                 Studio
               </h2>
-              <ul className="space-y-1 text-sm text-muted">
+              <ul className="space-y-1 text-base text-muted">
                 <li>Part Time Chiller, solo DJ / producer</li>
                 <li>SADUBAS, audio-visual act</li>
                 <li>Generative art / synthography</li>
