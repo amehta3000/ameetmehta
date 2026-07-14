@@ -16,7 +16,7 @@ const experience: ExperienceItem[] = [
     role: "Principal Product Design Manager",
     company: "Microsoft, Security Platform",
     period: "2023 — Present",
-    positioning: "Design Executive",
+    positioning: "Design Leader",
     points: [
       "Lead a multidisciplinary team of product designers, researchers, and content designers shaping the platform layer for Microsoft's AI-powered security products.",
       "Set experience strategy for agent-assisted workflows that help organizations understand and improve their security posture, bringing together data, recommendations, automation, and human judgment.",
