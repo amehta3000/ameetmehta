@@ -110,7 +110,10 @@ function Terrain({ color, segments, spectrumRef, cfgRef }: TerrainProps) {
       lastUpdate.current = nowMs;
       history.current.pop();
       const spec = spectrumRef.current;
-      const raw = resample(spec, segX).map((v) => v * cfg.amplitude);
+      // spread only the lower, energy-rich half of the spectrum across the full
+      // width — the top bins are near-silent and would leave the edge flat
+      const usable = Math.max(1, Math.floor(spec.length * 0.5));
+      const raw = resample(spec.subarray(0, usable), segX).map((v) => v * cfg.amplitude);
       history.current.unshift(smoothWave(raw, 3));
     }
 
