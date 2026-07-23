@@ -223,7 +223,7 @@ export function TerrainVisualizer() {
       />
 
       {/* mini player */}
-      <div className="absolute bottom-2 right-2 flex items-center gap-3 rounded-full border border-line bg-paper/70 px-3 py-2 backdrop-blur-sm">
+      <div className="pointer-events-auto absolute bottom-2 right-2 flex items-center gap-3 rounded-full border border-line bg-paper/70 px-3 py-2 backdrop-blur-sm">
         <button
           onClick={toggle}
           aria-label={playing ? "Pause" : "Play"}

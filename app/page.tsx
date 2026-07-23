@@ -16,8 +16,8 @@ export default function Home() {
     <div className="mx-auto max-w-7xl px-6">
       <section className="relative pt-24 pb-16 md:pt-40 md:pb-24">
         {/* Terrain visualizer, transparent, beside the copy on wide screens */}
-        <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[58%] items-center md:flex">
-          <div className="pointer-events-auto w-full">
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-[58%] items-center md:flex">
+          <div className="w-full">
             <TerrainVisualizerBand />
           </div>
         </div>
