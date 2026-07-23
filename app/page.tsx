@@ -2,6 +2,7 @@ import Link from "next/link";
 import { projects } from "@/data/projects";
 import { HomeCard } from "./components/HomeCard";
 import { Reveal } from "./components/Reveal";
+import { TerrainVisualizerBand } from "./components/TerrainVisualizerBand";
 
 export const metadata = {
   title: "Ameet Mehta",
@@ -37,6 +38,23 @@ export default function Home() {
               hello@ameetmehta.com
             </a>
           </p>
+        </Reveal>
+      </section>
+
+      <section className="pb-24">
+        <Reveal>
+          <div className="mb-4 flex items-baseline justify-between">
+            <h2 className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.25em] text-muted">
+              Sound
+            </h2>
+            <Link
+              href="/chiller"
+              className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.15em] text-muted hover:text-amber transition-colors"
+            >
+              More sound →
+            </Link>
+          </div>
+          <TerrainVisualizerBand />
         </Reveal>
       </section>
 
