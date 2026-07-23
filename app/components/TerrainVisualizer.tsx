@@ -6,153 +6,139 @@ import * as THREE from "three";
 import { useTheme } from "./ThemeProvider";
 import { useAudioPlayer } from "./AudioPlayerProvider";
 
-// ---- lightweight value-noise (deterministic, no deps) ----
-function hash(x: number, y: number) {
-  const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
-  return s - Math.floor(s);
-}
-function noise2(x: number, y: number) {
-  const xi = Math.floor(x);
-  const yi = Math.floor(y);
-  const xf = x - xi;
-  const yf = y - yi;
-  const u = xf * xf * (3 - 2 * xf);
-  const v = yf * yf * (3 - 2 * yf);
-  const a = hash(xi, yi);
-  const b = hash(xi + 1, yi);
-  const c = hash(xi, yi + 1);
-  const d = hash(xi + 1, yi + 1);
-  return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
-}
+// mesh resolution (denser than the reference for crisper lines)
+const SEG_X = 128;
+const SEG_Z = 64;
+const PLANE_W = 10;
+const PLANE_D = 20;
 
-const SEG_X = 110;
-const SEG_Y = 78;
-const PLANE_W = 30;
-const PLANE_H = 24;
-
-// ---- tunable view/motion config ----
+// ---- tunable config (mirrors ptc-player's TerrainVisualizer controls) ----
 export interface TerrainConfig {
-  tilt: number; // extra lean added to the flat plane (radians)
-  camX: number;
-  camY: number;
-  camZ: number;
-  lookX: number;
-  lookY: number;
-  lookZ: number;
-  fov: number;
-  meshY: number;
-  meshZ: number;
-  baseAmp: number; // idle noise height
-  audioAmp: number; // reactive spectrum height
-  scroll: number; // forward scroll speed
+  amplitude: number; // wave height from audio
+  speed: number; // history scroll rate (rows/sec-ish)
+  decay: number; // per-row falloff toward the back
+  sineAmplitude: number; // ambient idle sine base
+  autoRotation: number; // camera yaw per frame
+  cameraDistance: number;
+  camPitch: number; // camera elevation (radians)
 }
 
 export const DEFAULT_CONFIG: TerrainConfig = {
-  tilt: 0.06,
-  camX: 0,
-  camY: 2.4,
-  camZ: 7.6,
-  lookX: 0,
-  lookY: 0.2,
-  lookZ: -5,
-  fov: 42,
-  meshY: -0.9,
-  meshZ: -1,
-  baseAmp: 0.9,
-  audioAmp: 3.6,
-  scroll: 0.4,
+  amplitude: 2.6,
+  speed: 17.5,
+  decay: 0.95,
+  sineAmplitude: 0.3,
+  autoRotation: 0.0008,
+  cameraDistance: 9.5,
+  camPitch: 0.62,
 };
+
+// resample a spectrum array to a target length (linear interp)
+function resample(data: Float32Array, target: number): number[] {
+  const out = new Array(target);
+  const ratio = data.length / target;
+  for (let i = 0; i < target; i++) {
+    const s = i * ratio;
+    const lo = Math.floor(s);
+    const hi = Math.min(lo + 1, data.length - 1);
+    const f = s - lo;
+    out[i] = data[lo] * (1 - f) + data[hi] * f;
+  }
+  return out;
+}
+
+// 3-pass neighbour smoothing for a cleaner ridge line
+function smoothWave(data: number[], passes: number): number[] {
+  let result = data;
+  for (let p = 0; p < passes; p++) {
+    const out = new Array(result.length);
+    for (let i = 0; i < result.length; i++) {
+      const prev = result[Math.max(0, i - 1)];
+      const curr = result[i];
+      const next = result[Math.min(result.length - 1, i + 1)];
+      out[i] = prev * 0.25 + curr * 0.5 + next * 0.25;
+    }
+    result = out;
+  }
+  return result;
+}
 
 interface TerrainProps {
   color: string;
-  levelRef: React.MutableRefObject<number>;
   spectrumRef: React.MutableRefObject<Float32Array>;
-  beatRef: React.MutableRefObject<number>;
   cfgRef: React.MutableRefObject<TerrainConfig>;
-  config: TerrainConfig;
 }
 
-function Terrain({ color, levelRef, spectrumRef, beatRef, cfgRef, config }: TerrainProps) {
-  const meshRef = useRef<THREE.LineSegments>(null);
-  const matRef = useRef<THREE.LineBasicMaterial>(null);
-
+function Terrain({ color, spectrumRef, cfgRef }: TerrainProps) {
   const geometry = useMemo(() => {
-    const plane = new THREE.PlaneGeometry(PLANE_W, PLANE_H, SEG_X, SEG_Y);
-    plane.rotateX(-Math.PI / 2); // flat floor; viewing lean is applied on the mesh
-    return new THREE.WireframeGeometry(plane);
+    const g = new THREE.PlaneGeometry(PLANE_W, PLANE_D, SEG_X - 1, SEG_Z - 1);
+    g.rotateX(-Math.PI / 2);
+    return g;
   }, []);
 
-  const base = useMemo(() => {
-    const arr = geometry.attributes.position.array as Float32Array;
-    return new Float32Array(arr);
-  }, [geometry]);
+  // rolling audio history: SEG_Z rows, newest at the front (index 0)
+  const history = useRef<number[][]>([]);
+  if (history.current.length === 0) {
+    for (let i = 0; i < SEG_Z; i++) history.current.push(new Array(SEG_X).fill(0));
+  }
+  const lastUpdate = useRef(0);
 
   useFrame(({ clock }) => {
-    const g = meshRef.current?.geometry as THREE.BufferGeometry | undefined;
-    if (!g) return;
     const cfg = cfgRef.current;
-    const pos = g.attributes.position.array as Float32Array;
-    const t = clock.elapsedTime;
-    const level = levelRef.current;
-    const beat = beatRef.current;
-    const spec = spectrumRef.current;
-    const usableBins = Math.max(1, Math.floor(spec.length * 0.55));
+    const nowMs = clock.elapsedTime * 1000;
+    const interval = 1000 / cfg.speed;
 
-    const scroll = t * cfg.scroll;
-    const baseAmp = cfg.baseAmp + beat * 1.4;
-    const audioAmp = cfg.audioAmp + level * 3.0;
-
-    for (let i = 0; i < pos.length; i += 3) {
-      const x = base[i];
-      const z = base[i + 2];
-      const depth = (z + PLANE_H / 2) / PLANE_H;
-      const lateral = Math.abs(x) / (PLANE_W / 2);
-
-      const nx = x * 0.17;
-      const nz = z * 0.17 + scroll;
-      let h =
-        (noise2(nx, nz) * 1.0 +
-          noise2(nx * 2.3, nz * 2.3) * 0.4 +
-          noise2(nx * 4.7, nz * 4.7) * 0.18 -
-          0.75) *
-        baseAmp;
-
-      const specPos = Math.min(0.999, depth * 0.85 + lateral * 0.12);
-      const bin = Math.floor(specPos * (usableBins - 1));
-      const s = spec[bin] || 0;
-      h += s * s * audioAmp * (0.5 + depth * 0.9);
-
-      pos[i + 1] = base[i + 1] + h;
+    // push a new audio frame onto the front of the history at a fixed cadence
+    if (nowMs - lastUpdate.current >= interval) {
+      lastUpdate.current = nowMs;
+      history.current.pop();
+      const spec = spectrumRef.current;
+      const raw = resample(spec, SEG_X).map((v) => v * cfg.amplitude);
+      history.current.unshift(smoothWave(raw, 3));
     }
-    g.attributes.position.needsUpdate = true;
-    if (matRef.current) {
-      matRef.current.opacity = 0.26 + level * 0.45 + beat * 0.2;
+
+    const pos = geometry.attributes.position;
+    const sineAmp = cfg.sineAmplitude;
+    const time = clock.elapsedTime;
+
+    for (let z = 0; z < SEG_Z; z++) {
+      const decayFactor = Math.pow(cfg.decay, z);
+      const zNorm = (z / (SEG_Z - 1)) * 2 - 1;
+      const row = history.current[z];
+      for (let x = 0; x < SEG_X; x++) {
+        const index = z * SEG_X + x;
+        const xNorm = (x / (SEG_X - 1)) * 2 - 1;
+        const waveHeight = (row?.[x] || 0) * decayFactor;
+        const sineBase =
+          sineAmp *
+          (Math.sin(xNorm * Math.PI * 2 + time * 0.5) * 0.6 +
+            Math.cos(zNorm * Math.PI * 1.5 + time * 0.3) * 0.4);
+        pos.setY(index, waveHeight + sineBase);
+      }
     }
+    pos.needsUpdate = true;
   });
 
   return (
-    <lineSegments
-      ref={meshRef}
-      geometry={geometry}
-      position={[0, config.meshY, config.meshZ]}
-      rotation={[config.tilt, 0, 0]}
-    >
-      <lineBasicMaterial ref={matRef} color={color} transparent opacity={0.3} />
-    </lineSegments>
+    <mesh geometry={geometry} position={[0, 0, -PLANE_D / 2]}>
+      <meshBasicMaterial color={color} wireframe transparent opacity={0.5} />
+    </mesh>
   );
 }
 
 function Rig({ cfgRef }: { cfgRef: React.MutableRefObject<TerrainConfig> }) {
   const { camera } = useThree();
+  const yaw = useRef(0);
   useFrame(() => {
     const cfg = cfgRef.current;
-    const cam = camera as THREE.PerspectiveCamera;
-    cam.position.set(cfg.camX, cfg.camY, cfg.camZ);
-    if (cam.fov !== cfg.fov) {
-      cam.fov = cfg.fov;
-      cam.updateProjectionMatrix();
-    }
-    cam.lookAt(cfg.lookX, cfg.lookY, cfg.lookZ);
+    yaw.current += cfg.autoRotation;
+    const d = cfg.cameraDistance;
+    camera.position.set(
+      d * Math.sin(yaw.current) * Math.cos(cfg.camPitch),
+      d * Math.sin(cfg.camPitch),
+      d * Math.cos(yaw.current) * Math.cos(cfg.camPitch)
+    );
+    camera.lookAt(0, 0, -5);
   });
   return null;
 }
@@ -160,9 +146,8 @@ function Rig({ cfgRef }: { cfgRef: React.MutableRefObject<TerrainConfig> }) {
 export function TerrainVisualizer() {
   const { theme } = useTheme();
   const lineColor = theme === "dark" ? "#d8d3c8" : "#4a453d";
-  const { playing, toggle, levelRef, spectrumRef, beatRef } = useAudioPlayer();
+  const { playing, toggle, spectrumRef } = useAudioPlayer();
 
-  // tuning mode is opt-in via ?tune in the URL
   const [tuning, setTuning] = useState(false);
   const [config, setConfig] = useState<TerrainConfig>(DEFAULT_CONFIG);
   const cfgRef = useRef(config);
@@ -198,17 +183,10 @@ export function TerrainVisualizer() {
         <Canvas
           dpr={[1, 2]}
           gl={{ antialias: true, alpha: true }}
-          camera={{ fov: config.fov, near: 0.1, far: 100 }}
+          camera={{ fov: 75, near: 0.1, far: 1000 }}
         >
           <Rig cfgRef={cfgRef} />
-          <Terrain
-            color={lineColor}
-            levelRef={levelRef}
-            spectrumRef={spectrumRef}
-            beatRef={beatRef}
-            cfgRef={cfgRef}
-            config={config}
-          />
+          <Terrain color={lineColor} spectrumRef={spectrumRef} cfgRef={cfgRef} />
         </Canvas>
       </div>
 
@@ -228,24 +206,21 @@ export function TerrainVisualizer() {
         </span>
       </button>
 
-      {tuning && <TerrainControls config={config} update={update} onReset={() => setConfig(DEFAULT_CONFIG)} />}
+      {tuning && (
+        <TerrainControls config={config} update={update} onReset={() => setConfig(DEFAULT_CONFIG)} />
+      )}
     </div>
   );
 }
 
 const SLIDERS: { key: keyof TerrainConfig; label: string; min: number; max: number; step: number }[] = [
-  { key: "tilt", label: "Tilt", min: -0.6, max: 0.6, step: 0.005 },
-  { key: "camY", label: "Cam height", min: 0, max: 8, step: 0.05 },
-  { key: "camZ", label: "Cam distance", min: 3, max: 16, step: 0.05 },
-  { key: "camX", label: "Cam side", min: -6, max: 6, step: 0.05 },
-  { key: "lookY", label: "Look height", min: -3, max: 3, step: 0.05 },
-  { key: "lookZ", label: "Look depth", min: -12, max: 4, step: 0.05 },
-  { key: "fov", label: "Zoom (FOV)", min: 20, max: 70, step: 1 },
-  { key: "meshY", label: "Terrain Y", min: -4, max: 2, step: 0.05 },
-  { key: "meshZ", label: "Terrain Z", min: -6, max: 4, step: 0.05 },
-  { key: "baseAmp", label: "Idle height", min: 0, max: 3, step: 0.05 },
-  { key: "audioAmp", label: "Audio height", min: 0, max: 10, step: 0.1 },
-  { key: "scroll", label: "Scroll speed", min: 0, max: 1.5, step: 0.02 },
+  { key: "amplitude", label: "Wave amplitude", min: 0.5, max: 6, step: 0.1 },
+  { key: "speed", label: "Wave speed", min: 1, max: 30, step: 0.5 },
+  { key: "decay", label: "Wave decay", min: 0.85, max: 0.99, step: 0.005 },
+  { key: "sineAmplitude", label: "Idle sine base", min: 0, max: 1.5, step: 0.05 },
+  { key: "autoRotation", label: "Auto rotation", min: 0, max: 0.006, step: 0.0002 },
+  { key: "cameraDistance", label: "Camera distance", min: 5, max: 15, step: 0.1 },
+  { key: "camPitch", label: "Camera pitch", min: 0.1, max: 1.4, step: 0.01 },
 ];
 
 function TerrainControls({
@@ -268,14 +243,16 @@ function TerrainControls({
     <div className="pointer-events-auto absolute right-2 top-2 z-30 w-60 rounded-lg border border-line bg-paper/95 p-3 font-[family-name:var(--font-mono)] text-[10px] text-ink shadow-xl backdrop-blur-md">
       <div className="mb-2 flex items-center justify-between">
         <span className="uppercase tracking-[0.2em] text-muted">Terrain tuner</span>
-        <button onClick={onReset} className="text-amber hover:text-ink">reset</button>
+        <button onClick={onReset} className="text-amber hover:text-ink">
+          reset
+        </button>
       </div>
       <div className="space-y-2">
         {SLIDERS.map((s) => (
           <label key={s.key} className="block">
             <div className="flex justify-between">
               <span className="text-muted">{s.label}</span>
-              <span>{config[s.key].toFixed(2)}</span>
+              <span>{config[s.key].toFixed(s.step < 0.01 ? 4 : 2)}</span>
             </div>
             <input
               type="range"
@@ -291,7 +268,7 @@ function TerrainControls({
       </div>
       <button
         onClick={copy}
-        className="mt-3 w-full rounded border border-amber py-1.5 text-amber uppercase tracking-widest hover:bg-amber hover:text-paper"
+        className="mt-3 w-full rounded border border-amber py-1.5 uppercase tracking-widest text-amber hover:bg-amber hover:text-paper"
       >
         {copied ? "Copied!" : "Copy config"}
       </button>
