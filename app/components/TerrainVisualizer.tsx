@@ -33,10 +33,10 @@ function noise2(x: number, y: number) {
   return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
 }
 
-const SEG_X = 96;
-const SEG_Y = 64;
-const PLANE_W = 26;
-const PLANE_H = 18;
+const SEG_X = 110;
+const SEG_Y = 78;
+const PLANE_W = 30;
+const PLANE_H = 24;
 
 function Terrain({ color, levelRef }: { color: string; levelRef: React.MutableRefObject<number> }) {
   const meshRef = useRef<THREE.LineSegments>(null);
@@ -44,7 +44,8 @@ function Terrain({ color, levelRef }: { color: string; levelRef: React.MutableRe
 
   const geometry = useMemo(() => {
     const plane = new THREE.PlaneGeometry(PLANE_W, PLANE_H, SEG_X, SEG_Y);
-    plane.rotateX(-Math.PI / 2.35);
+    // lay the plane almost flat so the grid recedes into the distance
+    plane.rotateX(-Math.PI / 2.08);
     return new THREE.WireframeGeometry(plane);
   }, []);
 
@@ -83,7 +84,7 @@ function Terrain({ color, levelRef }: { color: string; levelRef: React.MutableRe
   });
 
   return (
-    <lineSegments ref={meshRef} geometry={geometry} position={[0, -1.5, 0]}>
+    <lineSegments ref={meshRef} geometry={geometry} position={[0, -0.9, -1]}>
       <lineBasicMaterial ref={matRef} color={color} transparent opacity={0.32} />
     </lineSegments>
   );
@@ -92,15 +93,16 @@ function Terrain({ color, levelRef }: { color: string; levelRef: React.MutableRe
 function Rig() {
   const { camera } = useThree();
   useEffect(() => {
-    camera.position.set(0, 3.4, 11);
-    camera.lookAt(0, -1, -2);
+    // low, close camera looking across the plane toward the peaks
+    camera.position.set(0, 2.4, 7.6);
+    camera.lookAt(0, 0.2, -5);
   }, [camera]);
   return null;
 }
 
 export function TerrainVisualizer() {
   const { theme } = useTheme();
-  const lineColor = theme === "dark" ? "#f59e0b" : "#9a5f18";
+  const lineColor = theme === "dark" ? "#d8d3c8" : "#4a453d";
 
   const levelRef = useRef(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -138,29 +140,38 @@ export function TerrainVisualizer() {
 
   const ensureGraph = useCallback(() => {
     if (ctxRef.current || !audioRef.current) return;
-    const Ctx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-    const ctx = new Ctx();
-    const source = ctx.createMediaElementSource(audioRef.current);
-    const analyser = ctx.createAnalyser();
-    analyser.fftSize = 256;
-    analyser.smoothingTimeConstant = 0.8;
-    source.connect(analyser);
-    analyser.connect(ctx.destination);
-    ctxRef.current = ctx;
-    analyserRef.current = analyser;
-    dataRef.current = new Uint8Array(new ArrayBuffer(analyser.frequencyBinCount));
+    try {
+      const Ctx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const ctx = new Ctx();
+      const source = ctx.createMediaElementSource(audioRef.current);
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 256;
+      analyser.smoothingTimeConstant = 0.8;
+      source.connect(analyser);
+      analyser.connect(ctx.destination);
+      ctxRef.current = ctx;
+      analyserRef.current = analyser;
+      dataRef.current = new Uint8Array(new ArrayBuffer(analyser.frequencyBinCount));
+    } catch {
+      /* analyser unavailable — audio still plays through the element directly */
+    }
   }, []);
 
   const play = useCallback(async () => {
     const el = audioRef.current;
     if (!el) return;
     ensureGraph();
-    if (ctxRef.current?.state === "suspended") await ctxRef.current.resume();
+    try {
+      if (ctxRef.current?.state === "suspended") await ctxRef.current.resume();
+    } catch {
+      /* ignore */
+    }
     try {
       await el.play();
       setPlaying(true);
-    } catch {
-      /* user gesture required / interrupted */
+    } catch (err) {
+      console.error("Playback failed", err);
+      setPlaying(false);
     }
   }, [ensureGraph]);
 
@@ -207,7 +218,6 @@ export function TerrainVisualizer() {
       <audio
         ref={audioRef}
         src={asset(TRACKS[current].src)}
-        crossOrigin="anonymous"
         onEnded={next}
         preload="none"
       />
