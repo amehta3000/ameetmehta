@@ -191,8 +191,8 @@ export function TerrainVisualizer() {
   }, [current]);
 
   return (
-    <div className="relative w-full overflow-hidden rounded-2xl border border-line bg-black/40">
-      <div className="aspect-[16/7] w-full">
+    <div className="relative w-full">
+      <div className="aspect-[16/11] w-full">
         <Canvas
           dpr={[1, 2]}
           gl={{ antialias: true, alpha: true }}
@@ -213,7 +213,7 @@ export function TerrainVisualizer() {
       />
 
       {/* mini player */}
-      <div className="absolute bottom-0 left-0 right-0 flex items-center gap-4 px-5 py-4">
+      <div className="absolute bottom-2 right-2 flex items-center gap-3 rounded-full border border-line bg-paper/70 px-3 py-2 backdrop-blur-sm">
         <button
           onClick={toggle}
           aria-label={playing ? "Pause" : "Play"}
@@ -242,8 +242,8 @@ export function TerrainVisualizer() {
           </svg>
         </button>
 
-        <div className="min-w-0 flex-1">
-          <p className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted">
+        <div className="min-w-0 pr-1">
+          <p className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.2em] text-muted">
             {playing ? "Now playing" : "Part Time Chiller"}
           </p>
           <p className="truncate font-[family-name:var(--font-display)] text-sm font-semibold text-ink">

@@ -14,48 +14,45 @@ export default function Home() {
 
   return (
     <div className="mx-auto max-w-7xl px-6">
-      <section className="pt-24 pb-16 md:pt-40 md:pb-20">
-        <Reveal>
-          <h1 className="font-[family-name:var(--font-display)] font-semibold leading-[1.0] tracking-tight text-[clamp(3.5rem,9vw,10rem)]">
-            design,<br />code,<br />sound.
-          </h1>
-        </Reveal>
-        <Reveal delay={0.12}>
-          <p className="mt-8 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-            Creative technologist, product design leader, musician, and curator of finely made things. Based in Los Angeles.
-          </p>
-          <p className="mt-4 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-            I shape complex ideas into products, prototypes, systems, and small worlds.
-          </p>
-        </Reveal>
-        <Reveal delay={0.2}>
-          <p className="mt-5 font-[family-name:var(--font-mono)] text-xs text-muted">
-            Say hi,{" "}
-            <a
-              href="mailto:hello@ameetmehta.com?subject=Hi%2C%20let%27s%20work%20together"
-              className="text-amber underline underline-offset-4 hover:text-ink transition-colors"
-            >
-              hello@ameetmehta.com
-            </a>
-          </p>
-        </Reveal>
-      </section>
-
-      <section className="pb-24">
-        <Reveal>
-          <div className="mb-4 flex items-baseline justify-between">
-            <h2 className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.25em] text-muted">
-              Sound
-            </h2>
-            <Link
-              href="/chiller"
-              className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.15em] text-muted hover:text-amber transition-colors"
-            >
-              More sound →
-            </Link>
+      <section className="relative pt-24 pb-16 md:pt-40 md:pb-24">
+        {/* Terrain visualizer, transparent, beside the copy on wide screens */}
+        <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[58%] items-center md:flex">
+          <div className="pointer-events-auto w-full">
+            <TerrainVisualizerBand />
           </div>
+        </div>
+
+        <div className="relative z-10">
+          <Reveal>
+            <h1 className="font-[family-name:var(--font-display)] font-semibold leading-[1.0] tracking-tight text-[clamp(3.5rem,9vw,10rem)]">
+              design,<br />code,<br />sound.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.12}>
+            <p className="mt-8 max-w-lg text-base leading-relaxed text-muted md:text-lg">
+              Creative technologist, product design leader, musician, and curator of finely made things. Based in Los Angeles.
+            </p>
+            <p className="mt-4 max-w-lg text-base leading-relaxed text-muted md:text-lg">
+              I shape complex ideas into products, prototypes, systems, and small worlds.
+            </p>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="mt-5 font-[family-name:var(--font-mono)] text-xs text-muted">
+              Say hi,{" "}
+              <a
+                href="mailto:hello@ameetmehta.com?subject=Hi%2C%20let%27s%20work%20together"
+                className="text-amber underline underline-offset-4 hover:text-ink transition-colors"
+              >
+                hello@ameetmehta.com
+              </a>
+            </p>
+          </Reveal>
+        </div>
+
+        {/* Terrain on small screens, stacked below the copy */}
+        <div className="mt-10 md:hidden">
           <TerrainVisualizerBand />
-        </Reveal>
+        </div>
       </section>
 
       <section className="pb-32">
