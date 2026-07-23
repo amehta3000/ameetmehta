@@ -113,6 +113,8 @@ export function TerrainVisualizer() {
 
   const [current, setCurrent] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const expanded = playing || hovered;
 
   // drive levelRef from the analyser each frame; idle-drift when paused
   const tick = useCallback(() => {
@@ -222,58 +224,78 @@ export function TerrainVisualizer() {
         preload="none"
       />
 
-      {/* mini player */}
-      <div className="pointer-events-auto absolute bottom-2 right-2 flex items-center gap-3 rounded-full border border-line bg-paper/70 px-3 py-2 backdrop-blur-sm">
-        <button
-          onClick={toggle}
-          aria-label={playing ? "Pause" : "Play"}
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-amber text-amber transition-colors hover:bg-amber hover:text-paper"
+      {/* mini player — minimal button that expands on hover / while playing */}
+      <div
+        className="pointer-events-auto absolute bottom-3 right-3"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <div
+          className={`flex items-center rounded-full transition-all duration-300 ease-out ${
+            expanded
+              ? "border border-line bg-paper/70 py-1.5 pl-1.5 pr-1 backdrop-blur-md"
+              : "border border-transparent"
+          }`}
         >
-          {playing ? (
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
-              <rect x="2" y="1" width="3.5" height="12" rx="1" />
-              <rect x="8.5" y="1" width="3.5" height="12" rx="1" />
-            </svg>
-          ) : (
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
-              <path d="M2.5 1.3v11.4a1 1 0 0 0 1.53.85l9-5.7a1 1 0 0 0 0-1.7l-9-5.7A1 1 0 0 0 2.5 1.3Z" />
-            </svg>
-          )}
-        </button>
+          <button
+            onClick={toggle}
+            aria-label={playing ? "Pause" : "Play"}
+            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-amber transition-colors ${
+              expanded ? "hover:text-ink" : "bg-black/30 backdrop-blur-sm hover:bg-black/50"
+            }`}
+          >
+            {playing ? (
+              <svg width="15" height="15" viewBox="0 0 14 14" fill="currentColor">
+                <rect x="2" y="1" width="3.5" height="12" rx="1" />
+                <rect x="8.5" y="1" width="3.5" height="12" rx="1" />
+              </svg>
+            ) : (
+              <svg width="15" height="15" viewBox="0 0 14 14" fill="currentColor">
+                <path d="M2.5 1.3v11.4a1 1 0 0 0 1.53.85l9-5.7a1 1 0 0 0 0-1.7l-9-5.7A1 1 0 0 0 2.5 1.3Z" />
+              </svg>
+            )}
+          </button>
 
-        <button
-          onClick={next}
-          aria-label="Next track"
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:text-amber"
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M3 2.2v11.6a.8.8 0 0 0 1.23.67l7.2-5.8a.8.8 0 0 0 0-1.34l-7.2-5.8A.8.8 0 0 0 3 2.2Z" />
-            <rect x="11.6" y="2" width="2.2" height="12" rx="1" />
-          </svg>
-        </button>
+          {/* revealed content */}
+          <div
+            className={`flex items-center gap-3 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out ${
+              expanded ? "ml-1 max-w-[280px] opacity-100" : "ml-0 max-w-0 opacity-0"
+            }`}
+          >
+            <button
+              onClick={next}
+              aria-label="Next track"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:text-amber"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M3 2.2v11.6a.8.8 0 0 0 1.23.67l7.2-5.8a.8.8 0 0 0 0-1.34l-7.2-5.8A.8.8 0 0 0 3 2.2Z" />
+                <rect x="11.6" y="2" width="2.2" height="12" rx="1" />
+              </svg>
+            </button>
 
-        <div className="min-w-0 pr-1">
-          <p className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.2em] text-muted">
-            {playing ? "Now playing" : "Part Time Chiller"}
-          </p>
-          <p className="truncate font-[family-name:var(--font-display)] text-sm font-semibold text-ink">
-            {TRACKS[current].title}
-          </p>
-        </div>
+            <div className="min-w-0">
+              <p className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.2em] text-muted">
+                {playing ? "Now playing" : "Part Time Chiller"}
+              </p>
+              <p className="truncate font-[family-name:var(--font-display)] text-sm font-semibold text-ink">
+                {TRACKS[current].title}
+              </p>
+            </div>
 
-        {/* equalizer bars — animate only while playing */}
-        <div className="hidden items-end gap-[3px] sm:flex" aria-hidden>
-          {[0, 1, 2, 3].map((i) => (
-            <span
-              key={i}
-              className="w-[3px] rounded-full bg-amber/70"
-              style={{
-                height: 14,
-                animation: playing ? `eq 0.9s ease-in-out ${i * 0.12}s infinite` : "none",
-                opacity: playing ? 1 : 0.3,
-              }}
-            />
-          ))}
+            <div className="flex items-end gap-[3px] pr-2" aria-hidden>
+              {[0, 1, 2, 3].map((i) => (
+                <span
+                  key={i}
+                  className="w-[3px] rounded-full bg-amber/70"
+                  style={{
+                    height: 14,
+                    animation: playing ? `eq 0.9s ease-in-out ${i * 0.12}s infinite` : "none",
+                    opacity: playing ? 1 : 0.35,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
