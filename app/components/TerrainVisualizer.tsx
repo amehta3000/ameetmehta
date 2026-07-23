@@ -27,13 +27,13 @@ export interface TerrainConfig {
 export const DEFAULT_CONFIG: TerrainConfig = {
   amplitude: 2.6,
   speed: 17.5,
-  decay: 0.95,
-  sineAmplitude: 0.3,
-  segments: 128,
-  autoRotation: 0.0008,
-  cameraDistance: 9.5,
-  camPitch: 0.62,
-  camYaw: 0,
+  decay: 0.97,
+  sineAmplitude: 0.4,
+  segments: 80,
+  autoRotation: 0.0004,
+  cameraDistance: 6.2,
+  camPitch: 0.952,
+  camYaw: 2.572,
 };
 
 // live camera state, mutated by mouse/touch and the auto-rotation loop
@@ -188,9 +188,6 @@ export function TerrainVisualizer() {
   const wrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (!params.has("tune")) return;
-    setTuning(true);
     try {
       const saved = localStorage.getItem("terrainConfig");
       if (saved) {
@@ -301,6 +298,20 @@ export function TerrainVisualizer() {
             <path d="M2.5 1.3v11.4a1 1 0 0 0 1.53.85l9-5.7a1 1 0 0 0 0-1.7l-9-5.7A1 1 0 0 0 2.5 1.3Z" />
           </svg>
         </span>
+      </button>
+
+      {/* tiny tuner toggle (default off) */}
+      <button
+        onClick={() => setTuning((t) => !t)}
+        aria-label="Toggle terrain tuner"
+        title="Tune terrain"
+        className={`pointer-events-auto absolute bottom-2 left-2 z-30 rounded-full border px-2.5 py-1 font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.2em] transition-colors ${
+          tuning
+            ? "border-amber bg-amber/10 text-amber"
+            : "border-line/60 text-muted/60 hover:border-amber hover:text-amber"
+        }`}
+      >
+        Tune
       </button>
 
       {tuning && (
