@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { projects, getProjectBySlug } from "@/data/projects";
+import { projects, visibleProjects, getProjectBySlug } from "@/data/projects";
 import { Reveal } from "../../components/Reveal";
 import { SpaceRickshawEmbed } from "../../components/SpaceRickshawEmbed";
 import { asset } from "@/lib/asset";
@@ -24,8 +24,10 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
   const project = getProjectBySlug(slug);
   if (!project) notFound();
 
-  const currentIndex = projects.findIndex((p) => p.slug === slug);
-  const nextProject = projects[(currentIndex + 1) % projects.length];
+  // cycle "next" through visible projects only (fall back to the full list)
+  const nav = visibleProjects.some((p) => p.slug === slug) ? visibleProjects : projects;
+  const currentIndex = nav.findIndex((p) => p.slug === slug);
+  const nextProject = nav[(currentIndex + 1) % nav.length];
 
   return (
     <div className="mx-auto max-w-7xl px-6">

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { projects } from "@/data/projects";
+import { visibleProjects } from "@/data/projects";
 import { HomeCard } from "./components/HomeCard";
 import { Reveal } from "./components/Reveal";
 import { TerrainVisualizerBand } from "./components/TerrainVisualizerBand";
@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 export default function Home() {
-  const sorted = projects;
+  const sorted = visibleProjects;
 
   return (
     <div className="mx-auto max-w-7xl px-6">

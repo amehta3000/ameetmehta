@@ -1,4 +1,4 @@
-import { projects } from "@/data/projects";
+import { visibleProjects } from "@/data/projects";
 import { WorkRow } from "../components/WorkRow";
 import { Reveal } from "../components/Reveal";
 
@@ -27,7 +27,7 @@ export default function WorkPage() {
       <section className="pb-32">
         <Reveal>
           <div className="border-b border-line">
-            {projects.map((project, i) => (
+            {visibleProjects.map((project, i) => (
               <WorkRow key={project.slug} project={project} index={i} />
             ))}
           </div>

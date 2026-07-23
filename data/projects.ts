@@ -25,6 +25,7 @@ export interface Project {
   shortDescription: string
   overview: string
   blocks: Block[]
+  hidden?: boolean
 }
 
 export const projects: Project[] = [
@@ -32,6 +33,7 @@ export const projects: Project[] = [
     slug: "ai-security-interfaces",
     title: "AI Security Interfaces",
     subtitle: "Current work",
+    hidden: true,
     type: "software",
     role: "Product Design Lead",
     year: "2023–present",
@@ -385,6 +387,8 @@ export const projects: Project[] = [
     ],
   },
 ]
+
+export const visibleProjects = projects.filter((p) => !p.hidden)
 
 export function getProjectBySlug(slug: string) {
   return projects.find((p) => p.slug === slug)
