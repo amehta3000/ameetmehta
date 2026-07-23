@@ -25,15 +25,15 @@ export interface TerrainConfig {
 }
 
 export const DEFAULT_CONFIG: TerrainConfig = {
-  amplitude: 2.6,
+  amplitude: 4.3,
   speed: 17.5,
   decay: 0.97,
-  sineAmplitude: 0.4,
+  sineAmplitude: 0.75,
   segments: 80,
-  autoRotation: 0.0004,
-  cameraDistance: 6.2,
-  camPitch: 0.952,
-  camYaw: 2.572,
+  autoRotation: 0,
+  cameraDistance: 5,
+  camPitch: 0.75,
+  camYaw: 0.993,
 };
 
 // live camera state, mutated by mouse/touch and the auto-rotation loop
