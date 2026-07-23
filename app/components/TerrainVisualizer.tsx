@@ -30,7 +30,14 @@ const SEG_Y = 78;
 const PLANE_W = 30;
 const PLANE_H = 24;
 
-function Terrain({ color, levelRef }: { color: string; levelRef: React.MutableRefObject<number> }) {
+interface TerrainProps {
+  color: string;
+  levelRef: React.MutableRefObject<number>;
+  spectrumRef: React.MutableRefObject<Float32Array>;
+  beatRef: React.MutableRefObject<number>;
+}
+
+function Terrain({ color, levelRef, spectrumRef, beatRef }: TerrainProps) {
   const meshRef = useRef<THREE.LineSegments>(null);
   const matRef = useRef<THREE.LineBasicMaterial>(null);
 
@@ -51,33 +58,52 @@ function Terrain({ color, levelRef }: { color: string; levelRef: React.MutableRe
     if (!g) return;
     const pos = g.attributes.position.array as Float32Array;
     const t = clock.elapsedTime;
-    // ease audio level toward target for smooth response
     const level = levelRef.current;
-    const amp = 1.1 + level * 4.2;
-    const scroll = t * 0.45;
+    const beat = beatRef.current;
+    const spec = spectrumRef.current;
+    // use only the lower ~55% of bins — that's where musical energy lives
+    const usableBins = Math.max(1, Math.floor(spec.length * 0.55));
+
+    const scroll = t * 0.4;
+    // gentle organic base always present; audio adds the reactive height on top
+    const baseAmp = 0.9 + beat * 1.4;
+    const audioAmp = 3.6 + level * 3.0;
+
     for (let i = 0; i < pos.length; i += 3) {
       const x = base[i];
       const z = base[i + 2];
-      const nx = x * 0.18;
-      const nz = z * 0.18 + scroll;
+      const depth = (z + PLANE_H / 2) / PLANE_H; // 0 = front (near), 1 = back
+      const lateral = Math.abs(x) / (PLANE_W / 2); // 0 center .. 1 edge
+
+      // rolling noise floor so it breathes even when idle
+      const nx = x * 0.17;
+      const nz = z * 0.17 + scroll;
       let h =
-        noise2(nx, nz) * 1.0 +
-        noise2(nx * 2.3, nz * 2.3) * 0.4 +
-        noise2(nx * 4.7, nz * 4.7) * 0.18;
-      h = (h - 0.75) * amp;
-      // ridge emphasis toward the back
-      const depth = (z + PLANE_H / 2) / PLANE_H;
-      pos[i + 1] = base[i + 1] + h * (0.4 + depth * 1.2);
+        (noise2(nx, nz) * 1.0 +
+          noise2(nx * 2.3, nz * 2.3) * 0.4 +
+          noise2(nx * 4.7, nz * 4.7) * 0.18 -
+          0.75) *
+        baseAmp;
+
+      // spectrum mapped across depth: bass at the front, treble toward the back.
+      // lateral offset spreads neighbouring bins so ridges aren't perfectly flat.
+      const specPos = Math.min(0.999, depth * 0.85 + lateral * 0.12);
+      const bin = Math.floor(specPos * (usableBins - 1));
+      const s = spec[bin] || 0;
+      // square it so quiet noise stays low and peaks punch up
+      h += s * s * audioAmp * (0.5 + depth * 0.9);
+
+      pos[i + 1] = base[i + 1] + h;
     }
     g.attributes.position.needsUpdate = true;
     if (matRef.current) {
-      matRef.current.opacity = 0.28 + level * 0.5;
+      matRef.current.opacity = 0.26 + level * 0.45 + beat * 0.2;
     }
   });
 
   return (
     <lineSegments ref={meshRef} geometry={geometry} position={[0, -0.9, -1]}>
-      <lineBasicMaterial ref={matRef} color={color} transparent opacity={0.32} />
+      <lineBasicMaterial ref={matRef} color={color} transparent opacity={0.3} />
     </lineSegments>
   );
 }
@@ -95,7 +121,7 @@ function Rig() {
 export function TerrainVisualizer() {
   const { theme } = useTheme();
   const lineColor = theme === "dark" ? "#d8d3c8" : "#4a453d";
-  const { playing, toggle, levelRef } = useAudioPlayer();
+  const { playing, toggle, levelRef, spectrumRef, beatRef } = useAudioPlayer();
 
   return (
     <div className="relative w-full">
@@ -106,7 +132,12 @@ export function TerrainVisualizer() {
           camera={{ fov: 42, near: 0.1, far: 100 }}
         >
           <Rig />
-          <Terrain color={lineColor} levelRef={levelRef} />
+          <Terrain
+            color={lineColor}
+            levelRef={levelRef}
+            spectrumRef={spectrumRef}
+            beatRef={beatRef}
+          />
         </Canvas>
       </div>
 
