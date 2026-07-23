@@ -1,18 +1,10 @@
 "use client";
 
-import { useRef, useMemo, useState, useEffect, useCallback } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { asset } from "@/lib/asset";
 import { useTheme } from "./ThemeProvider";
-
-// ---- tracks ----
-const TRACKS = [
-  { title: "Dive Into Dark", src: "/audio/DiveIntoDark_PTC.mp3" },
-  { title: "Some Vibes", src: "/audio/SomeVibes_PTC.mp3" },
-  { title: "Slow Burn", src: "/audio/SlowBurn_PTC.mp3" },
-  { title: "Stranger Events", src: "/audio/StrangerEvents_PTC.mp3" },
-];
+import { useAudioPlayer } from "./AudioPlayerProvider";
 
 // ---- lightweight value-noise (deterministic, no deps) ----
 function hash(x: number, y: number) {
@@ -103,105 +95,7 @@ function Rig() {
 export function TerrainVisualizer() {
   const { theme } = useTheme();
   const lineColor = theme === "dark" ? "#d8d3c8" : "#4a453d";
-
-  const levelRef = useRef(0);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const ctxRef = useRef<AudioContext | null>(null);
-  const analyserRef = useRef<AnalyserNode | null>(null);
-  const dataRef = useRef<Uint8Array<ArrayBuffer> | null>(null);
-  const rafRef = useRef<number>(0);
-
-  const [current, setCurrent] = useState(0);
-  const [playing, setPlaying] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const expanded = playing || hovered;
-
-  // drive levelRef from the analyser each frame; idle-drift when paused
-  const tick = useCallback(() => {
-    const analyser = analyserRef.current;
-    const data = dataRef.current;
-    if (analyser && data) {
-      analyser.getByteFrequencyData(data);
-      // bias toward low/mid where the energy lives
-      let sum = 0;
-      const n = Math.floor(data.length * 0.6);
-      for (let i = 0; i < n; i++) sum += data[i];
-      const avg = sum / n / 255; // 0..1
-      // smooth
-      levelRef.current += (avg - levelRef.current) * 0.15;
-    } else {
-      levelRef.current += (0 - levelRef.current) * 0.05;
-    }
-    rafRef.current = requestAnimationFrame(tick);
-  }, []);
-
-  useEffect(() => {
-    rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [tick]);
-
-  const ensureGraph = useCallback(() => {
-    if (ctxRef.current || !audioRef.current) return;
-    try {
-      const Ctx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      const ctx = new Ctx();
-      const source = ctx.createMediaElementSource(audioRef.current);
-      const analyser = ctx.createAnalyser();
-      analyser.fftSize = 256;
-      analyser.smoothingTimeConstant = 0.8;
-      source.connect(analyser);
-      analyser.connect(ctx.destination);
-      ctxRef.current = ctx;
-      analyserRef.current = analyser;
-      dataRef.current = new Uint8Array(new ArrayBuffer(analyser.frequencyBinCount));
-    } catch {
-      /* analyser unavailable — audio still plays through the element directly */
-    }
-  }, []);
-
-  const play = useCallback(async () => {
-    const el = audioRef.current;
-    if (!el) return;
-    ensureGraph();
-    try {
-      if (ctxRef.current?.state === "suspended") await ctxRef.current.resume();
-    } catch {
-      /* ignore */
-    }
-    try {
-      await el.play();
-      setPlaying(true);
-    } catch (err) {
-      console.error("Playback failed", err);
-      setPlaying(false);
-    }
-  }, [ensureGraph]);
-
-  const pause = useCallback(() => {
-    audioRef.current?.pause();
-    setPlaying(false);
-  }, []);
-
-  const toggle = useCallback(() => {
-    if (playing) pause();
-    else play();
-  }, [playing, play, pause]);
-
-  const next = useCallback(() => {
-    setCurrent((c) => (c + 1) % TRACKS.length);
-  }, []);
-
-  // when track changes, load and (if we were playing) continue
-  useEffect(() => {
-    const el = audioRef.current;
-    if (!el) return;
-    const wasPlaying = playing;
-    el.load();
-    if (wasPlaying) {
-      el.play().catch(() => {});
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [current]);
+  const { playing, toggle, levelRef } = useAudioPlayer();
 
   return (
     <div className="relative w-full">
@@ -216,95 +110,26 @@ export function TerrainVisualizer() {
         </Canvas>
       </div>
 
-      {/* hidden audio element */}
-      <audio
-        ref={audioRef}
-        src={asset(TRACKS[current].src)}
-        onEnded={next}
-        preload="none"
-      />
-
-      {/* mini player — minimal button that expands on hover / while playing */}
-      <div
-        className="pointer-events-auto absolute bottom-3 right-3"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+      {/* minimal overlay play/pause — controls live in the persistent footer */}
+      <button
+        onClick={toggle}
+        aria-label={playing ? "Pause" : "Play"}
+        className="pointer-events-auto group absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-amber transition-transform duration-200 hover:scale-110"
       >
-        <div
-          className={`flex items-center rounded-full transition-all duration-300 ease-out ${
-            expanded
-              ? "border border-line bg-paper/70 py-1.5 pl-1.5 pr-1 backdrop-blur-md"
-              : "border border-transparent"
-          }`}
-        >
-          <button
-            onClick={toggle}
-            aria-label={playing ? "Pause" : "Play"}
-            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-amber transition-colors ${
-              expanded ? "hover:text-ink" : "bg-black/30 backdrop-blur-sm hover:bg-black/50"
-            }`}
-          >
-            {playing ? (
-              <svg width="15" height="15" viewBox="0 0 14 14" fill="currentColor">
-                <rect x="2" y="1" width="3.5" height="12" rx="1" />
-                <rect x="8.5" y="1" width="3.5" height="12" rx="1" />
-              </svg>
-            ) : (
-              <svg width="15" height="15" viewBox="0 0 14 14" fill="currentColor">
-                <path d="M2.5 1.3v11.4a1 1 0 0 0 1.53.85l9-5.7a1 1 0 0 0 0-1.7l-9-5.7A1 1 0 0 0 2.5 1.3Z" />
-              </svg>
-            )}
-          </button>
-
-          {/* revealed content */}
-          <div
-            className={`flex items-center gap-3 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out ${
-              expanded ? "ml-1 max-w-[280px] opacity-100" : "ml-0 max-w-0 opacity-0"
-            }`}
-          >
-            <button
-              onClick={next}
-              aria-label="Next track"
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:text-amber"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M3 2.2v11.6a.8.8 0 0 0 1.23.67l7.2-5.8a.8.8 0 0 0 0-1.34l-7.2-5.8A.8.8 0 0 0 3 2.2Z" />
-                <rect x="11.6" y="2" width="2.2" height="12" rx="1" />
-              </svg>
-            </button>
-
-            <div className="min-w-0">
-              <p className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.2em] text-muted">
-                {playing ? "Now playing" : "Part Time Chiller"}
-              </p>
-              <p className="truncate font-[family-name:var(--font-display)] text-sm font-semibold text-ink">
-                {TRACKS[current].title}
-              </p>
-            </div>
-
-            <div className="flex items-end gap-[3px] pr-2" aria-hidden>
-              {[0, 1, 2, 3].map((i) => (
-                <span
-                  key={i}
-                  className="w-[3px] rounded-full bg-amber/70"
-                  style={{
-                    height: 14,
-                    animation: playing ? `eq 0.9s ease-in-out ${i * 0.12}s infinite` : "none",
-                    opacity: playing ? 1 : 0.35,
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <style jsx>{`
-        @keyframes eq {
-          0%, 100% { transform: scaleY(0.4); }
-          50% { transform: scaleY(1); }
-        }
-      `}</style>
+        <span className="absolute inset-0 rounded-full border border-amber/50 bg-black/20 backdrop-blur-sm transition-colors duration-200 group-hover:border-amber group-hover:bg-black/40" />
+        <span className="relative">
+          {playing ? (
+            <svg width="18" height="18" viewBox="0 0 14 14" fill="currentColor">
+              <rect x="2" y="1" width="3.5" height="12" rx="1" />
+              <rect x="8.5" y="1" width="3.5" height="12" rx="1" />
+            </svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 14 14" fill="currentColor">
+              <path d="M2.5 1.3v11.4a1 1 0 0 0 1.53.85l9-5.7a1 1 0 0 0 0-1.7l-9-5.7A1 1 0 0 0 2.5 1.3Z" />
+            </svg>
+          )}
+        </span>
+      </button>
     </div>
   );
 }

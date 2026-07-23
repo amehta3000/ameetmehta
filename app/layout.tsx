@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Fraunces, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { AudioPlayerProvider } from "./components/AudioPlayerProvider";
+import { MiniPlayer } from "./components/MiniPlayer";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
 import { SceneWrapper } from "./components/SceneWrapper";
@@ -59,10 +61,13 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-[family-name:var(--font-body)] antialiased bg-paper text-ink">
         <ThemeProvider>
-          <SceneWrapper />
-          <Nav />
-          <main className="flex-1 pt-14 relative z-10">{children}</main>
-          <Footer />
+          <AudioPlayerProvider>
+            <SceneWrapper />
+            <Nav />
+            <main className="flex-1 pt-14 relative z-10">{children}</main>
+            <Footer />
+            <MiniPlayer />
+          </AudioPlayerProvider>
         </ThemeProvider>
       </body>
     </html>
