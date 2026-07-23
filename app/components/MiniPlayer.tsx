@@ -1,10 +1,19 @@
 "use client";
 
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAudioPlayer } from "./AudioPlayerProvider";
 
 export function MiniPlayer() {
   const { tracks, current, playing, active, toggle, next } = useAudioPlayer();
+
+  // reserve space at the bottom so the fixed player never covers page content
+  useEffect(() => {
+    document.body.style.paddingBottom = active ? "96px" : "";
+    return () => {
+      document.body.style.paddingBottom = "";
+    };
+  }, [active]);
 
   return (
     <AnimatePresence>
