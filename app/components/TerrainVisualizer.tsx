@@ -305,7 +305,7 @@ export function TerrainVisualizer() {
         onClick={() => setTuning((t) => !t)}
         aria-label="Toggle terrain tuner"
         title="Tune terrain"
-        className={`pointer-events-auto absolute bottom-2 left-2 z-30 rounded-full border px-2.5 py-1 font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.2em] transition-colors ${
+        className={`pointer-events-auto absolute bottom-2 right-2 z-30 rounded-full border px-2.5 py-1 font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.2em] transition-colors ${
           tuning
             ? "border-amber bg-amber/10 text-amber"
             : "border-line/60 text-muted/60 hover:border-amber hover:text-amber"
