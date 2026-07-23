@@ -6,8 +6,7 @@ import * as THREE from "three";
 import { useTheme } from "./ThemeProvider";
 import { useAudioPlayer } from "./AudioPlayerProvider";
 
-// mesh resolution (denser than the reference for crisper lines)
-const SEG_X = 128;
+// mesh depth resolution (rows); width is tunable via config.segments
 const SEG_Z = 64;
 const PLANE_W = 10;
 const PLANE_D = 20;
@@ -18,9 +17,11 @@ export interface TerrainConfig {
   speed: number; // history scroll rate (rows/sec-ish)
   decay: number; // per-row falloff toward the back
   sineAmplitude: number; // ambient idle sine base
+  segments: number; // mesh width resolution
   autoRotation: number; // camera yaw per frame
   cameraDistance: number;
   camPitch: number; // camera elevation (radians)
+  camYaw: number; // camera azimuth start (radians)
 }
 
 export const DEFAULT_CONFIG: TerrainConfig = {
@@ -28,10 +29,22 @@ export const DEFAULT_CONFIG: TerrainConfig = {
   speed: 17.5,
   decay: 0.95,
   sineAmplitude: 0.3,
+  segments: 128,
   autoRotation: 0.0008,
   cameraDistance: 9.5,
   camPitch: 0.62,
+  camYaw: 0,
 };
+
+// live camera state, mutated by mouse/touch and the auto-rotation loop
+export interface ViewState {
+  yaw: number;
+  pitch: number;
+  distance: number;
+  dragging: boolean;
+  lastX: number;
+  lastY: number;
+}
 
 // resample a spectrum array to a target length (linear interp)
 function resample(data: Float32Array, target: number): number[] {
@@ -65,22 +78,26 @@ function smoothWave(data: number[], passes: number): number[] {
 
 interface TerrainProps {
   color: string;
+  segments: number;
   spectrumRef: React.MutableRefObject<Float32Array>;
   cfgRef: React.MutableRefObject<TerrainConfig>;
 }
 
-function Terrain({ color, spectrumRef, cfgRef }: TerrainProps) {
+function Terrain({ color, segments, spectrumRef, cfgRef }: TerrainProps) {
+  const segX = Math.max(8, Math.round(segments));
+
   const geometry = useMemo(() => {
-    const g = new THREE.PlaneGeometry(PLANE_W, PLANE_D, SEG_X - 1, SEG_Z - 1);
+    const g = new THREE.PlaneGeometry(PLANE_W, PLANE_D, segX - 1, SEG_Z - 1);
     g.rotateX(-Math.PI / 2);
     return g;
-  }, []);
+  }, [segX]);
 
   // rolling audio history: SEG_Z rows, newest at the front (index 0)
   const history = useRef<number[][]>([]);
-  if (history.current.length === 0) {
-    for (let i = 0; i < SEG_Z; i++) history.current.push(new Array(SEG_X).fill(0));
-  }
+  useMemo(() => {
+    history.current = [];
+    for (let i = 0; i < SEG_Z; i++) history.current.push(new Array(segX).fill(0));
+  }, [segX]);
   const lastUpdate = useRef(0);
 
   useFrame(({ clock }) => {
@@ -93,7 +110,7 @@ function Terrain({ color, spectrumRef, cfgRef }: TerrainProps) {
       lastUpdate.current = nowMs;
       history.current.pop();
       const spec = spectrumRef.current;
-      const raw = resample(spec, SEG_X).map((v) => v * cfg.amplitude);
+      const raw = resample(spec, segX).map((v) => v * cfg.amplitude);
       history.current.unshift(smoothWave(raw, 3));
     }
 
@@ -105,9 +122,9 @@ function Terrain({ color, spectrumRef, cfgRef }: TerrainProps) {
       const decayFactor = Math.pow(cfg.decay, z);
       const zNorm = (z / (SEG_Z - 1)) * 2 - 1;
       const row = history.current[z];
-      for (let x = 0; x < SEG_X; x++) {
-        const index = z * SEG_X + x;
-        const xNorm = (x / (SEG_X - 1)) * 2 - 1;
+      for (let x = 0; x < segX; x++) {
+        const index = z * segX + x;
+        const xNorm = (x / (segX - 1)) * 2 - 1;
         const waveHeight = (row?.[x] || 0) * decayFactor;
         const sineBase =
           sineAmp *
@@ -126,17 +143,23 @@ function Terrain({ color, spectrumRef, cfgRef }: TerrainProps) {
   );
 }
 
-function Rig({ cfgRef }: { cfgRef: React.MutableRefObject<TerrainConfig> }) {
+function Rig({
+  cfgRef,
+  viewRef,
+}: {
+  cfgRef: React.MutableRefObject<TerrainConfig>;
+  viewRef: React.MutableRefObject<ViewState>;
+}) {
   const { camera } = useThree();
-  const yaw = useRef(0);
   useFrame(() => {
     const cfg = cfgRef.current;
-    yaw.current += cfg.autoRotation;
-    const d = cfg.cameraDistance;
+    const v = viewRef.current;
+    if (!v.dragging) v.yaw += cfg.autoRotation;
+    const d = v.distance;
     camera.position.set(
-      d * Math.sin(yaw.current) * Math.cos(cfg.camPitch),
-      d * Math.sin(cfg.camPitch),
-      d * Math.cos(yaw.current) * Math.cos(cfg.camPitch)
+      d * Math.sin(v.yaw) * Math.cos(v.pitch),
+      d * Math.sin(v.pitch),
+      d * Math.cos(v.yaw) * Math.cos(v.pitch)
     );
     camera.lookAt(0, 0, -5);
   });
@@ -153,19 +176,40 @@ export function TerrainVisualizer() {
   const cfgRef = useRef(config);
   cfgRef.current = config;
 
+  // live, mouse-driven camera state (kept out of React state to avoid re-renders)
+  const viewRef = useRef<ViewState>({
+    yaw: DEFAULT_CONFIG.camYaw,
+    pitch: DEFAULT_CONFIG.camPitch,
+    distance: DEFAULT_CONFIG.cameraDistance,
+    dragging: false,
+    lastX: 0,
+    lastY: 0,
+  });
+  const wrapRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (!params.has("tune")) return;
     setTuning(true);
     try {
       const saved = localStorage.getItem("terrainConfig");
-      if (saved) setConfig({ ...DEFAULT_CONFIG, ...JSON.parse(saved) });
+      if (saved) {
+        const cfg = { ...DEFAULT_CONFIG, ...JSON.parse(saved) };
+        setConfig(cfg);
+        viewRef.current.yaw = cfg.camYaw;
+        viewRef.current.pitch = cfg.camPitch;
+        viewRef.current.distance = cfg.cameraDistance;
+      }
     } catch {
       /* ignore */
     }
   }, []);
 
   const update = (key: keyof TerrainConfig, value: number) => {
+    // camera sliders also drive the live view
+    if (key === "camPitch") viewRef.current.pitch = value;
+    if (key === "cameraDistance") viewRef.current.distance = value;
+    if (key === "camYaw") viewRef.current.yaw = value;
     setConfig((c) => {
       const next = { ...c, [key]: value };
       try {
@@ -177,16 +221,69 @@ export function TerrainVisualizer() {
     });
   };
 
+  // snapshot of the live (mouse-adjusted) camera for copy-config
+  const liveView = () => ({
+    camYaw: +viewRef.current.yaw.toFixed(3),
+    camPitch: +viewRef.current.pitch.toFixed(3),
+    cameraDistance: +viewRef.current.distance.toFixed(2),
+  });
+
+  // drag to rotate, wheel to zoom (mirrors ptc-player's controls)
+  const onPointerDown = (e: React.PointerEvent) => {
+    const v = viewRef.current;
+    v.dragging = true;
+    v.lastX = e.clientX;
+    v.lastY = e.clientY;
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    const v = viewRef.current;
+    if (!v.dragging) return;
+    v.yaw += (e.clientX - v.lastX) * 0.005;
+    v.pitch += (e.clientY - v.lastY) * 0.005;
+    v.pitch = Math.max(0.05, Math.min(1.45, v.pitch));
+    v.lastX = e.clientX;
+    v.lastY = e.clientY;
+  };
+  const onPointerUp = () => {
+    viewRef.current.dragging = false;
+  };
+
+  // non-passive wheel so we can prevent the page from scrolling while zooming
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const v = viewRef.current;
+      v.distance = Math.max(5, Math.min(15, v.distance + e.deltaY * 0.01));
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, []);
+
   return (
     <div className="relative w-full">
-      <div className="aspect-[16/11] w-full">
+      <div
+        ref={wrapRef}
+        className="aspect-[16/11] w-full cursor-grab touch-none active:cursor-grabbing"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerLeave={onPointerUp}
+      >
         <Canvas
           dpr={[1, 2]}
           gl={{ antialias: true, alpha: true }}
           camera={{ fov: 75, near: 0.1, far: 1000 }}
         >
-          <Rig cfgRef={cfgRef} />
-          <Terrain color={lineColor} spectrumRef={spectrumRef} cfgRef={cfgRef} />
+          <Rig cfgRef={cfgRef} viewRef={viewRef} />
+          <Terrain
+            color={lineColor}
+            segments={config.segments}
+            spectrumRef={spectrumRef}
+            cfgRef={cfgRef}
+          />
         </Canvas>
       </div>
 
@@ -207,7 +304,17 @@ export function TerrainVisualizer() {
       </button>
 
       {tuning && (
-        <TerrainControls config={config} update={update} onReset={() => setConfig(DEFAULT_CONFIG)} />
+        <TerrainControls
+          config={config}
+          update={update}
+          liveView={liveView}
+          onReset={() => {
+            setConfig(DEFAULT_CONFIG);
+            viewRef.current.yaw = DEFAULT_CONFIG.camYaw;
+            viewRef.current.pitch = DEFAULT_CONFIG.camPitch;
+            viewRef.current.distance = DEFAULT_CONFIG.cameraDistance;
+          }}
+        />
       )}
     </div>
   );
@@ -218,6 +325,7 @@ const SLIDERS: { key: keyof TerrainConfig; label: string; min: number; max: numb
   { key: "speed", label: "Wave speed", min: 1, max: 30, step: 0.5 },
   { key: "decay", label: "Wave decay", min: 0.85, max: 0.99, step: 0.005 },
   { key: "sineAmplitude", label: "Idle sine base", min: 0, max: 1.5, step: 0.05 },
+  { key: "segments", label: "Segments", min: 32, max: 256, step: 16 },
   { key: "autoRotation", label: "Auto rotation", min: 0, max: 0.006, step: 0.0002 },
   { key: "cameraDistance", label: "Camera distance", min: 5, max: 15, step: 0.1 },
   { key: "camPitch", label: "Camera pitch", min: 0.1, max: 1.4, step: 0.01 },
@@ -226,15 +334,19 @@ const SLIDERS: { key: keyof TerrainConfig; label: string; min: number; max: numb
 function TerrainControls({
   config,
   update,
+  liveView,
   onReset,
 }: {
   config: TerrainConfig;
   update: (key: keyof TerrainConfig, value: number) => void;
+  liveView: () => { camYaw: number; camPitch: number; cameraDistance: number };
   onReset: () => void;
 }) {
   const [copied, setCopied] = useState(false);
   const copy = () => {
-    navigator.clipboard?.writeText(JSON.stringify(config, null, 2));
+    // merge the live mouse-adjusted camera into the exported config
+    const out = { ...config, ...liveView() };
+    navigator.clipboard?.writeText(JSON.stringify(out, null, 2));
     setCopied(true);
     setTimeout(() => setCopied(false), 1200);
   };
