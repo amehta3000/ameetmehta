@@ -1,5 +1,18 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Syne,
+  Space_Grotesk,
+  Unbounded,
+  Instrument_Serif,
+  Fraunces,
+  DM_Serif_Display,
+  Playfair_Display,
+  Anton,
+  Sora,
+  Instrument_Sans,
+  IBM_Plex_Mono,
+} from "next/font/google";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { AudioPlayerProvider } from "./components/AudioPlayerProvider";
 import { MiniPlayer } from "./components/MiniPlayer";
@@ -8,11 +21,30 @@ import { Footer } from "./components/Footer";
 import { SceneWrapper } from "./components/SceneWrapper";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-display",
-});
+// ---- display font options (cycled by the Ctrl+D switcher) ----
+const bricolage = Bricolage_Grotesque({ subsets: ["latin"], display: "swap", variable: "--font-d0" });
+const syne = Syne({ subsets: ["latin"], display: "swap", variable: "--font-d1" });
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], display: "swap", variable: "--font-d2" });
+const unbounded = Unbounded({ subsets: ["latin"], display: "swap", variable: "--font-d3" });
+const instrumentSerif = Instrument_Serif({ subsets: ["latin"], weight: ["400"], display: "swap", variable: "--font-d4" });
+const fraunces = Fraunces({ subsets: ["latin"], display: "swap", variable: "--font-d5" });
+const dmSerif = DM_Serif_Display({ subsets: ["latin"], weight: ["400"], display: "swap", variable: "--font-d6" });
+const playfair = Playfair_Display({ subsets: ["latin"], display: "swap", variable: "--font-d7" });
+const anton = Anton({ subsets: ["latin"], weight: ["400"], display: "swap", variable: "--font-d8" });
+const sora = Sora({ subsets: ["latin"], display: "swap", variable: "--font-d9" });
+
+const displayFonts = [
+  bricolage,
+  syne,
+  spaceGrotesk,
+  unbounded,
+  instrumentSerif,
+  fraunces,
+  dmSerif,
+  playfair,
+  anton,
+  sora,
+];
 
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
@@ -56,7 +88,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`h-full dark ${bricolage.variable} ${instrumentSans.variable} ${ibmPlexMono.variable}`}
+      className={`h-full dark ${displayFonts.map((f) => f.variable).join(" ")} ${instrumentSans.variable} ${ibmPlexMono.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col font-[family-name:var(--font-body)] antialiased bg-paper text-ink">
