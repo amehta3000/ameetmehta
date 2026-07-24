@@ -26,7 +26,7 @@ const experience: ExperienceItem[] = [
   },
   {
     role: "Founding Principal Product Designer",
-    company: "Moveworks, acquired by ServiceNow for $2.85B",
+    company: "Moveworks, acquired by ServiceNow",
     period: "2017 — 2022",
     positioning: "AI Pioneer",
     points: [
