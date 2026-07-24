@@ -234,18 +234,29 @@ export function TerrainVisualizer() {
     v.dragging = true;
     v.lastX = e.clientX;
     v.lastY = e.clientY;
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    // capture the mouse so drags keep tracking off-element; do NOT capture
+    // touch — that would block the browser's vertical scroll gesture
+    if (e.pointerType === "mouse") {
+      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    }
   };
   const onPointerMove = (e: React.PointerEvent) => {
     const v = viewRef.current;
     if (!v.dragging) return;
+    // on touch, only horizontal drags reach us (touch-action: pan-y) so pitch
+    // is left to the vertical scroll; on mouse, both axes rotate.
     v.yaw += (e.clientX - v.lastX) * 0.005;
-    v.pitch += (e.clientY - v.lastY) * 0.005;
-    v.pitch = Math.max(0.05, Math.min(1.45, v.pitch));
+    if (e.pointerType === "mouse") {
+      v.pitch += (e.clientY - v.lastY) * 0.005;
+      v.pitch = Math.max(0.05, Math.min(1.45, v.pitch));
+    }
     v.lastX = e.clientX;
     v.lastY = e.clientY;
   };
   const onPointerUp = () => {
+    viewRef.current.dragging = false;
+  };
+  const onPointerCancel = () => {
     viewRef.current.dragging = false;
   };
 
@@ -266,11 +277,12 @@ export function TerrainVisualizer() {
     <div className="relative w-full">
       <div
         ref={wrapRef}
-        className="aspect-[16/11] w-full cursor-grab touch-none active:cursor-grabbing"
+        className="aspect-[16/11] w-full cursor-grab touch-pan-y active:cursor-grabbing"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerUp}
+        onPointerCancel={onPointerCancel}
       >
         <Canvas
           dpr={[1, 2]}
