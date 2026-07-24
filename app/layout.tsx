@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { AudioPlayerProvider } from "./components/AudioPlayerProvider";
 import { MiniPlayer } from "./components/MiniPlayer";
@@ -8,7 +8,7 @@ import { Footer } from "./components/Footer";
 import { SceneWrapper } from "./components/SceneWrapper";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-display",
@@ -56,7 +56,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`h-full dark ${fraunces.variable} ${instrumentSans.variable} ${ibmPlexMono.variable}`}
+      className={`h-full dark ${bricolage.variable} ${instrumentSans.variable} ${ibmPlexMono.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col font-[family-name:var(--font-body)] antialiased bg-paper text-ink">
