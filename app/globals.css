@@ -41,7 +41,7 @@ html {
   background: var(--paper);
   color: var(--ink);
   /* default display font; overridden live by the Ctrl+D font switcher */
-  --font-display: var(--font-d0);
+  --font-display: var(--font-d7);
 }
 
 body {
