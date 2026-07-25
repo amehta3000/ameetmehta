@@ -458,14 +458,10 @@ export const projects: Project[] = [
         alt: "RbkCustom screens",
       },
       {
-        type: "prose",
-        content: "In a notable highlight, I collaborated with design technologist John Maeda to craft a limited edition Reebok Custom experience, pushing front-end development into artistic expression.",
-      },
-      {
         type: "image",
         src: "/assets/rbkcustom/rbk_maeda_labptop-1280@2x.jpg",
-        alt: "John Maeda x Reebok limited edition",
-        caption: "The John Maeda limited edition experience.",
+        alt: "Reebok Custom limited edition experience",
+        caption: "A limited edition Reebok Custom experience.",
       },
     ],
   },
