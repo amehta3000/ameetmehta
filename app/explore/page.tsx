@@ -27,7 +27,7 @@ export default function ExplorePage() {
           </Reveal>
           <Reveal delay={0.12}>
             <p className="mt-8 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-              Creative technologist, product design leader, musician, and curator of finely made things. Based in Los Angeles.
+              Designing AI products, creative tools, and product systems where technology meets human creativity. Based in Los Angeles.
             </p>
             <p className="mt-4 max-w-lg text-base leading-relaxed text-muted md:text-lg">
               I shape complex ideas into products, prototypes, systems, and small worlds.
