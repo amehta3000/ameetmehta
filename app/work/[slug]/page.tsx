@@ -1,10 +1,24 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { projects, visibleProjects, getProjectBySlug } from "@/data/projects";
+import { projects, visibleProjects, getProjectBySlug, type Block } from "@/data/projects";
 import { Reveal } from "../../components/Reveal";
 import { SpaceRickshawEmbed } from "../../components/SpaceRickshawEmbed";
 import { SpotifyEmbed } from "../../components/SpotifyEmbed";
 import { asset } from "@/lib/asset";
+
+// group runs of consecutive spotify blocks so they can render side by side
+function groupBlocks(blocks: Block[]): Block[][] {
+  const groups: Block[][] = [];
+  for (const block of blocks) {
+    const last = groups[groups.length - 1];
+    if (block.type === "spotify" && last && last[0].type === "spotify") {
+      last.push(block);
+    } else {
+      groups.push([block]);
+    }
+  }
+  return groups;
+}
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -118,9 +132,31 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
         </div>
       </Reveal>
 
-      {/* Content blocks */}
+      {/* Content blocks (consecutive spotify blocks render side by side) */}
       <div className="space-y-14 pb-32">
-        {project.blocks.map((block, i) => {
+        {groupBlocks(project.blocks).map((group, gi) => {
+          if (group.length > 1 && group.every((b) => b.type === "spotify")) {
+            return (
+              <Reveal key={`sg-${gi}`} delay={0.05}>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {group.map((block, j) =>
+                    block.playlistId ? (
+                      <div key={j}>
+                        {block.title && (
+                          <p className="mb-3 font-[family-name:var(--font-display)] text-lg font-semibold text-ink">
+                            {block.title}
+                          </p>
+                        )}
+                        <SpotifyEmbed playlistId={block.playlistId} title={block.title ?? "Playlist"} />
+                      </div>
+                    ) : null
+                  )}
+                </div>
+              </Reveal>
+            );
+          }
+          const block = group[0];
+          const i = gi;
           if (block.type === "prose") {
             return (
               <Reveal key={i} delay={0.05}>

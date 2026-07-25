@@ -126,24 +126,17 @@ export const projects: Project[] = [
     role: "Product Design Lead",
     year: "2021",
     client: "Moveworks",
+    link: "https://www.moveworks.com/us/en/platform/internal-communication",
     tags: ["Product Design", "Enterprise", "AI"],
     cover: "/assets/employee-communications/mw_comms_dashboard_x1280@2x.jpg",
     shortDescription: "Led product design and research for a zero-to-one enterprise communications platform at Moveworks, helping teams replace low-signal corporate email with targeted, actionable communication.",
-    overview: "From October 2020 to March 2021, I helped shape a crucial component of Moveworks' core platform by serving as the Product Design Lead for a pioneering corporate communications platform. This platform revolutionized internal corporate communication by empowering IT and HR stakeholders to send custom, actionable messages directly via Moveworks' AI enhanced chatbot, effectively replacing the clutter of traditional corporate emails.\n\nAs a true zero-to-one product, it required an extensive mix of user research, stakeholder interviews, data analysis, and intuitive design to shape and launch the MVP to our three lighthouse partners. More than just a designer, I acted as a product leader, onboarding over 20 customers and harnessing their feedback to continually refine the product.",
+    overview: "I served as Product Design Lead for Employee Communications, a zero-to-one product at Moveworks that let IT and HR teams send custom, actionable messages straight through Moveworks' AI assistant, replacing the noise of traditional corporate email.\n\nThe work spanned user research, stakeholder interviews, data analysis, and design, from earliest concept to launching the MVP with three lighthouse partners. I acted as a product leader as much as a designer: onboarding over 20 customers, folding their feedback into each iteration, and laying the groundwork for Moveworks' first web design system.",
     blocks: [
-      {
-        type: "prose",
-        content: "As a true zero-to-one product, it required an extensive mix of user research, stakeholder interviews, data analysis, and intuitive design to shape and launch the MVP to three lighthouse partners.",
-      },
       {
         type: "image",
         src: "/assets/employee-communications/mw_comms_dashboard_x1280@2x.jpg",
         alt: "Moveworks employee communications dashboard",
         caption: "The communications dashboard, designed for HR and IT stakeholders to compose and target messages.",
-      },
-      {
-        type: "prose",
-        content: "I acted as a product leader beyond design: onboarding over 20 customers, synthesizing usage data and employee responses to drive iteration, and laying the groundwork for Moveworks' initial web design system.",
       },
     ],
   },
