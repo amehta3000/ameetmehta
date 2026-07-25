@@ -50,7 +50,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
       {/* Top nav: back + prev/next */}
       <div className="flex items-center justify-between gap-4 pt-20 md:pt-24">
         <Link
-          href="/explore"
+          href="/home2"
           className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.15em] text-muted transition-colors hover:text-amber"
         >
           ← All
