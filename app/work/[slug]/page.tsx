@@ -3,6 +3,7 @@ import Link from "next/link";
 import { projects, visibleProjects, getProjectBySlug } from "@/data/projects";
 import { Reveal } from "../../components/Reveal";
 import { SpaceRickshawEmbed } from "../../components/SpaceRickshawEmbed";
+import { SpotifyEmbed } from "../../components/SpotifyEmbed";
 import { asset } from "@/lib/asset";
 
 export function generateStaticParams() {
@@ -24,15 +25,41 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
   const project = getProjectBySlug(slug);
   if (!project) notFound();
 
-  // cycle "next" through visible projects only (fall back to the full list)
+  // cycle prev/next through visible projects only (fall back to the full list)
   const nav = visibleProjects.some((p) => p.slug === slug) ? visibleProjects : projects;
   const currentIndex = nav.findIndex((p) => p.slug === slug);
   const nextProject = nav[(currentIndex + 1) % nav.length];
+  const prevProject = nav[(currentIndex - 1 + nav.length) % nav.length];
 
   return (
     <div className="mx-auto max-w-7xl px-6">
+      {/* Top nav: back + prev/next */}
+      <div className="flex items-center justify-between gap-4 pt-20 md:pt-24">
+        <Link
+          href="/explore"
+          className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.15em] text-muted transition-colors hover:text-amber"
+        >
+          ← All
+        </Link>
+        <div className="flex items-center gap-5">
+          <Link
+            href={`/work/${prevProject.slug}`}
+            className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.15em] text-muted transition-colors hover:text-amber"
+          >
+            ← Prev
+          </Link>
+          <span className="text-line">|</span>
+          <Link
+            href={`/work/${nextProject.slug}`}
+            className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.15em] text-muted transition-colors hover:text-amber"
+          >
+            Next →
+          </Link>
+        </div>
+      </div>
+
       {/* Hero */}
-      <section className="pt-24 pb-16 md:pt-36">
+      <section className="pt-10 pb-16 md:pt-14">
         <Reveal>
           <p className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-amber mb-4">
             {project.client ?? project.type}
@@ -207,6 +234,19 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                     className="w-full h-full"
                   />
                 </div>
+              </Reveal>
+            );
+          }
+
+          if (block.type === "spotify" && block.playlistId) {
+            return (
+              <Reveal key={i} delay={0.05}>
+                {block.title && (
+                  <p className="mb-3 font-[family-name:var(--font-display)] text-lg font-semibold text-ink">
+                    {block.title}
+                  </p>
+                )}
+                <SpotifyEmbed playlistId={block.playlistId} title={block.title ?? "Playlist"} />
               </Reveal>
             );
           }

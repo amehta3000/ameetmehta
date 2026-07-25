@@ -1,7 +1,9 @@
 export type ArtifactType = "software" | "product" | "identity" | "sound" | "image"
 
+export type Discipline = "design" | "code" | "sound"
+
 export interface Block {
-  type: "prose" | "image" | "grid" | "video" | "game"
+  type: "prose" | "image" | "grid" | "video" | "game" | "spotify"
   content?: string
   src?: string
   alt?: string
@@ -9,6 +11,7 @@ export interface Block {
   images?: { src: string; alt: string; caption?: string }[]
   url?: string
   title?: string
+  playlistId?: string
 }
 
 export interface Project {
@@ -16,6 +19,7 @@ export interface Project {
   title: string
   subtitle: string
   type: ArtifactType
+  disciplines: Discipline[]
   role: string
   year: string
   client?: string
@@ -33,6 +37,7 @@ export const projects: Project[] = [
     slug: "ai-security-interfaces",
     title: "AI Security Interfaces",
     subtitle: "Current work",
+    disciplines: ["design", "code"],
     hidden: true,
     type: "software",
     role: "Product Design Lead",
@@ -53,6 +58,7 @@ export const projects: Project[] = [
     slug: "part-time-chiller",
     title: "Part Time Chiller",
     subtitle: "Visual beat tape",
+    disciplines: ["sound"],
     type: "sound",
     role: "Artist / Producer / Designer",
     year: "2015–present",
@@ -65,7 +71,49 @@ export const projects: Project[] = [
       {
         type: "video",
         url: "https://www.youtube.com/embed/Zv2sKFRcMis",
-        title: "Part Time Chiller",
+        title: "Part Time Chiller live",
+      },
+      {
+        type: "prose",
+        content: "Two playlists that map where my taste lives. Sunday Vibes is the one that started it all, built for slow mornings and focused afternoons. Track IDs is a deeper cut, the records I keep coming back to across years of digging.",
+      },
+      {
+        type: "spotify",
+        playlistId: "0iMNNrtl1m6B54PyGlygy2",
+        title: "Sunday Vibes",
+      },
+      {
+        type: "spotify",
+        playlistId: "6MYB8Zxzbi2w6zZGIovB5S",
+        title: "Track IDs",
+      },
+    ],
+  },
+  {
+    slug: "sadubas",
+    title: "SADUBAS",
+    subtitle: "Audio-visual act",
+    disciplines: ["sound"],
+    type: "sound",
+    role: "Co-founder / Producer / Live visuals",
+    year: "2012–present",
+    link: "https://sadubas.com",
+    tags: ["Music", "Live", "Audio-Visual", "Sound"],
+    cover: "/assets/identity/Sadubas-The_Ascent_cover_2000_trishul.png",
+    shortDescription: "An audio-visual performance act I co-founded with a longtime collaborator. South Asian-influenced electronic music and live visuals, performed everywhere from the Academy Museum to LACMA and the Hammer.",
+    overview: "SADUBAS is an audio-visual performance act I co-founded with my collaborator and longtime friend. Together we make South Asian-influenced electronic music and live visuals, sitting somewhere between house, ambient, and whatever comes next. We collaborate with musicians and filmmakers to expand the work beyond the two of us: live sets, beat tapes, short film scores, and visual installations. We have performed at the Academy Museum of Motion Pictures, LACMA, the Hammer Museum, the Bowers Museum, and the Wende Museum.",
+    blocks: [
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/K7yc3vkW1ZA",
+        title: "SADUBAS live performance",
+      },
+      {
+        type: "grid",
+        images: [
+          { src: "/assets/identity/Sadubas-The_Ascent_cover_2000_trishul.png", alt: "SADUBAS: The Ascent" },
+          { src: "/assets/identity/Railways_cover_202212.jpg", alt: "SADUBAS: Railways" },
+        ],
       },
     ],
   },
@@ -73,6 +121,7 @@ export const projects: Project[] = [
     slug: "employee-communications",
     title: "Employee Comms",
     subtitle: "AI enterprise product",
+    disciplines: ["design", "code"],
     type: "software",
     role: "Product Design Lead",
     year: "2021",
@@ -102,6 +151,7 @@ export const projects: Project[] = [
     slug: "xlr8r",
     title: "XLR8R Magazine",
     subtitle: "Music culture and product systems",
+    disciplines: ["design", "code"],
     type: "product",
     role: "Product Manager / Designer / Developer",
     year: "2015–2016",
@@ -154,6 +204,7 @@ export const projects: Project[] = [
     slug: "chnl",
     title: "CHNL",
     subtitle: "Founder, zero-to-one product",
+    disciplines: ["design", "code"],
     type: "software",
     role: "Co-founder / Product / Lead Designer",
     year: "2012–2015",
@@ -204,6 +255,7 @@ export const projects: Project[] = [
     slug: "space-rickshaw",
     title: "Space Rickshaw",
     subtitle: "Generative worldbuilding",
+    disciplines: ["design", "code"],
     type: "software",
     role: "Artist / Designer",
     year: "2026",
@@ -222,6 +274,7 @@ export const projects: Project[] = [
     slug: "topspin",
     title: "Topspin",
     subtitle: "Music tech",
+    disciplines: ["design", "code"],
     type: "software",
     role: "Lead UX Designer / Developer",
     year: "2011–2014",
@@ -272,6 +325,7 @@ export const projects: Project[] = [
     slug: "product-plan",
     title: "ProductPlan",
     subtitle: "SaaS MVP",
+    disciplines: ["design"],
     type: "software",
     role: "UX Designer",
     year: "2013",
@@ -319,6 +373,7 @@ export const projects: Project[] = [
     slug: "identity",
     title: "Marks, Posters, Systems",
     subtitle: "Visual identity",
+    disciplines: ["design"],
     type: "identity",
     role: "Designer",
     year: "2008–present",
