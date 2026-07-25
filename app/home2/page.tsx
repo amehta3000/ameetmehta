@@ -14,20 +14,20 @@ const NOW = [
   {
     label: "Playable game",
     title: "Space Rickshaw",
-    desc: "A C64-era arcade game rebuilt as a bajaj rickshaw odyssey across India. Vibe-coded with Claude in an afternoon.",
+    desc: "A C64-era arcade game turned into a bajaj rickshaw run across India. Vibe-coded with Claude in an afternoon, mostly to see if I could.",
     href: "/work/space-rickshaw",
   },
   {
     label: "Generative art",
     title: "TheGridLifeAI",
-    desc: "An ongoing generative art and synthography practice, exploring what taste looks like when the machine gets fast.",
+    desc: "A generative art practice. Part sketchbook, part argument that taste still matters when the tools get fast.",
     href: "https://www.instagram.com/thegridlifeai/",
     external: true,
   },
   {
     label: "Creative code",
     title: "This sound visualizer",
-    desc: "The terrain above is a real-time, audio-reactive Three.js instrument, playing my own records. Press play.",
+    desc: "The terrain up top is a real-time, audio-reactive instrument built in Three.js, running my own records. Hit play.",
     href: "/work/part-time-chiller",
   },
 ];
@@ -128,10 +128,10 @@ export default function Home2Page() {
       <section className="border-t border-line py-16 md:py-24">
         <Reveal>
           <p className="max-w-4xl font-[family-name:var(--font-display)] text-2xl font-medium leading-snug tracking-tight text-ink md:text-4xl">
-            Plenty of principal design leaders can show you a Microsoft logo. Fewer can also show you the game they coded last weekend, the record they pressed, and the design system they scaled from six people to six hundred.
+            I design, I code, and I make music. Not as a party trick, but because the interesting problems tend to live in the space between them.
           </p>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-            I work at the seam between product rigor and creative instinct, where AI stops being a buzzword and starts being a material you can shape.
+            I&apos;ve been in product long enough to know which trends to ignore and which are worth the bet. Right now the bet is AI, treated as a material to shape, not a slide to present.
           </p>
         </Reveal>
       </section>
@@ -141,8 +141,8 @@ export default function Home2Page() {
         <ActLabel num="01" title="What I'm building now" />
         <Reveal>
           <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-6xl">
-            I don&apos;t just talk about AI and creative tools.
-            <span className="text-muted"> I build with them, in public, for the joy of it.</span>
+            I&apos;d rather show you than tell you.
+            <span className="text-muted"> Here&apos;s what&apos;s on the bench.</span>
           </h2>
         </Reveal>
 
@@ -178,11 +178,11 @@ export default function Home2Page() {
         <ActLabel num="02" title="How I got here" />
         <Reveal>
           <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-6xl">
-            Two decades turning ambiguous technology
-            <span className="text-muted"> into products people actually trust.</span>
+            Founding designer to principal.
+            <span className="text-muted"> Startups to Microsoft. The standard didn&apos;t move.</span>
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-            From founding designer at an AI pioneer to principal leader at Microsoft, the same throughline: make the complex feel obvious, and build the teams and systems that keep it that way.
+            I think most enterprise software is needlessly hostile to the people stuck using it. I&apos;ve spent a career arguing otherwise, from the first design hire at Moveworks to leading platform design for Microsoft security.
           </p>
         </Reveal>
 
@@ -198,11 +198,11 @@ export default function Home2Page() {
         <ActLabel num="03" title="Why I care" />
         <Reveal>
           <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-6xl">
-            Craft, culture, and momentum.
-            <span className="text-muted"> Music is how I keep my hands dirty and my taste sharp.</span>
+            Music isn&apos;t the thing I keep off the résumé.
+            <span className="text-muted"> It&apos;s where my taste stays honest.</span>
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-            I produce and DJ, perform audio-visual sets, and build interactive sound experiments. It is not a side quest, it is where I test what technology feels like when it is in service of people.
+            I produce, DJ, and perform audio-visual sets, and I&apos;ve run a monthly residency for fifteen years. Playing for actual rooms of people is harder and more useful than any deck about user empathy.
           </p>
         </Reveal>
 
@@ -218,7 +218,7 @@ export default function Home2Page() {
         <ActLabel num="04" title="Let's build something" />
         <Reveal>
           <h2 className="max-w-4xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-7xl">
-            If you&apos;re building where AI meets human creativity, let&apos;s talk.
+            If you&apos;re building something real, let&apos;s talk.
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
