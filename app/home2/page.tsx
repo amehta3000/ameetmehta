@@ -122,10 +122,10 @@ export default function Home2Page() {
       <section className="border-t border-line py-16 md:py-24">
         <Reveal>
           <p className="max-w-4xl font-[family-name:var(--font-display)] text-2xl font-medium leading-snug tracking-tight text-ink md:text-4xl">
-            I design, I code, and I make music. Not as a party trick, but because the interesting problems tend to live in the space between them.
+            I design, I code, and I make music. The interesting problems tend to live in the space between them.
           </p>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-            I&apos;ve been in product long enough to know which trends to ignore and which are worth the bet. Right now the bet is AI, treated as a material to shape, not a slide to present.
+            Most of my career has been making complicated technology feel obvious. Lately that means figuring out where AI genuinely belongs, and where it&apos;s just noise.
           </p>
         </Reveal>
       </section>
@@ -135,8 +135,8 @@ export default function Home2Page() {
         <SectionLabel title="What I'm building now" />
         <Reveal>
           <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-6xl">
-            I&apos;d rather show you than tell you.
-            <span className="text-muted"> Here&apos;s what&apos;s on the bench.</span>
+            The best way to understand a tool is to build something with it.
+            <span className="text-muted"> So I do.</span>
           </h2>
         </Reveal>
 
@@ -172,11 +172,11 @@ export default function Home2Page() {
         <SectionLabel title="How I got here" />
         <Reveal>
           <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-6xl">
-            Founding designer to principal.
-            <span className="text-muted"> Startups to Microsoft. The standard didn&apos;t move.</span>
+            Over two decades of making complex software
+            <span className="text-muted"> feel human.</span>
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-            I think most enterprise software is needlessly hostile to the people stuck using it. I&apos;ve spent a career arguing otherwise, from the first design hire at Moveworks to leading platform design for Microsoft security.
+            The throughline: sweat the craft, build the team, and leave the systems better than I found them. Moveworks from six people to six hundred, and now Microsoft security.
           </p>
         </Reveal>
 
@@ -192,11 +192,10 @@ export default function Home2Page() {
         <SectionLabel title="Why I care" />
         <Reveal>
           <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-6xl">
-            Music isn&apos;t the thing I keep off the résumé.
-            <span className="text-muted"> It&apos;s where my taste stays honest.</span>
+            Music keeps my taste honest.
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-            I produce, DJ, and perform audio-visual sets, and I&apos;ve run a monthly residency for fifteen years. Playing for actual rooms of people is harder and more useful than any deck about user empathy.
+            I produce, DJ, and perform audio-visual sets, and I&apos;ve run a monthly residency for fifteen years. It&apos;s where I stay close to actual audiences and remember that the best work gets felt before it gets explained.
           </p>
         </Reveal>
 
