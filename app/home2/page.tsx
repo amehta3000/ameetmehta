@@ -35,17 +35,11 @@ const NOW = [
 const CAREER = ["ai-security-interfaces", "employee-communications", "chnl", "xlr8r"];
 const PRACTICE = ["part-time-chiller", "sadubas"];
 
-function ActLabel({ num, title }: { num: string; title: string }) {
+function SectionLabel({ title }: { title: string }) {
   return (
-    <div className="mb-8 flex items-baseline gap-4">
-      <span className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.3em] text-amber">
-        Act {num}
-      </span>
-      <span className="h-px flex-1 bg-line" />
-      <span className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.2em] text-muted">
-        {title}
-      </span>
-    </div>
+    <p className="mb-6 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.25em] text-amber">
+      {title}
+    </p>
   );
 }
 
@@ -138,7 +132,7 @@ export default function Home2Page() {
 
       {/* ---------- Act 1 — What I'm building now ---------- */}
       <section className="py-16 md:py-24">
-        <ActLabel num="01" title="What I'm building now" />
+        <SectionLabel title="What I'm building now" />
         <Reveal>
           <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-6xl">
             I&apos;d rather show you than tell you.
@@ -175,7 +169,7 @@ export default function Home2Page() {
 
       {/* ---------- Act 2 — How I got here ---------- */}
       <section className="py-16 md:py-24">
-        <ActLabel num="02" title="How I got here" />
+        <SectionLabel title="How I got here" />
         <Reveal>
           <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-6xl">
             Founding designer to principal.
@@ -195,7 +189,7 @@ export default function Home2Page() {
 
       {/* ---------- Act 3 — Why I care ---------- */}
       <section className="py-16 md:py-24">
-        <ActLabel num="03" title="Why I care" />
+        <SectionLabel title="Why I care" />
         <Reveal>
           <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-6xl">
             Music isn&apos;t the thing I keep off the résumé.
@@ -215,7 +209,7 @@ export default function Home2Page() {
 
       {/* ---------- Act 4 — Let's build something ---------- */}
       <section className="border-t border-line py-20 md:py-32">
-        <ActLabel num="04" title="Let's build something" />
+        <SectionLabel title="Let's build something" />
         <Reveal>
           <h2 className="max-w-4xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-7xl">
             If you&apos;re building something real, let&apos;s talk.
