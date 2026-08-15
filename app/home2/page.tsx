@@ -2,6 +2,20 @@ import Link from "next/link";
 import { getProjectBySlug, type Project } from "@/data/projects";
 import { Reveal } from "../components/Reveal";
 import { TerrainVisualizerBand } from "../components/TerrainVisualizerBand";
+import { ProjectHoverList, type HoverItem } from "../components/ProjectHoverList";
+
+function toHoverItems(projects: Project[]): HoverItem[] {
+  return projects.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    subtitle: p.subtitle,
+    client: p.client,
+    disciplines: p.disciplines,
+    shortDescription: p.shortDescription,
+    year: p.year,
+    cover: p.cover,
+  }));
+}
 
 export const metadata = {
   title: "Ameet Mehta",
@@ -40,38 +54,6 @@ function SectionLabel({ title }: { title: string }) {
     <p className="mb-6 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.25em] text-amber">
       {title}
     </p>
-  );
-}
-
-function ProjectRow({ project, index }: { project: Project; index: number }) {
-  return (
-    <Reveal delay={Math.min(index * 0.05, 0.2)}>
-      <Link
-        href={`/work/${project.slug}`}
-        className="group flex items-baseline justify-between gap-6 border-b border-line py-6 md:py-7"
-      >
-        <div className="min-w-0 flex-1">
-          <div className="mb-1 flex flex-wrap items-center gap-3">
-            <span className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-amber">
-              {project.client ?? project.subtitle}
-            </span>
-            <span className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.15em] text-muted/60">
-              {project.disciplines.join(" · ")}
-            </span>
-          </div>
-          <h3 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-amber md:text-3xl">
-            {project.title}
-          </h3>
-          <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-muted line-clamp-2">
-            {project.shortDescription}
-          </p>
-        </div>
-        <div className="shrink-0 text-right">
-          <span className="font-[family-name:var(--font-mono)] text-[11px] text-muted">{project.year}</span>
-          <span className="mt-2 block text-muted transition-colors group-hover:text-amber">→</span>
-        </div>
-      </Link>
-    </Reveal>
   );
 }
 
@@ -180,10 +162,8 @@ export default function Home2Page() {
           </p>
         </Reveal>
 
-        <div className="mt-12 border-t border-line">
-          {career.map((p, i) => (
-            <ProjectRow key={p.slug} project={p} index={i} />
-          ))}
+        <div className="mt-12">
+          <ProjectHoverList items={toHoverItems(career)} />
         </div>
       </section>
 
@@ -199,10 +179,8 @@ export default function Home2Page() {
           </p>
         </Reveal>
 
-        <div className="mt-12 border-t border-line">
-          {practice.map((p, i) => (
-            <ProjectRow key={p.slug} project={p} index={i} />
-          ))}
+        <div className="mt-12">
+          <ProjectHoverList items={toHoverItems(practice)} />
         </div>
       </section>
 
