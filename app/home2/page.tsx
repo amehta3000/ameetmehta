@@ -61,7 +61,7 @@ const NOW = [
   },
 ];
 
-const CAREER = ["ai-security-interfaces", "employee-communications", "chnl", "xlr8r"];
+const CAREER = ["ai-security-interfaces", "lightmetric-rideview", "employee-communications", "chnl", "xlr8r"];
 const PRACTICE = ["part-time-chiller", "sadubas"];
 
 function SectionLabel({ title }: { title: string }) {
