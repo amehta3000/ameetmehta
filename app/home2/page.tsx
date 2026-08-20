@@ -26,23 +26,38 @@ export const metadata = {
 // curated narratives per act
 const NOW = [
   {
-    label: "Playable game",
-    title: "Space Rickshaw",
-    desc: "A C64-era arcade game turned into a bajaj rickshaw run across India. Vibe-coded with Claude in an afternoon, mostly to see if I could.",
-    href: "/work/space-rickshaw",
+    label: "Reactive audio-visual",
+    title: "Part Time Chiller",
+    desc: "A reactive audio-visual beat tape. The terrain up top is a real-time Three.js instrument running my own records, part of the parttimechiller.com player. Hit play.",
+    href: "https://parttimechiller.com",
+    external: true,
   },
   {
-    label: "Generative art",
+    label: "Generative AI research",
+    title: "Maharani Project",
+    desc: "An experiment probing bias in generative AI models, and what it takes to get them to see South Asian women clearly.",
+    href: "https://amehta3000.github.io/maharani-project/",
+    external: true,
+  },
+  {
+    label: "Image tool",
+    title: "SuperFlatPixel",
+    desc: "A browser-based image pixelizer. A small, sharp tool for turning any photo into clean, flat pixel art.",
+    href: "https://amehta3000.github.io/superflatpixel/",
+    external: true,
+  },
+  {
+    label: "Synthography",
     title: "TheGridLifeAI",
-    desc: "A generative art practice. Part sketchbook, part argument that taste still matters when the tools get fast.",
+    desc: "An early synthographer's exploration of indofuturism. Part sketchbook, part argument that taste still matters when the tools get fast.",
     href: "https://www.instagram.com/thegridlifeai/",
     external: true,
   },
   {
-    label: "Creative code",
-    title: "This sound visualizer",
-    desc: "The terrain up top is a real-time, audio-reactive instrument built in Three.js, running my own records. Hit play.",
-    href: "/work/part-time-chiller",
+    label: "Playable game",
+    title: "Space Rickshaw",
+    desc: "A C64-era arcade game turned into a bajaj rickshaw run across India. Vibe-coded with Claude in an afternoon, mostly to see if I could.",
+    href: "/work/space-rickshaw",
   },
 ];
 
