@@ -173,7 +173,7 @@ export const projects: Project[] = [
     client: "XLR8R",
     link: "https://xlr8r.com",
     tags: ["Editorial", "Music", "Web Development"],
-    cover: "/assets/xlr8r/xlr8r_v1_casestudybrowser-1-w1280@2x.jpg",
+    cover: "/assets/xlr8r/xlr8r_v1_ipad_browser-1280@2x.png",
     shortDescription: "Led product and engineering for the relaunch of a 25-year electronic music publication, modernizing the platform, preserving the archive, and supporting a large global readership.",
     overview: "As the appointed Head of Product and Engineering at XLR8R.com, a revered music and culture magazine with over two decades of print and digital history, my task was to revive and redefine its digital landscape. I empowered writers with enhanced editorial capabilities while overhauling the platform to provide a sleek, responsive interface complete with popular daily free music downloads.",
     blocks: [
@@ -225,7 +225,7 @@ export const projects: Project[] = [
     year: "2012–2015",
     client: "CHNL",
     tags: ["Product Design", "Startup", "Content"],
-    cover: "/assets/chnl/chnl_casestudybrowser-home-w1280@2x.jpg",
+    cover: "/assets/chnl/chnl_social_3channels_white_w1280@2x.jpg",
     shortDescription: "Co-founded and designed a social content platform that turned noisy feeds into curated visual channels, growing to more than 400k registered users before pivoting and acquisition.",
     overview: "In an era of digital noise, CHNL emerged as a tool for personalized, meaningful content. We didn't just aggregate quality content into beautiful channels — we redefined how users interact with digital media. CHNL wasn't just about consumption; it was about active, community-driven curation. As co-founder, my leadership spanned both Product and Engineering, steering a diverse team toward a product that resonated profoundly.",
     blocks: [
