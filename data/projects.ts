@@ -133,27 +133,9 @@ export const projects: Project[] = [
     blocks: [
       {
         type: "image",
-        src: "/assets/lightmetrics/original_modal.webp",
-        alt: "Original Create DVR modal",
-        caption: "The original video-retrieval modal. It only worked if you already knew the exact time of the incident.",
-      },
-      {
-        type: "image",
         src: "/assets/lightmetrics/rideview_final.gif",
         alt: "Redesigned Video Request interface",
         caption: "The redesigned Video Request interface: map, timeline, and AI-detected events in a single place.",
-      },
-      {
-        type: "image",
-        src: "/assets/lightmetrics/timeline.webp",
-        alt: "Final timeline component",
-        caption: "The final two-lane timeline. A vehicle playhead ties the selected start time to the vehicle's position on the map, alongside event and stopped-vehicle markers.",
-      },
-      {
-        type: "image",
-        src: "/assets/lightmetrics/confirmation.webp",
-        alt: "Request confirmation modal",
-        caption: "Confirmation modal showing the vehicle's location at the selected start time before submitting the request.",
       },
     ],
   },
