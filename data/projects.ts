@@ -127,7 +127,7 @@ export const projects: Project[] = [
     year: "2023",
     client: "Lightmetrics",
     tags: ["Product Design", "UX", "Enterprise", "Maps"],
-    cover: "/assets/lightmetrics/rideview_final.png",
+    cover: "/assets/lightmetrics/rideview_final.gif",
     shortDescription: "Reconceived the video-retrieval experience for a trucking-fleet telematics platform, turning an unusable, time-guessing flow into a map-and-timeline interface managers could trust under pressure.",
     overview: "Lightmetrics builds video telematics for large trucking fleets, using AI to flag hazardous driving and let fleet managers pull footage from any trip. Their video-retrieval flow was basic, error-prone, and effectively unusable: it forced managers to already know the exact time of an incident, offered no map to locate it, and split time-lapse requests across separate modals. Under the pressure of an actual accident, that fell apart.\n\nI rebuilt the retrieval experience around what managers actually know in the moment: roughly when, and roughly where. The redesign put the trip on a map and a timeline together, surfaced AI-detected events and long stops as markers, and let managers place the vehicle in time and space to pull the right footage in one place.\n\nMidway through, engineering flagged that the accelerometer and G-force data I had designed around could not be loaded performantly. I cut it, went back to first principles (incidents, time, map), and reworked the timeline into a cleaner two-lane control that mapped directly to the vehicle's position on the map. I prototyped it in Figma, earned stakeholder buy-in, and shipped a detailed developer handoff.",
     blocks: [
@@ -139,7 +139,7 @@ export const projects: Project[] = [
       },
       {
         type: "image",
-        src: "/assets/lightmetrics/rideview_final.png",
+        src: "/assets/lightmetrics/rideview_final.gif",
         alt: "Redesigned Video Request interface",
         caption: "The redesigned Video Request interface: map, timeline, and AI-detected events in a single place.",
       },
