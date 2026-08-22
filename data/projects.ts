@@ -35,7 +35,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: "ai-security-interfaces",
-    title: "AI Security Interfaces",
+    title: "AI Security Systems",
     subtitle: "Current work",
     disciplines: ["design", "code"],
     hidden: true,
@@ -45,8 +45,8 @@ export const projects: Project[] = [
     client: "Microsoft",
     tags: ["AI", "Security", "Enterprise", "Product Design"],
     cover: "https://img.youtube.com/vi/f-IosS4FYws/maxresdefault.jpg",
-    shortDescription: "Envisioning the future of agentic security at Microsoft: leading platform UX for Sentinel and shipping the Security Copilot Agent Builder, where the data is dense, the stakes are high, and trust has to be earned.",
-    overview: "As a Principal Product Design Manager at Microsoft, I work on what agentic security looks like when it grows up. That means partnering with Microsoft Security AI research to turn emerging capability into product, leading design across a multidisciplinary team, and designing the hard parts: multi-agent collaboration, human-in-the-loop control, and dense investigation workflows where a wrong call has real consequences.\n\nTwo threads of that work are public. I lead platform UX for Microsoft Sentinel, shaping how analysts move from detection to investigation to response at scale. And I shipped the Security Copilot Agent Builder, which lets security teams compose and tune their own agents instead of waiting on a vendor roadmap.\n\nThe throughline is trust. Agents are only useful in security if the people relying on them can see what an agent did, why it did it, and step in the moment it matters.",
+    shortDescription: "Envisioning agentic security at Microsoft through systems thinking: composable UX systems and multi-agent frameworks, platform UX for Sentinel, and the shipped Security Copilot Agent Builder, where the data is dense and the stakes are high.",
+    overview: "As a Principal Product Design Manager at Microsoft, I work on what agentic security looks like when it grows up. I partner with Microsoft Security AI research to turn emerging capability into product, and I lead design across a multidisciplinary team.\n\nMost of the work is systems thinking made visible: composable UX systems that scale across products, and interaction frameworks for multi-agent collaboration, so agents, analysts, and automation can work the same investigation without stepping on each other. I design the hard parts, human-in-the-loop control and dense, high-stakes workflows where a wrong call has real consequences.\n\nTwo threads are public. I lead platform UX for Microsoft Sentinel, shaping how analysts move from detection to investigation to response at scale. And I shipped the Security Copilot Agent Builder, which lets security teams compose and tune their own agents instead of waiting on a vendor roadmap.\n\nThe throughline is trust. Agents are only useful in security if the people relying on them can see what an agent did, why it did it, and step in the moment it matters.",
     blocks: [
       {
         type: "prose",
