@@ -71,7 +71,9 @@ export function ProjectHoverList({ items }: { items: HoverItem[] }) {
           href={`/work/${item.slug}`}
           onMouseEnter={() => setActive(i)}
           onMouseLeave={() => setActive((cur) => (cur === i ? null : cur))}
-          className="group flex items-baseline justify-between gap-6 border-b border-line py-6 md:py-7"
+          className={`group flex items-baseline justify-between gap-6 py-6 md:py-7 ${
+            i < items.length - 1 ? "border-b border-line" : ""
+          }`}
         >
           <div className="min-w-0 flex-1">
             <div className="mb-1 flex flex-wrap items-center gap-3">
