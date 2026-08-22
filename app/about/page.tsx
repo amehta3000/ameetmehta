@@ -54,9 +54,8 @@ export default function AboutPage() {
                 I&apos;ve managed, mentored, and led multidisciplinary teams of
                 designers, researchers, and content designers, and I&apos;ve
                 collaborated across product, engineering, and research to ship
-                at enterprise grade. I set direction and raise the bar as a
-                leader, and I still get into the file as an IC when the work
-                calls for it.
+                at enterprise grade. I&apos;m comfortable setting direction for a
+                team and just as happy in the file doing the work myself.
               </p>
               <p>
                 Mostly, I want to make thoughtful things with good people and
