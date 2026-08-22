@@ -110,7 +110,7 @@ export default function AboutPage() {
               </h2>
               <ul className="space-y-1 text-base text-muted">
                 <li>Product design</li>
-                <li>Workflow analysis</li>
+                <li>Agentic workflow analysis</li>
                 <li>Creative direction</li>
                 <li>System design</li>
                 <li>AI tools integration</li>

@@ -95,7 +95,7 @@ export function ExperienceAccordion() {
       {experience.map((item, i) => {
         const isOpen = open === i;
         return (
-          <div key={i} className="border-b border-line">
+          <div key={i} className={i < experience.length - 1 ? "border-b border-line" : ""}>
             <button
               onClick={() => setOpen(isOpen ? null : i)}
               className="group flex w-full items-start justify-between gap-6 py-7 text-left"
