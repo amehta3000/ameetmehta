@@ -44,13 +44,14 @@ export const projects: Project[] = [
     year: "2023–present",
     client: "Microsoft",
     tags: ["AI", "Security", "Enterprise", "Product Design"],
-    cover: "/assets/ai-security/cover.jpg",
+    cover: "https://img.youtube.com/vi/f-IosS4FYws/maxresdefault.jpg",
     shortDescription: "Designing AI-powered security experiences for high-stakes enterprise workflows, from agentic investigation patterns to composable interfaces and human-in-the-loop systems.",
     overview: "As a Principal Product Design Manager at Microsoft, I shape how AI shows up inside security tools, where the stakes are high, the data is dense, and trust is everything. I focus on the hard parts: framing ambiguous problems, building a research foundation, and helping designers turn raw complexity into experiences security professionals can actually rely on. Alongside the product work, I created a framework for scaling AI into my team's day-to-day design practice.",
     blocks: [
       {
-        type: "prose",
-        content: "More detail coming soon.",
+        type: "video",
+        url: "https://www.youtube.com/embed/f-IosS4FYws?start=18",
+        title: "Microsoft Security Copilot Agent Builder demo",
       },
     ],
   },
