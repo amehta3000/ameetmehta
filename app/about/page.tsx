@@ -51,9 +51,12 @@ export default function AboutPage() {
                 argue about the slide.
               </p>
               <p>
-                Music keeps me honest. I produce and DJ as Part Time Chiller and
-                perform with Sadubas, which keeps me close to real audiences and
-                reminds me the best work gets felt before it gets explained.
+                I&apos;ve managed, mentored, and led multidisciplinary teams of
+                designers, researchers, and content designers, and I&apos;ve
+                collaborated across product, engineering, and research to ship
+                at enterprise grade. I set direction and raise the bar as a
+                leader, and I still get into the file as an IC when the work
+                calls for it.
               </p>
               <p>
                 Mostly, I want to make thoughtful things with good people and
