@@ -133,7 +133,7 @@ export const projects: Project[] = [
   },
   {
     slug: "lightmetric-rideview",
-    title: "Lightmetric RideView",
+    title: "Lightmetrics RideView",
     subtitle: "Video telematics UX",
     disciplines: ["design"],
     type: "software",
