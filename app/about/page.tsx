@@ -83,6 +83,7 @@ export default function AboutPage() {
               <ul className="space-y-2">
                 {[
                   { label: "hello@ameetmehta.com", href: "mailto:hello@ameetmehta.com?subject=Hey%20Ameet" },
+                  { label: "Download CV / Resume (PDF)", href: "/Ameet_Mehta_Resume_2026.pdf" },
                   { label: "LinkedIn", href: "https://www.linkedin.com/in/ameetmehta/" },
                   { label: "GitHub", href: "https://github.com/amehta3000" },
                   { label: "Instagram", href: "https://www.instagram.com/ameet3000/" },

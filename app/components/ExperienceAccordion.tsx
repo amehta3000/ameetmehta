@@ -91,7 +91,7 @@ export function ExperienceAccordion() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="border-t border-line">
+    <div>
       {experience.map((item, i) => {
         const isOpen = open === i;
         return (
