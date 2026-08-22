@@ -94,7 +94,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={0.12}>
             <p className="mt-8 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-              Designing AI products, creative tools, and product systems where technology meets human creativity. Based in Los Angeles.
+              Creative technologist and artist. Los Angeles.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
@@ -169,11 +169,10 @@ export default function Home() {
         <SectionLabel title="How I got here" />
         <Reveal>
           <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-6xl">
-            Over two decades of making complex software
-            <span className="text-muted"> feel human.</span>
+            The path here.
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-            The throughline: sweat the craft, build the team, and leave the systems better than I found them. Moveworks from six people to six hundred, and now Microsoft security.
+            Music platforms and independent media, then enterprise AI at Moveworks, now security systems at Microsoft.
           </p>
         </Reveal>
 
@@ -184,13 +183,13 @@ export default function Home() {
 
       {/* ---------- Act 3 — Why I care ---------- */}
       <section className="py-16 md:py-24">
-        <SectionLabel title="Why I care" />
+        <SectionLabel title="Art & sound" />
         <Reveal>
           <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-6xl">
             Music keeps my taste honest.
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-            I produce, DJ, and perform audio-visual sets, and I&apos;ve run a monthly residency for fifteen years. It&apos;s where I stay close to actual audiences and remember that the best work gets felt before it gets explained.
+            Part Time Chiller, Sadubas, and generative work. Same curiosity as the day job, fewer stakeholders.
           </p>
         </Reveal>
 
