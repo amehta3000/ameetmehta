@@ -45,13 +45,26 @@ export const projects: Project[] = [
     client: "Microsoft",
     tags: ["AI", "Security", "Enterprise", "Product Design"],
     cover: "https://img.youtube.com/vi/f-IosS4FYws/maxresdefault.jpg",
-    shortDescription: "Designing AI-powered security experiences for high-stakes enterprise workflows, from agentic investigation patterns to composable interfaces and human-in-the-loop systems.",
-    overview: "As a Principal Product Design Manager at Microsoft, I shape how AI shows up inside security tools, where the stakes are high, the data is dense, and trust is everything. I focus on the hard parts: framing ambiguous problems, building a research foundation, and helping designers turn raw complexity into experiences security professionals can actually rely on. Alongside the product work, I created a framework for scaling AI into my team's day-to-day design practice.",
+    shortDescription: "Envisioning the future of agentic security at Microsoft: leading platform UX for Sentinel and shipping the Security Copilot Agent Builder, where the data is dense, the stakes are high, and trust has to be earned.",
+    overview: "As a Principal Product Design Manager at Microsoft, I work on what agentic security looks like when it grows up. That means partnering with Microsoft Security AI research to turn emerging capability into product, leading design across a multidisciplinary team, and designing the hard parts: multi-agent collaboration, human-in-the-loop control, and dense investigation workflows where a wrong call has real consequences.\n\nTwo threads of that work are public. I lead platform UX for Microsoft Sentinel, shaping how analysts move from detection to investigation to response at scale. And I shipped the Security Copilot Agent Builder, which lets security teams compose and tune their own agents instead of waiting on a vendor roadmap.\n\nThe throughline is trust. Agents are only useful in security if the people relying on them can see what an agent did, why it did it, and step in the moment it matters.",
     blocks: [
+      {
+        type: "prose",
+        content: "Microsoft Sentinel. I lead platform UX for the security operations experience analysts live in, shaping how they move from detection to investigation to response at scale.",
+      },
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/oCl3Pplr__s",
+        title: "Microsoft Sentinel platform overview",
+      },
+      {
+        type: "prose",
+        content: "Security Copilot Agent Builder. I shipped the experience that lets security teams compose, test, and tune their own agents, with the reasoning visible every step of the way.",
+      },
       {
         type: "video",
         url: "https://www.youtube.com/embed/f-IosS4FYws?start=18",
-        title: "Microsoft Security Copilot Agent Builder demo",
+        title: "Security Copilot Agent Builder",
       },
     ],
   },
