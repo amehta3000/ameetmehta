@@ -85,7 +85,12 @@ export const projects: Project[] = [
       {
         type: "video",
         url: "https://www.youtube.com/embed/Zv2sKFRcMis",
-        title: "Part Time Chiller live",
+        title: "Live performance",
+      },
+      {
+        type: "video",
+        url: "https://www.youtube.com/embed/DfbAidatpuM",
+        title: "Live set",
       },
       {
         type: "prose",

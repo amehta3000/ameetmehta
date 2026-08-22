@@ -6,12 +6,13 @@ import { SpaceRickshawEmbed } from "../../components/SpaceRickshawEmbed";
 import { SpotifyEmbed } from "../../components/SpotifyEmbed";
 import { asset } from "@/lib/asset";
 
-// group runs of consecutive spotify blocks so they can render side by side
+// group runs of consecutive spotify/video blocks so they can render side by side
 function groupBlocks(blocks: Block[]): Block[][] {
   const groups: Block[][] = [];
   for (const block of blocks) {
     const last = groups[groups.length - 1];
-    if (block.type === "spotify" && last && last[0].type === "spotify") {
+    const groupable = block.type === "spotify" || block.type === "video";
+    if (groupable && last && last[0].type === block.type) {
       last.push(block);
     } else {
       groups.push([block]);
@@ -155,6 +156,36 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
               </Reveal>
             );
           }
+          if (group[0].type === "video") {
+            const many = group.length > 1;
+            return (
+              <Reveal key={`vg-${gi}`} delay={0.05}>
+                <div className={many ? "grid gap-4 sm:grid-cols-2" : "max-w-3xl"}>
+                  {group.map((b, j) =>
+                    b.url ? (
+                      <figure key={j}>
+                        <div className="aspect-video w-full overflow-hidden rounded-lg border border-line">
+                          <iframe
+                            src={b.url}
+                            title={b.title ?? "Video"}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            className="h-full w-full"
+                          />
+                        </div>
+                        {b.title && (
+                          <figcaption className="mt-2 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.15em] text-muted">
+                            {b.title}
+                          </figcaption>
+                        )}
+                      </figure>
+                    ) : null
+                  )}
+                </div>
+              </Reveal>
+            );
+          }
+
           const block = group[0];
           const i = gi;
           if (block.type === "prose") {
@@ -204,22 +235,6 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                       )}
                     </figure>
                   ))}
-                </div>
-              </Reveal>
-            );
-          }
-
-          if (block.type === "video" && block.url) {
-            return (
-              <Reveal key={i} delay={0.05}>
-                <div className="aspect-video w-full overflow-hidden border border-line">
-                  <iframe
-                    src={block.url}
-                    title={block.title ?? "Video"}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                  />
                 </div>
               </Reveal>
             );
