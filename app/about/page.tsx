@@ -31,30 +31,29 @@ export default function AboutPage() {
             <div className="space-y-6 text-lg leading-relaxed text-muted">
               <p>Hey there. I&apos;m Ameet.</p>
               <p>
-                I&apos;m a well-marinated product design leader, builder, and
-                musician based in Los Angeles.
+                I&apos;m a well-marinated product design leader based in Los
+                Angeles. I design, I build, and I make music, and the
+                interesting problems tend to live where those overlap.
               </p>
               <p>
-                For more than 20 years, I&apos;ve worked at the intersection of
-                design, technology, and culture. I&apos;ve led teams, built
-                zero-to-one products, and helped turn emerging technology into
-                experiences people can understand and enjoy. My path has moved
-                across engineering, product, and design, from music platforms
-                and independent media to early enterprise AI at Moveworks and
-                AI-native products at Microsoft.
+                For more than 20 years I&apos;ve turned emerging technology into
+                products people trust. Lately that means agentic AI at
+                Microsoft, where I lead UX for security systems: composable
+                design systems, multi-agent frameworks, and the
+                human-in-the-loop controls that keep people in charge when the
+                stakes are high. Before that, early enterprise AI at Moveworks,
+                plus a long run across music platforms and independent media.
               </p>
               <p>
-                Music is a core part of how I think and create. I produce and DJ
-                as Part Time Chiller, perform with Sadubas, and build visual and
-                generative experiments around sound. That work keeps me close to
-                the creators, audiences, and communities these products are
-                meant to serve.
+                The way I work is systems thinking made tangible. I bring
+                product vision, technical fluency, and taste to ambitious ideas
+                still taking shape, and I&apos;d rather build the prototype than
+                argue about the slide.
               </p>
               <p>
-                I&apos;m most energized by teams exploring how AI can expand
-                human creativity. I bring product vision, systems thinking,
-                technical fluency, taste, and a collaborative leadership style
-                to ambitious ideas that are still taking shape.
+                Music keeps me honest. I produce and DJ as Part Time Chiller and
+                perform with Sadubas, which keeps me close to real audiences and
+                reminds me the best work gets felt before it gets explained.
               </p>
               <p>
                 Mostly, I want to make thoughtful things with good people and
