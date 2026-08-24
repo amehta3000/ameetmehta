@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const TICKS = 22;
 
@@ -23,18 +23,32 @@ export function ScrollProgressRail() {
     };
   }, []);
 
+  const jumpTo = useCallback((i: number) => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const y = (i / (TICKS - 1)) * max;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }, []);
+
   return (
     <div
-      className="pointer-events-none fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-end gap-[7px] lg:flex"
-      aria-hidden
+      className="fixed right-3 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-end lg:flex"
+      aria-label="Scroll position"
     >
       {Array.from({ length: TICKS }).map((_, i) => (
-        <span
+        <button
           key={i}
-          className={`block rounded-full transition-all duration-200 ${
-            i === active ? "h-[2px] w-6 bg-ink" : "h-px w-3 bg-line"
-          }`}
-        />
+          onClick={() => jumpTo(i)}
+          aria-label={`Scroll to ${Math.round((i / (TICKS - 1)) * 100)}%`}
+          className="group flex h-[9px] items-center justify-end pl-4 pr-1"
+        >
+          <span
+            className={`block rounded-full transition-all duration-200 group-hover:bg-amber ${
+              i === active
+                ? "h-[2px] w-6 bg-ink group-hover:w-7"
+                : "h-px w-3 bg-line group-hover:w-5"
+            }`}
+          />
+        </button>
       ))}
     </div>
   );
