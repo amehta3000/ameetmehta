@@ -3,7 +3,6 @@ import { getProjectBySlug, type Project } from "@/data/projects";
 import { Reveal } from "./components/Reveal";
 import { TerrainVisualizerBand } from "./components/TerrainVisualizerBand";
 import { ProjectHoverList, type HoverItem } from "./components/ProjectHoverList";
-import { ScrollProgressRail } from "./components/ScrollProgressRail";
 
 function toHoverItems(projects: Project[]): HoverItem[] {
   return projects.map((p) => ({
@@ -79,7 +78,6 @@ export default function Home() {
 
   return (
     <div className="mx-auto max-w-7xl px-6">
-      <ScrollProgressRail />
       {/* ---------- Opening ---------- */}
       <section className="relative pt-24 pb-14 md:pt-40 md:pb-20">
         <div className="pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-[58%] items-center md:flex">
