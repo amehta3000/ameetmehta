@@ -334,6 +334,7 @@ export function TerrainVisualizer() {
           config={config}
           update={update}
           liveView={liveView}
+          onClose={() => setTuning(false)}
           onReset={() => {
             setConfig(DEFAULT_CONFIG);
             viewRef.current.yaw = DEFAULT_CONFIG.camYaw;
@@ -362,11 +363,13 @@ function TerrainControls({
   update,
   liveView,
   onReset,
+  onClose,
 }: {
   config: TerrainConfig;
   update: (key: keyof TerrainConfig, value: number) => void;
   liveView: () => { camYaw: number; camPitch: number; cameraDistance: number };
   onReset: () => void;
+  onClose: () => void;
 }) {
   const [copied, setCopied] = useState(false);
   const copy = () => {
@@ -381,9 +384,18 @@ function TerrainControls({
     <div className="pointer-events-auto absolute right-2 top-2 z-30 w-60 rounded-lg border border-line bg-paper/95 p-3 font-[family-name:var(--font-mono)] text-[10px] text-ink shadow-xl backdrop-blur-md">
       <div className="mb-2 flex items-center justify-between">
         <span className="uppercase tracking-[0.2em] text-muted">Terrain tuner</span>
-        <button onClick={onReset} className="text-amber hover:text-ink">
-          reset
-        </button>
+        <div className="flex items-center gap-3">
+          <button onClick={onReset} className="text-amber hover:text-ink">
+            reset
+          </button>
+          <button
+            onClick={onClose}
+            aria-label="Close tuner"
+            className="flex h-5 w-5 items-center justify-center rounded-full text-muted hover:bg-ink/10 hover:text-ink"
+          >
+            ✕
+          </button>
+        </div>
       </div>
       <div className="space-y-2">
         {SLIDERS.map((s) => (
