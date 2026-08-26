@@ -202,7 +202,7 @@ export default function Home() {
         <SectionLabel title="Let's build something" />
         <Reveal>
           <h2 className="max-w-4xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-7xl">
-            If you&apos;re building something real, let&apos;s talk.
+            Let&apos;s talk.
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
