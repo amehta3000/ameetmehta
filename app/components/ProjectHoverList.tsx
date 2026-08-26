@@ -91,10 +91,7 @@ export function ProjectHoverList({ items }: { items: HoverItem[] }) {
               {item.shortDescription}
             </p>
           </div>
-          <div className="shrink-0 text-right">
-            <span className="font-[family-name:var(--font-mono)] text-[11px] text-muted">{item.year}</span>
-            <span className="mt-2 block text-muted transition-colors group-hover:text-amber">→</span>
-          </div>
+          <span className="shrink-0 text-muted transition-colors group-hover:text-amber">→</span>
         </Link>
       ))}
     </div>

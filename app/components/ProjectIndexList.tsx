@@ -20,9 +20,7 @@ export function ProjectIndexList({ projects }: { projects: Project[] }) {
               {p.subtitle}
             </span>
           </div>
-          <span className="shrink-0 font-[family-name:var(--font-mono)] text-[11px] text-muted">
-            {p.year}
-          </span>
+          <span className="shrink-0 text-muted transition-colors group-hover:text-amber">→</span>
         </Link>
       ))}
     </div>
