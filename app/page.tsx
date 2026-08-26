@@ -132,8 +132,7 @@ export default function Home() {
         <SectionLabel title="What I'm building now" />
         <Reveal>
           <h2 className="max-w-3xl font-[family-name:var(--font-display)] text-4xl font-semibold tracking-tight md:text-6xl">
-            The best way to understand a tool is to build something with it.
-            <span className="text-muted"> So I do.</span>
+            I learn new tools by building with them.
           </h2>
         </Reveal>
 
