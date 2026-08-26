@@ -506,6 +506,30 @@ export const projects: Project[] = [
 
 export const visibleProjects = projects.filter((p) => !p.hidden)
 
+// canonical order for detail-page prev/next, mirroring the homepage flow
+// (Building now -> career -> art & sound) then earlier work.
+export const navOrder: string[] = [
+  "space-rickshaw",
+  "ai-security-interfaces",
+  "lightmetric-rideview",
+  "employee-communications",
+  "chnl",
+  "xlr8r",
+  "part-time-chiller",
+  "sadubas",
+  "topspin",
+  "product-plan",
+  "rbkcustom",
+  "identity",
+]
+
+// projects with detail pages that aren't headlined on the homepage
+export const earlierWork: string[] = ["topspin", "product-plan", "rbkcustom", "identity"]
+
+export function orderedProjects(slugs: string[]): Project[] {
+  return slugs.map(getProjectBySlug).filter(Boolean) as Project[]
+}
+
 export function getProjectBySlug(slug: string) {
   return projects.find((p) => p.slug === slug)
 }

@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { getProjectBySlug, type Project } from "@/data/projects";
+import { getProjectBySlug, orderedProjects, earlierWork, type Project } from "@/data/projects";
 import { Reveal } from "./components/Reveal";
 import { TerrainVisualizerBand } from "./components/TerrainVisualizerBand";
 import { ProjectHoverList, type HoverItem } from "./components/ProjectHoverList";
+import { ProjectIndexList } from "./components/ProjectIndexList";
 
 function toHoverItems(projects: Project[]): HoverItem[] {
   return projects.map((p) => ({
@@ -75,6 +76,7 @@ function SectionLabel({ title }: { title: string }) {
 export default function Home() {
   const career = CAREER.map(getProjectBySlug).filter(Boolean) as Project[];
   const practice = PRACTICE.map(getProjectBySlug).filter(Boolean) as Project[];
+  const earlier = orderedProjects(earlierWork);
 
   return (
     <div className="mx-auto max-w-7xl px-6">
@@ -178,9 +180,18 @@ export default function Home() {
         <div className="mt-12">
           <ProjectHoverList items={toHoverItems(career)} />
         </div>
+
+        {earlier.length > 0 && (
+          <div className="mt-14">
+            <p className="mb-2 font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted/60">
+              Earlier work
+            </p>
+            <ProjectIndexList projects={earlier} />
+          </div>
+        )}
       </section>
 
-      {/* ---------- Act 3 — Why I care ---------- */}
+      {/* ---------- Act 3 — Art & sound ---------- */}
       <section className="py-16 md:py-24">
         <SectionLabel title="Art & sound" />
         <Reveal>
@@ -193,7 +204,7 @@ export default function Home() {
         </Reveal>
 
         <div className="mt-12">
-          <ProjectHoverList items={toHoverItems(practice)} />
+          <ProjectIndexList projects={practice} />
         </div>
       </section>
 

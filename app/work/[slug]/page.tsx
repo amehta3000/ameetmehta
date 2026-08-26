@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { projects, visibleProjects, getProjectBySlug, type Block } from "@/data/projects";
+import { projects, navOrder, orderedProjects, getProjectBySlug, type Block } from "@/data/projects";
 import { Reveal } from "../../components/Reveal";
 import { SpaceRickshawEmbed } from "../../components/SpaceRickshawEmbed";
 import { SpotifyEmbed } from "../../components/SpotifyEmbed";
@@ -40,9 +40,10 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
   const project = getProjectBySlug(slug);
   if (!project) notFound();
 
-  // cycle prev/next through visible projects only (fall back to the full list)
-  const nav = visibleProjects.some((p) => p.slug === slug) ? visibleProjects : projects;
-  const currentIndex = nav.findIndex((p) => p.slug === slug);
+  // prev/next follow the homepage flow (navOrder), so navigation stays consistent
+  const nav = orderedProjects(navOrder);
+  const found = nav.findIndex((p) => p.slug === slug);
+  const currentIndex = found >= 0 ? found : 0;
   const nextProject = nav[(currentIndex + 1) % nav.length];
   const prevProject = nav[(currentIndex - 1 + nav.length) % nav.length];
 
