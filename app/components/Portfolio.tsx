@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 
 export interface PortfolioItem {
@@ -28,7 +28,7 @@ function Thumb({ item }: { item: PortfolioItem }) {
   const [err, setErr] = useState(false);
   const showImg = item.cover && !err;
   return (
-    <div className="h-44 w-72 overflow-hidden rounded-2xl border border-line bg-ink/20 shadow-2xl">
+    <div className="h-full w-full overflow-hidden rounded-md border border-line bg-ink/20 shadow-2xl">
       {showImg ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
@@ -38,8 +38,8 @@ function Thumb({ item }: { item: PortfolioItem }) {
           className="h-full w-full object-cover"
         />
       ) : (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-amber/25 via-ink/30 to-ink/60">
-          <span className="font-[family-name:var(--font-body)] text-lg font-semibold text-ink/90">
+        <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-amber/25 via-ink/30 to-ink/60 p-6 text-center">
+          <span className="font-[family-name:var(--font-body)] text-xl font-semibold text-ink/90">
             {item.title}
           </span>
           <span className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.2em] text-muted">
@@ -53,9 +53,8 @@ function Thumb({ item }: { item: PortfolioItem }) {
 
 export function Portfolio({ items }: { items: PortfolioItem[] }) {
   const [filter, setFilter] = useState<Filter>("all");
-  const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<string | null>(null);
-  const [y, setY] = useState(0);
+  const [shown, setShown] = useState<PortfolioItem | null>(null);
 
   const list = useMemo(() => {
     if (filter === "all") return items;
@@ -63,45 +62,43 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
     return items.filter((i) => i.disciplines.includes(filter));
   }, [items, filter]);
 
-  const onMove = (e: React.MouseEvent) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (rect) setY(e.clientY - rect.top);
+  const enter = (item: PortfolioItem) => {
+    setActive(item.id);
+    setShown(item);
   };
-
-  const activeItem = list.find((i) => i.id === active) ?? null;
+  const leave = (id: string) => setActive((c) => (c === id ? null : c));
 
   return (
     <div>
-      {/* filter chips */}
-      <div className="mb-8 flex flex-wrap gap-2">
-        {FILTERS.map((f) => (
-          <button
-            key={f.key}
-            onClick={() => setFilter(f.key)}
-            className={`rounded-full border px-4 py-1.5 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.15em] transition-colors ${
-              filter === f.key
-                ? "border-amber bg-amber/10 text-amber"
-                : "border-line text-muted hover:border-amber hover:text-amber"
-            }`}
-          >
-            {f.label}
-          </button>
-        ))}
+      {/* filter menu — sticky under the header nav */}
+      <div className="sticky top-14 z-30 -mx-6 mb-4 bg-paper/90 px-6 py-3 backdrop-blur-sm">
+        <div className="flex flex-wrap gap-2">
+          {FILTERS.map((f) => (
+            <button
+              key={f.key}
+              onClick={() => setFilter(f.key)}
+              className={`rounded-full border px-3.5 py-1 font-[family-name:var(--font-mono)] text-[10px] font-normal uppercase tracking-[0.12em] transition-colors ${
+                filter === f.key
+                  ? "border-amber bg-amber/10 text-amber"
+                  : "border-line text-muted hover:border-amber hover:text-amber"
+              }`}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* list with cursor-tracking preview */}
-      <div ref={ref} onMouseMove={onMove} className="relative">
-        <div
-          className="pointer-events-none absolute right-2 z-20 hidden transition-[opacity,transform] duration-200 ease-out lg:block"
-          style={{
-            top: y,
-            transform: `translateY(-50%) scale(${activeItem ? 1 : 0.92})`,
-            opacity: activeItem ? 1 : 0,
-          }}
-        >
-          {activeItem && <Thumb key={activeItem.id} item={activeItem} />}
-        </div>
+      {/* big square preview, fixed in one place on the right */}
+      <div
+        className="pointer-events-none fixed right-8 top-1/2 z-20 hidden h-[min(38vw,440px)] w-[min(38vw,440px)] -translate-y-1/2 transition-opacity duration-200 ease-out lg:block"
+        style={{ opacity: active ? 1 : 0 }}
+      >
+        {shown && <Thumb item={shown} />}
+      </div>
 
+      {/* list */}
+      <div>
         {list.map((item) => {
           const inner = (
             <>
@@ -118,7 +115,7 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
           );
 
           const cls =
-            "group relative flex items-center justify-between gap-6 -mx-4 rounded-lg px-4 py-4 transition-colors duration-200 hover:bg-ink/[0.05] md:py-5";
+            "group relative flex items-center justify-between gap-6 -mx-4 rounded-lg px-4 py-3 transition-colors duration-200 hover:bg-ink/[0.05]";
 
           return item.external ? (
             <a
@@ -126,8 +123,8 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              onMouseEnter={() => setActive(item.id)}
-              onMouseLeave={() => setActive((c) => (c === item.id ? null : c))}
+              onMouseEnter={() => enter(item)}
+              onMouseLeave={() => leave(item.id)}
               className={cls}
             >
               {inner}
@@ -136,8 +133,8 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
             <Link
               key={item.id}
               href={item.href}
-              onMouseEnter={() => setActive(item.id)}
-              onMouseLeave={() => setActive((c) => (c === item.id ? null : c))}
+              onMouseEnter={() => enter(item)}
+              onMouseLeave={() => leave(item.id)}
               className={cls}
             >
               {inner}
