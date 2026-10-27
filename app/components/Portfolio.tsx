@@ -102,20 +102,22 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
         {list.map((item) => {
           const inner = (
             <>
-              <h3 className="truncate font-[family-name:var(--font-body)] text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-amber md:text-4xl">
-                {item.title}
-              </h3>
-              <div className="flex shrink-0 items-center gap-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                <span className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted">
+              <div className="flex min-w-0 items-center">
+                <span className="max-w-0 overflow-hidden whitespace-nowrap font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted opacity-0 transition-all duration-300 ease-out group-hover:mr-4 group-hover:max-w-[22rem] group-hover:opacity-100">
                   {item.meta}
                 </span>
-                <span className="text-muted">{item.external ? "↗" : "→"}</span>
+                <h3 className="truncate font-[family-name:var(--font-body)] text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-amber md:text-4xl">
+                  {item.title}
+                </h3>
               </div>
+              <span className="shrink-0 text-muted opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                {item.external ? "↗" : "→"}
+              </span>
             </>
           );
 
           const cls =
-            "group relative flex items-center justify-between gap-6 -mx-4 rounded-lg px-4 py-3 transition-colors duration-200 hover:bg-ink/[0.05]";
+            "group relative flex items-center justify-between gap-4 -mx-4 rounded-lg px-4 py-3 transition-colors duration-200 hover:bg-ink/[0.05]";
 
           return item.external ? (
             <a

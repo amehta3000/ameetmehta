@@ -113,8 +113,11 @@ export default function Home() {
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
-            <p className="mt-8 max-w-lg text-base leading-relaxed text-muted md:text-lg">
-              Creative technologist and artist. I design AI security systems at Microsoft, and build things out of curiosity on the side.
+            <p className="mt-8 max-w-xl text-lg leading-relaxed text-ink md:text-xl">
+              I design human interfaces for autonomous systems operating in complex, high-consequence environments.
+            </p>
+            <p className="mt-3 max-w-lg text-base leading-relaxed text-muted">
+              Creative technologist and artist based in Los Angeles.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
