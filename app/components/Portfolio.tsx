@@ -39,7 +39,7 @@ function Thumb({ item }: { item: PortfolioItem }) {
         />
       ) : (
         <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-amber/25 via-ink/30 to-ink/60">
-          <span className="font-[family-name:var(--font-display)] text-lg font-semibold text-ink/90">
+          <span className="font-[family-name:var(--font-body)] text-lg font-semibold text-ink/90">
             {item.title}
           </span>
           <span className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.2em] text-muted">
@@ -105,7 +105,7 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
         {list.map((item) => {
           const inner = (
             <>
-              <h3 className="truncate font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-amber md:text-4xl">
+              <h3 className="truncate font-[family-name:var(--font-body)] text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-amber md:text-4xl">
                 {item.title}
               </h3>
               <div className="flex shrink-0 items-center gap-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
