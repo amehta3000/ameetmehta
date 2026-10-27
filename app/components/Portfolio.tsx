@@ -90,7 +90,7 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
       </div>
 
       {/* list with cursor-tracking preview */}
-      <div ref={ref} onMouseMove={onMove} className="relative border-t border-line">
+      <div ref={ref} onMouseMove={onMove} className="relative">
         <div
           className="pointer-events-none absolute right-2 z-20 hidden transition-[opacity,transform] duration-200 ease-out lg:block"
           style={{
@@ -102,31 +102,23 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
           {activeItem && <Thumb key={activeItem.id} item={activeItem} />}
         </div>
 
-        {list.map((item, i) => {
+        {list.map((item) => {
           const inner = (
             <>
-              <div className="min-w-0 flex-1">
-                <div className="mb-1 flex flex-wrap items-center gap-3">
-                  <span className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-amber">
-                    {item.meta}
-                  </span>
-                  <span className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.15em] text-muted/60">
-                    {item.disciplines.join(" · ")}
-                  </span>
-                </div>
-                <h3 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-amber md:text-3xl">
-                  {item.title}
-                </h3>
+              <h3 className="truncate font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-amber md:text-4xl">
+                {item.title}
+              </h3>
+              <div className="flex shrink-0 items-center gap-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                <span className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted">
+                  {item.meta}
+                </span>
+                <span className="text-muted">{item.external ? "↗" : "→"}</span>
               </div>
-              <span className="shrink-0 text-muted transition-colors group-hover:text-amber">
-                {item.external ? "↗" : "→"}
-              </span>
             </>
           );
 
-          const cls = `group flex items-baseline justify-between gap-6 py-6 md:py-7 ${
-            i < list.length - 1 ? "border-b border-line" : ""
-          }`;
+          const cls =
+            "group relative flex items-center justify-between gap-6 -mx-4 rounded-lg px-4 py-4 transition-colors duration-200 hover:bg-ink/[0.05] md:py-5";
 
           return item.external ? (
             <a
