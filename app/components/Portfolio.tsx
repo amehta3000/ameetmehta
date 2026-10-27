@@ -89,66 +89,71 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
       </div>
 
       {/* preview image, pinned below the sticky filter menu, never overlapping it */}
-      <div
-        className="pointer-events-none fixed right-8 top-32 z-20 hidden w-[min(40vw,480px)] transition-opacity duration-200 ease-out lg:block"
-        style={{ opacity: active ? 1 : 0 }}
-      >
-        {shown && <Thumb item={shown} />}
-      </div>
-
-      {/* list */}
-      <div>
-        {list.map((item) => {
-          const inner = (
-            <>
-              <div className="flex min-w-0 items-center gap-4">
-                <h3 className="truncate font-[family-name:var(--font-d2)] text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-amber md:text-4xl">
-                  {item.title}
-                </h3>
-                <span className="hidden -translate-x-3 whitespace-nowrap font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted opacity-0 transition-all duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100 lg:block">
-                  {item.meta}
+      {/* list + sticky preview column */}
+      <div className="lg:flex lg:gap-10">
+        <div className="lg:min-w-0 lg:flex-1">
+          {list.map((item) => {
+            const inner = (
+              <>
+                <div className="flex min-w-0 items-center gap-4">
+                  <h3 className="truncate font-[family-name:var(--font-d2)] text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-amber md:text-4xl">
+                    {item.title}
+                  </h3>
+                  <span className="hidden -translate-x-3 whitespace-nowrap font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted opacity-0 transition-all duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100 lg:block">
+                    {item.meta}
+                  </span>
+                </div>
+                <span className="shrink-0 text-muted opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                  {item.external ? "↗" : "→"}
                 </span>
-              </div>
-              <span className="shrink-0 text-muted opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                {item.external ? "↗" : "→"}
-              </span>
-            </>
-          );
+              </>
+            );
 
-          const cls =
-            "group flex items-center justify-between gap-4 py-3 transition-colors duration-200";
+            const cls =
+              "group flex items-center justify-between gap-4 py-3 transition-colors duration-200";
 
-          return item.external ? (
-            <a
-              key={item.id}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onMouseEnter={() => enter(item)}
-              onMouseLeave={() => leave(item.id)}
-              className={cls}
-            >
-              {inner}
-            </a>
-          ) : (
-            <Link
-              key={item.id}
-              href={item.href}
-              onMouseEnter={() => enter(item)}
-              onMouseLeave={() => leave(item.id)}
-              className={cls}
-            >
-              {inner}
-            </Link>
-          );
-        })}
+            return item.external ? (
+              <a
+                key={item.id}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={() => enter(item)}
+                onMouseLeave={() => leave(item.id)}
+                className={cls}
+              >
+                {inner}
+              </a>
+            ) : (
+              <Link
+                key={item.id}
+                href={item.href}
+                onMouseEnter={() => enter(item)}
+                onMouseLeave={() => leave(item.id)}
+                className={cls}
+              >
+                {inner}
+              </Link>
+            );
+          })}
+
+          {list.length === 0 && (
+            <p className="py-10 text-center font-[family-name:var(--font-mono)] text-xs text-muted">
+              Nothing here yet.
+            </p>
+          )}
+        </div>
+
+        {/* preview — flows with the list, sticks just under the filter menu */}
+        <div className="hidden lg:block lg:w-[440px] lg:shrink-0">
+          <div
+            className="pointer-events-none sticky top-28 transition-opacity duration-200 ease-out"
+            style={{ opacity: active ? 1 : 0 }}
+          >
+            {shown && <Thumb item={shown} />}
+          </div>
+        </div>
       </div>
-
-      {list.length === 0 && (
-        <p className="py-10 text-center font-[family-name:var(--font-mono)] text-xs text-muted">
-          Nothing here yet.
-        </p>
-      )}
     </div>
   );
 }
