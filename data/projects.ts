@@ -37,7 +37,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: "ai-security-interfaces",
-    title: "AI Security Systems",
+    title: "Microsoft Agentic Security Systems",
     subtitle: "Current work",
     disciplines: ["design", "code"],
     hidden: true,
@@ -168,7 +168,7 @@ export const projects: Project[] = [
   },
   {
     slug: "employee-communications",
-    title: "Employee Comms",
+    title: "Moveworks Employee Comms",
     subtitle: "AI enterprise product",
     disciplines: ["design", "code"],
     type: "software",

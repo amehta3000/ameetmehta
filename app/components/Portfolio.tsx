@@ -27,26 +27,25 @@ const FILTERS: { key: Filter; label: string }[] = [
 function Thumb({ item }: { item: PortfolioItem }) {
   const [err, setErr] = useState(false);
   const showImg = item.cover && !err;
+  if (showImg) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={item.cover}
+        alt=""
+        onError={() => setErr(true)}
+        className="block h-auto w-full rounded-md border border-line object-cover shadow-2xl"
+      />
+    );
+  }
   return (
-    <div className="h-full w-full overflow-hidden rounded-md border border-line bg-ink/20 shadow-2xl">
-      {showImg ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={item.cover}
-          alt=""
-          onError={() => setErr(true)}
-          className="h-full w-full object-cover"
-        />
-      ) : (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-amber/25 via-ink/30 to-ink/60 p-6 text-center">
-          <span className="font-[family-name:var(--font-body)] text-xl font-semibold text-ink/90">
-            {item.title}
-          </span>
-          <span className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.2em] text-muted">
-            {item.meta}
-          </span>
-        </div>
-      )}
+    <div className="flex aspect-square w-full flex-col items-center justify-center gap-2 rounded-md border border-line bg-gradient-to-br from-amber/25 via-ink/30 to-ink/60 p-6 text-center shadow-2xl">
+      <span className="font-[family-name:var(--font-body)] text-xl font-semibold text-ink/90">
+        {item.title}
+      </span>
+      <span className="font-[family-name:var(--font-mono)] text-[9px] uppercase tracking-[0.2em] text-muted">
+        {item.meta}
+      </span>
     </div>
   );
 }
@@ -89,9 +88,9 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
         </div>
       </div>
 
-      {/* big square preview, fixed in one place on the right */}
+      {/* preview image, fixed in one place on the right (natural aspect) */}
       <div
-        className="pointer-events-none fixed right-8 top-1/2 z-20 hidden h-[min(38vw,440px)] w-[min(38vw,440px)] -translate-y-1/2 transition-opacity duration-200 ease-out lg:block"
+        className="pointer-events-none fixed right-8 top-1/2 z-20 hidden w-[min(40vw,480px)] -translate-y-1/2 transition-opacity duration-200 ease-out lg:block"
         style={{ opacity: active ? 1 : 0 }}
       >
         {shown && <Thumb item={shown} />}
@@ -102,13 +101,13 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
         {list.map((item) => {
           const inner = (
             <>
-              <div className="relative flex min-w-0 items-center">
-                <span className="pointer-events-none absolute right-full mr-4 hidden -translate-x-2 whitespace-nowrap font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted opacity-0 transition-all duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100 lg:block">
-                  {item.meta}
-                </span>
+              <div className="flex min-w-0 items-center gap-4">
                 <h3 className="truncate font-[family-name:var(--font-d2)] text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-amber md:text-4xl">
                   {item.title}
                 </h3>
+                <span className="hidden -translate-x-3 whitespace-nowrap font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted opacity-0 transition-all duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100 lg:block">
+                  {item.meta}
+                </span>
               </div>
               <span className="shrink-0 text-muted opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                 {item.external ? "↗" : "→"}
@@ -117,7 +116,7 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
           );
 
           const cls =
-            "group relative flex items-center justify-between gap-4 -mx-4 rounded-lg px-4 py-3 transition-colors duration-200 hover:bg-ink/[0.05]";
+            "group flex items-center justify-between gap-4 py-3 transition-colors duration-200";
 
           return item.external ? (
             <a
