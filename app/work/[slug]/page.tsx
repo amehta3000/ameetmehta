@@ -189,6 +189,55 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
 
           const block = group[0];
           const i = gi;
+
+          if (block.type === "feature") {
+            return (
+              <Reveal key={i} delay={0.05}>
+                <div className="border-t border-line pt-10">
+                  <h2 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-ink md:text-3xl">
+                    {block.title}
+                  </h2>
+                  {block.content && (
+                    <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+                      {block.content}
+                    </p>
+                  )}
+                  {block.embed && (
+                    <div className="mt-6 aspect-video w-full max-w-3xl overflow-hidden rounded-lg border border-line">
+                      <iframe
+                        src={block.embed}
+                        title={block.title ?? "Video"}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="h-full w-full"
+                      />
+                    </div>
+                  )}
+                  {block.src && !block.embed && block.url && (
+                    <a
+                      href={block.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-6 block max-w-3xl overflow-hidden rounded-lg border border-line transition-colors hover:border-amber/60"
+                    >
+                      <img src={asset(block.src)} alt={block.alt ?? block.title ?? ""} className="w-full" />
+                    </a>
+                  )}
+                  {block.url && (
+                    <a
+                      href={block.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-5 inline-flex items-center gap-2 rounded-full border border-amber px-5 py-2.5 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.15em] text-amber transition-colors hover:bg-amber hover:text-paper"
+                    >
+                      {block.linkLabel ?? "Learn more"} ↗
+                    </a>
+                  )}
+                </div>
+              </Reveal>
+            );
+          }
+
           if (block.type === "prose") {
             return (
               <Reveal key={i} delay={0.05}>

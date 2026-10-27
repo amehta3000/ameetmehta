@@ -3,7 +3,7 @@ export type ArtifactType = "software" | "product" | "identity" | "sound" | "imag
 export type Discipline = "design" | "code" | "sound"
 
 export interface Block {
-  type: "prose" | "image" | "grid" | "video" | "game" | "spotify" | "link"
+  type: "prose" | "image" | "grid" | "video" | "game" | "spotify" | "link" | "feature"
   content?: string
   src?: string
   alt?: string
@@ -12,6 +12,8 @@ export interface Block {
   url?: string
   title?: string
   playlistId?: string
+  embed?: string
+  linkLabel?: string
 }
 
 export interface Project {
@@ -47,34 +49,30 @@ export const projects: Project[] = [
     tags: ["AI", "Security", "Enterprise", "Product Design"],
     cover: "https://img.youtube.com/vi/f-IosS4FYws/maxresdefault.jpg",
     shortDescription: "Envisioning agentic security at Microsoft through systems thinking: composable UX systems and multi-agent frameworks, platform UX for Sentinel, and the shipped Security Copilot Agent Builder, where the data is dense and the stakes are high.",
-    overview: "As a Principal Product Design Manager at Microsoft, I work on what agentic security looks like when it grows up. I partner with Microsoft Security AI research to turn emerging capability into product, and I lead design across a multidisciplinary team.\n\nMost of the work is systems thinking made visible: composable UX systems that scale across products, and interaction frameworks for multi-agent collaboration, so agents, analysts, and automation can work the same investigation without stepping on each other. I design the hard parts, human-in-the-loop control and dense, high-stakes workflows where a wrong call has real consequences.\n\nA few threads are public. I lead platform UX for Microsoft Sentinel, shaping how analysts move from detection to investigation to response at scale. I shipped the Security Copilot Agent Builder, which lets security teams compose and tune their own agents instead of waiting on a vendor roadmap. And I lead the composable UX system for Project Perception, Microsoft's agentic security system.\n\nThe throughline is trust. Agents are only useful in security if the people relying on them can see what an agent did, why it did it, and step in the moment it matters.",
+    overview: "As a Principal Product Design Manager at Microsoft, I work on what agentic security looks like when it grows up. I partner with Microsoft Security AI research to turn emerging capability into product, and I lead design across a multidisciplinary team.\n\nMost of the work is systems thinking made visible: composable UX systems that scale across products, and interaction frameworks for multi-agent collaboration, so agents, analysts, and automation can work the same investigation without stepping on each other. I design the hard parts, human-in-the-loop control and dense, high-stakes workflows where a wrong call has real consequences.\n\nThree of those threads are public.\n\nThe throughline is trust. Agents are only useful in security if the people relying on them can see what an agent did, why it did it, and step in the moment it matters.",
     blocks: [
       {
-        type: "prose",
-        content: "Microsoft Sentinel. I lead platform UX for the security operations experience analysts live in, shaping how they move from detection to investigation to response at scale.",
+        type: "feature",
+        title: "Microsoft Sentinel",
+        content: "I lead platform UX for the security operations experience analysts live in, shaping how they move from detection to investigation to response at scale.",
+        embed: "https://www.youtube.com/embed/oCl3Pplr__s",
+        url: "https://youtu.be/oCl3Pplr__s",
+        linkLabel: "Watch the overview",
       },
       {
-        type: "video",
-        url: "https://www.youtube.com/embed/oCl3Pplr__s",
-        title: "Microsoft Sentinel platform overview",
-      },
-      {
-        type: "prose",
-        content: "Security Copilot Agent Builder. I shipped the experience that lets security teams compose, test, and tune their own agents, with the reasoning visible every step of the way.",
-      },
-      {
-        type: "video",
-        url: "https://www.youtube.com/embed/f-IosS4FYws?start=18",
+        type: "feature",
         title: "Security Copilot Agent Builder",
+        content: "I shipped the experience that lets security teams compose, test, and tune their own agents, with the reasoning visible every step of the way.",
+        embed: "https://www.youtube.com/embed/f-IosS4FYws?start=18",
+        url: "https://youtu.be/f-IosS4FYws",
+        linkLabel: "Watch the demo",
       },
       {
-        type: "prose",
-        content: "Project Perception. Microsoft's agentic security system, where I lead the composable UX system.",
-      },
-      {
-        type: "link",
+        type: "feature",
+        title: "Project Perception",
+        content: "Microsoft's agentic security system, where I lead the composable UX system.",
         url: "https://www.microsoft.com/en-ca/security/business/ai-powered-cybersecurity/project-perception-agentic-system",
-        title: "Read about Project Perception",
+        linkLabel: "Read about Project Perception",
       },
     ],
   },
