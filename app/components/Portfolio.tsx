@@ -88,9 +88,9 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
         </div>
       </div>
 
-      {/* preview image, fixed in one place on the right (natural aspect) */}
+      {/* preview image, pinned below the sticky filter menu, never overlapping it */}
       <div
-        className="pointer-events-none fixed right-8 top-1/2 z-20 hidden w-[min(40vw,480px)] -translate-y-1/2 transition-opacity duration-200 ease-out lg:block"
+        className="pointer-events-none fixed right-8 top-32 z-20 hidden w-[min(40vw,480px)] transition-opacity duration-200 ease-out lg:block"
         style={{ opacity: active ? 1 : 0 }}
       >
         {shown && <Thumb item={shown} />}
