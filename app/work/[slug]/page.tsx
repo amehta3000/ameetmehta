@@ -254,6 +254,21 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
             );
           }
 
+          if (block.type === "link" && block.url) {
+            return (
+              <Reveal key={i} delay={0.05}>
+                <a
+                  href={block.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-amber px-5 py-2.5 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.15em] text-amber transition-colors hover:bg-amber hover:text-paper"
+                >
+                  {block.title ?? "Visit"} ↗
+                </a>
+              </Reveal>
+            );
+          }
+
           if (block.type === "game") {
             return (
               <Reveal key={i} delay={0.05}>

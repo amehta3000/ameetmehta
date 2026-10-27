@@ -3,7 +3,7 @@ export type ArtifactType = "software" | "product" | "identity" | "sound" | "imag
 export type Discipline = "design" | "code" | "sound"
 
 export interface Block {
-  type: "prose" | "image" | "grid" | "video" | "game" | "spotify"
+  type: "prose" | "image" | "grid" | "video" | "game" | "spotify" | "link"
   content?: string
   src?: string
   alt?: string
@@ -69,7 +69,12 @@ export const projects: Project[] = [
       },
       {
         type: "prose",
-        content: "Project Perception. Microsoft's agentic security system, where I lead the composable UX system. Announcement linked in the details.",
+        content: "Project Perception. Microsoft's agentic security system, where I lead the composable UX system.",
+      },
+      {
+        type: "link",
+        url: "https://www.microsoft.com/en-ca/security/business/ai-powered-cybersecurity/project-perception-agentic-system",
+        title: "Read about Project Perception",
       },
     ],
   },
