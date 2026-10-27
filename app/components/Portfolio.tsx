@@ -102,11 +102,11 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
         {list.map((item) => {
           const inner = (
             <>
-              <div className="flex min-w-0 items-center">
-                <span className="max-w-0 overflow-hidden whitespace-nowrap font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted opacity-0 transition-all duration-300 ease-out group-hover:mr-4 group-hover:max-w-[22rem] group-hover:opacity-100">
+              <div className="relative flex min-w-0 items-center">
+                <span className="pointer-events-none absolute right-full mr-4 hidden -translate-x-2 whitespace-nowrap font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted opacity-0 transition-all duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100 lg:block">
                   {item.meta}
                 </span>
-                <h3 className="truncate font-[family-name:var(--font-body)] text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-amber md:text-4xl">
+                <h3 className="truncate font-[family-name:var(--font-d2)] text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-amber md:text-4xl">
                   {item.title}
                 </h3>
               </div>
