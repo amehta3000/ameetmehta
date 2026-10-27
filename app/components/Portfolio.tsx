@@ -150,7 +150,7 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
             className="pointer-events-none sticky top-28 transition-opacity duration-200 ease-out"
             style={{ opacity: active ? 1 : 0 }}
           >
-            {shown && <Thumb item={shown} />}
+            {shown && <Thumb key={shown.id} item={shown} />}
           </div>
         </div>
       </div>

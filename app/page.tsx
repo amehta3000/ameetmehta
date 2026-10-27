@@ -84,13 +84,7 @@ function buildItems(): PortfolioItem[] {
     };
   }).filter(Boolean) as PortfolioItem[];
 
-  // give Space Rickshaw its real cover if present
-  const sr = getProjectBySlug("space-rickshaw");
-  const experiments = EXPERIMENTS.map((e) =>
-    e.id === "space-rickshaw" && sr ? { ...e, cover: sr.cover } : e
-  );
-
-  return [...work, ...experiments];
+  return [...work, ...EXPERIMENTS];
 }
 
 export default function Home() {
