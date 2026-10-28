@@ -73,7 +73,7 @@ const EXPERIMENTS: PortfolioItem[] = [
     external: true,
     disciplines: ["code", "sound"],
     experiment: true,
-    cover: "",
+    cover: "/assets/experiments/dbplayer.webp",
   },
 ];
 
