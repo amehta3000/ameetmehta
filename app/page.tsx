@@ -65,6 +65,16 @@ const EXPERIMENTS: PortfolioItem[] = [
     experiment: true,
     cover: "",
   },
+  {
+    id: "dbplayer",
+    title: "dbplayer",
+    meta: "App",
+    href: "https://dbplayer.app/",
+    external: true,
+    disciplines: ["design", "code"],
+    experiment: true,
+    cover: "",
+  },
 ];
 
 const EXPERIMENT_SLUGS = new Set(["space-rickshaw"]);
