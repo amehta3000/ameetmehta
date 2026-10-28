@@ -96,7 +96,7 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
             const inner = (
               <>
                 <div className="flex min-w-0 items-center gap-4">
-                  <h3 className="truncate font-[family-name:var(--font-d2)] text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-amber md:text-4xl">
+                  <h3 className="truncate font-[family-name:var(--font-body)] text-2xl font-normal tracking-tight text-ink transition-colors group-hover:text-amber md:text-4xl">
                     {item.title}
                   </h3>
                   <span className="hidden -translate-x-3 whitespace-nowrap font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-[0.2em] text-muted opacity-0 transition-all duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100 lg:block">

@@ -143,12 +143,7 @@ export default function Home() {
       </section>
 
       {/* ---------- The list ---------- */}
-      <section className="pb-28">
-        <Reveal>
-          <p className="mb-8 max-w-2xl font-[family-name:var(--font-display)] text-xl font-medium leading-snug tracking-tight text-ink md:text-2xl">
-            Selected work and the things I&apos;m building out of curiosity.
-          </p>
-        </Reveal>
+      <section className="pb-28 pt-4">
         <Portfolio items={items} />
       </section>
 
