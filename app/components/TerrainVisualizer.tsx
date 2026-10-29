@@ -299,17 +299,18 @@ export function TerrainVisualizer() {
         </Canvas>
       </div>
 
-      {/* minimal overlay play — only shown when paused; controls live in the footer */}
+      {/* minimal overlay play — only shown when paused; controls live in the footer.
+          large invisible hit area for reliable mobile taps */}
       <button
+        type="button"
         onClick={toggle}
-        aria-label="Play"
-        className={`group absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-amber transition-all duration-300 hover:scale-110 ${
+        aria-label={playing ? "Pause" : "Play"}
+        className={`group absolute left-1/2 top-1/2 z-30 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 touch-manipulation items-center justify-center transition-all duration-300 focus:outline-none ${
           playing ? "pointer-events-none scale-90 opacity-0" : "pointer-events-auto opacity-100"
         }`}
       >
-        <span className="absolute inset-0 rounded-full border border-amber/50 bg-black/20 backdrop-blur-sm transition-colors duration-200 group-hover:border-amber group-hover:bg-black/40" />
-        <span className="relative">
-          <svg width="18" height="18" viewBox="0 0 14 14" fill="currentColor">
+        <span className="flex h-16 w-16 items-center justify-center rounded-full border border-amber/50 bg-black/30 text-amber backdrop-blur-sm transition-all duration-200 group-hover:scale-110 group-hover:border-amber group-hover:bg-black/50 group-focus-visible:ring-2 group-focus-visible:ring-amber">
+          <svg width="20" height="20" viewBox="0 0 14 14" fill="currentColor" className="ml-0.5">
             <path d="M2.5 1.3v11.4a1 1 0 0 0 1.53.85l9-5.7a1 1 0 0 0 0-1.7l-9-5.7A1 1 0 0 0 2.5 1.3Z" />
           </svg>
         </span>

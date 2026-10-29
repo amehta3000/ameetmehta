@@ -76,7 +76,7 @@ export function Portfolio({ items }: { items: PortfolioItem[] }) {
             <button
               key={f.key}
               onClick={() => setFilter(f.key)}
-              className={`rounded-full border px-3.5 py-1 font-[family-name:var(--font-mono)] text-[10px] font-normal uppercase tracking-[0.12em] transition-colors ${
+              className={`touch-manipulation rounded-full border px-3.5 py-1.5 font-[family-name:var(--font-mono)] text-[10px] font-normal uppercase tracking-[0.12em] transition-colors ${
                 filter === f.key
                   ? "border-amber bg-amber/10 text-amber"
                   : "border-line text-muted hover:border-amber hover:text-amber"

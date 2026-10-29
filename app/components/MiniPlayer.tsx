@@ -29,8 +29,9 @@ export function MiniPlayer() {
             <div className="flex flex-1 items-center gap-4 rounded-full border border-line bg-paper/80 px-3 py-2 backdrop-blur-md">
               <button
                 onClick={toggle}
+                type="button"
                 aria-label={playing ? "Pause" : "Play"}
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-amber text-amber transition-colors hover:bg-amber hover:text-paper"
+                className="flex h-11 w-11 shrink-0 touch-manipulation items-center justify-center rounded-full border border-amber text-amber transition-colors hover:bg-amber hover:text-paper"
               >
                 {playing ? (
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
@@ -46,8 +47,9 @@ export function MiniPlayer() {
 
               <button
                 onClick={next}
+                type="button"
                 aria-label="Next track"
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:text-amber"
+                className="flex h-10 w-10 shrink-0 touch-manipulation items-center justify-center rounded-full text-muted transition-colors hover:text-amber"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                   <path d="M3 2.2v11.6a.8.8 0 0 0 1.23.67l7.2-5.8a.8.8 0 0 0 0-1.34l-7.2-5.8A.8.8 0 0 0 3 2.2Z" />
